@@ -63,3 +63,10 @@ the old URL is on resumes and outreach in the wild.
 - **A. Static `resume.pdf`** (v5 export) in /public, linked in nav+footer. ★
 - **B. HTML resume page** — second source of truth to maintain. No.
 ★ A. LaTeX stays the source of truth; replace the PDF on each version bump.
+
+### D9 · Hero glow: Paper Shaders ambient vs static gradient — resolved 2026-06-10
+- **A. Static radial indigo gradient** — zero JS, zero risk, per original spec.
+- **B. Paper Shaders ambient GPU glow** behind the hero name, loaded post-paint,
+  falling back to A when JS/WebGL/reduced-motion unavailable. ★ (owner-approved)
+★ B chosen by owner. Conditions: hero name stays the LCP element (text), shader is
+enhancement-only, fallback = A. See notes/DECISION-LOG.md.

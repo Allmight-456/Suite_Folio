@@ -1,0 +1,70 @@
+{
+  "entries": [
+    {
+      "tag": "Building",
+      "emoji": "🛠️",
+      "title": "SkillForge: agents that auto-detect their own skills",
+      "bodyMd": "AST-based retrieval over a Claude Skill library, human-gated approval loop. Cuts repeat-class error context from **~3000 → ~80 tokens (~50×)**. Repo: [github.com/Allmight-456/SkillForge](https://github.com/Allmight-456).",
+      "links": [
+        {
+          "label": "github.com/Allmight-456/SkillForge",
+          "href": "https://github.com/Allmight-456"
+        }
+      ]
+    },
+    {
+      "tag": "Running",
+      "emoji": "🔁",
+      "title": "Hermes & OpenClaw on Hostinger cloud",
+      "bodyMd": "Self-hosted long-running agent boxes, kept alive specifically to watch where production-grade agent loops degrade. Tool-loop convergence, memory bleed across runs, where they crack under sustained load. Operational notes feed back into SkillForge.",
+      "links": []
+    },
+    {
+      "tag": "Harness engineering",
+      "emoji": "🧪",
+      "title": "guardrails, evals, agent loops",
+      "bodyMd": "Wiring them *into* the LLM workflow itself, not bolted on after. The open question: where do evals belong — pre-tool, post-tool, or as a separate critic agent?",
+      "links": []
+    },
+    {
+      "tag": "Agent memory",
+      "emoji": "🧠",
+      "title": "mem0 vs SkillForge",
+      "bodyMd": "[mem0](https://github.com/mem0ai/mem0) for long-horizon memory. Mapping the gap between mem0 (episodic, vector-backed) and SkillForge (procedural, AST-indexed) — different halves of the same problem.",
+      "links": [
+        {
+          "label": "mem0",
+          "href": "https://github.com/mem0ai/mem0"
+        }
+      ]
+    },
+    {
+      "tag": "Retrieval",
+      "emoji": "🔍",
+      "title": "PageIndex & Agentic RAG",
+      "bodyMd": "[PageIndex](https://github.com/VectifyAI/PageIndex) and tree-structured retrieval — moving past vector-only. Reads more like how you'd actually search a codebase or a textbook.",
+      "links": [
+        {
+          "label": "PageIndex",
+          "href": "https://github.com/VectifyAI/PageIndex"
+        }
+      ]
+    },
+    {
+      "tag": "Tooling",
+      "emoji": "🧰",
+      "title": "Conductor.build & Superset side-by-side",
+      "bodyMd": "Running them against real PRs to see which agentic loop converges. Cursor stays the daily driver; these are the challengers.",
+      "links": []
+    },
+    {
+      "tag": "Studying",
+      "emoji": "📡",
+      "title": "Karpathy's nanochat & Autoresearch",
+      "bodyMd": "Single-GPU nanochat lineage. Reference for what \"tiny but real\" looks like at the model layer.",
+      "links": []
+    }
+  ],
+  "fetchedAt": "2026-06-10T18:16:37.752Z",
+  "source": "github.com/Allmight-456 (build snapshot)"
+}
