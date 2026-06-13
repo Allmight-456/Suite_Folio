@@ -51,7 +51,7 @@ export function Hall() {
                 </h3>
                 <span className="shrink-0 font-mono text-xs text-bone-dim">
                   {p.year}
-                  {p.wip && <span className="ml-2 text-volt">wip</span>}
+                  {p.wip && <span className="ml-2 text-volt-bright">wip</span>}
                 </span>
               </div>
 
@@ -63,7 +63,7 @@ export function Hall() {
                 />
               </div>
 
-              <p className="font-mono text-xs text-volt">{p.stat}</p>
+              <p className="font-mono text-xs text-volt-bright">{p.stat}</p>
               <p className="mt-3 text-sm leading-relaxed text-bone-dim">
                 {p.oneLiner}
               </p>

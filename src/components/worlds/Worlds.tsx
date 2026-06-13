@@ -35,7 +35,7 @@ export function Worlds() {
             </motion.span>
             <span className="max-w-md font-mono text-sm text-bone-dim md:text-right">
               {w.blurb}
-              <span className="ml-2 inline-block text-volt transition-transform duration-300 group-hover:translate-x-1">
+              <span className="ml-2 inline-block text-volt-bright transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
             </span>

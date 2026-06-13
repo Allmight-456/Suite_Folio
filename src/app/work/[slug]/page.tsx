@@ -62,10 +62,14 @@ export default async function WorkPage({
             </h1>
             <span className="shrink-0 font-mono text-sm text-bone-dim">
               {project.year}
-              {project.wip && <span className="ml-2 text-volt">wip</span>}
+              {project.wip && (
+                <span className="ml-2 text-volt-bright">wip</span>
+              )}
             </span>
           </div>
-          <p className="mt-2 font-mono text-sm text-volt">{project.stat}</p>
+          <p className="mt-2 font-mono text-sm text-volt-bright">
+            {project.stat}
+          </p>
         </Reveal>
 
         <Reveal className="mt-10 flex justify-center text-bone-dim">
@@ -89,7 +93,7 @@ export default async function WorkPage({
                 key={i}
                 className="font-mono text-xs leading-relaxed text-bone-dim"
               >
-                <span className="text-volt">$</span> {line}
+                <span className="text-volt-bright">$</span> {line}
               </li>
             ))}
           </ul>
@@ -110,12 +114,12 @@ export default async function WorkPage({
 
         <Reveal className="mt-10 flex gap-6 font-mono text-sm">
           {project.repo && (
-            <a href={project.repo} className="text-volt hover:underline">
+            <a href={project.repo} className="text-volt-bright hover:underline">
               repo ↗
             </a>
           )}
           {project.live && (
-            <a href={project.live} className="text-volt hover:underline">
+            <a href={project.live} className="text-volt-bright hover:underline">
               live ↗
             </a>
           )}

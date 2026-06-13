@@ -8,6 +8,7 @@
   --bone: #e8e6e1;
   --bone-dim: #8b8a94;
   --volt: #5b5bf0;
+  --volt-bright: #7b7bf2; /* small text on dark — passes 4.5:1 AA (a11y floor) */
   --volt-dim: #2e2e7a;
   --phosphor: #9be89b; /* terminal panes ONLY */
 
@@ -20,6 +21,7 @@
   --color-bone: var(--bone);
   --color-bone-dim: var(--bone-dim);
   --color-volt: var(--volt);
+  --color-volt-bright: var(--volt-bright);
   --color-volt-dim: var(--volt-dim);
   --color-phosphor: var(--phosphor);
 

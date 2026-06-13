@@ -47,6 +47,11 @@ export function HeroGlow() {
 
   useEffect(() => {
     if (reduced || !hasWebGL()) return;
+    // Perf budget (DESIGN-SPEC §4): the shader's WebGL raf loop blocks the main
+    // thread on throttled mobile CPUs (TBT). Restrict it to fine-pointer desktop;
+    // touch/small screens keep the static gradient fallback.
+    if (!window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches)
+      return;
     const idle =
       window.requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 200));
     const id = idle(() => {

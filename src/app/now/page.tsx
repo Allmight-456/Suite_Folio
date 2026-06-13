@@ -21,7 +21,7 @@ export default async function NowPage() {
         </Link>
         <p className="mt-8 font-mono text-sm text-bone-dim">
           machine-readable:{" "}
-          <a href="/now.json" className="text-volt hover:underline">
+          <a href="/now.json" className="text-volt-bright hover:underline">
             /now.json
           </a>
         </p>

@@ -46,7 +46,7 @@ export default function LabPage() {
           <ul className="mt-4 flex flex-wrap gap-6 font-mono text-sm">
             {writingLinks.map((l) => (
               <li key={l.label}>
-                <a href={l.href} className="text-volt hover:underline">
+                <a href={l.href} className="text-volt-bright hover:underline">
                   {l.label} ↗
                 </a>
               </li>
