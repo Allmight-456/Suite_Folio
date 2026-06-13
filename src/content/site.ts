@@ -1,9 +1,10 @@
 // All copy sourced from handoff/docs/CONTENT.md — edit there first, here second.
 import { CertSchema, type Cert } from "./schema";
 
-// Canonical origin. D7 interim default = Vercel subdomain; swap to the bought
-// domain (ishankumar.dev) when DNS is set, and add a 301 from the old Netlify URL.
-export const SITE_URL = "https://ishan-kumar.vercel.app";
+// Canonical origin. D7: deployed on Netlify at this subdomain; swap to the bought
+// domain (ishankumar.dev) when DNS is set, and 301 the old URL. Feeds metadataBase,
+// OpenGraph, sitemap, robots and JSON-LD — keep it in sync with the live host.
+export const SITE_URL = "https://ishan-kumar.netlify.app";
 
 export const hero = {
   eyebrow: "backend & genai engineer",
@@ -16,29 +17,33 @@ export const nav = [
   { label: "work", href: "/work" },
   { label: "lab", href: "/lab" },
   { label: "now", href: "/now" },
-  { label: "resume", href: "/resume.pdf" },
+  // "the best resume is a git log" — the nav resume points at the GitHub profile
+  // (the living résumé). The downloadable PDF still lives at /resume.pdf via the
+  // footer for recruiters who want a file.
+  { label: "resume", href: "https://github.com/Allmight-456" },
   { label: "contact", href: "#contact" },
 ] as const;
 
-// Message block (§2). Bold spans rendered in --volt.
+// Message block (§2). Bold spans rendered in --volt. Tighter than the v1 line:
+// two beats (what I ship / what I chase) instead of a feature list, so it earns
+// its own section. Stays inside CONTENT.md's facts registry.
 type MessagePart = { text: string; volt?: boolean };
-export const message: { parts: MessagePart[]; signature: string } = {
+export const message: {
+  eyebrow: string;
+  parts: MessagePart[];
+  signature: string;
+} = {
+  eyebrow: "$ whoami",
   parts: [
-    { text: "I build " },
+    { text: "I ship " },
     { text: "production", volt: true },
-    { text: " backends and " },
-    { text: "agentic", volt: true },
-    {
-      text: " systems — FastAPI and Go services for multinational clients, RAG pipelines that survive ",
-    },
-    { text: "free-tier rate limits", volt: true },
-    { text: ", and migrations that ship with " },
+    { text: " backends — Go and FastAPI under real rate limits, migrations with " },
     { text: "zero downtime", volt: true },
-    {
-      text: ". Then I run long-horizon agent infrastructure to study where the loops ",
-    },
+    { text: ". Then I run the " },
+    { text: "agent", volt: true },
+    { text: " loops that sit on top of them until they " },
     { text: "break", volt: true },
-    { text: "." },
+    { text: " — because that's where the engineering actually is." },
   ],
   signature: "ishan@prod:~$",
 };
@@ -48,11 +53,16 @@ export const worlds = [
     title: "ON PROD",
     blurb: "Production systems, migrations, and the constraints they survived.",
     href: "/work",
+    tags: ["fastapi", "go", "postgres", "redis", "zero-downtime migrations"],
   },
   {
     title: "OFF PROD",
     blurb: "Agent boxes, evals, experiments — and what breaks at 3am.",
+    // OFF PROD carries a little more: the README's terminal voice + a peek at
+    // what actually runs on the box, so it doesn't read as a mirror of ON PROD.
+    note: "$ tail -f ~/agents/*.log — long-horizon loops I keep alive to watch them degrade.",
     href: "/lab",
+    tags: ["hermes", "openclaw", "evals + guardrails", "mem0", "pageindex"],
   },
 ] as const;
 

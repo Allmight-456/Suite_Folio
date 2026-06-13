@@ -16,7 +16,13 @@ const COLS = 74; // sampling resolution; rows derived from image aspect
 function tokens() {
   const css = getComputedStyle(document.documentElement);
   const t = (n: string) => css.getPropertyValue(n).trim();
-  return { ink: t("--ink"), volt: t("--volt"), voltBright: t("--volt-bright"), bone: t("--bone") };
+  return {
+    ink: t("--ink"),
+    voltDim: t("--volt-dim"),
+    volt: t("--volt"),
+    voltBright: t("--volt-bright"),
+    bone: t("--bone"),
+  };
 }
 
 type Cell = { cx: number; cy: number; a: number; lum: number; bit: string; thr: number };
@@ -177,13 +183,14 @@ export function useBinaryDissolve({ sectionRef, canvasRef, reduced, mounted }: A
   return active;
 }
 
-/** luminance → ink → volt → bone indigo ramp */
+/** luminance → volt-dim → volt → bone indigo ramp (shadows lifted off pure ink
+    so the mosaic reads as deep indigo rather than near-black mud). */
 function ramp(
   lum: number,
-  pal: { ink: string; volt: string; bone: string },
+  pal: { voltDim: string; volt: string; bone: string },
 ): string {
-  if (lum < 0.35) return mix(pal.ink, pal.volt, lum / 0.35);
-  return mix(pal.volt, pal.bone, (lum - 0.35) / 0.65);
+  if (lum < 0.4) return mix(pal.voltDim, pal.volt, lum / 0.4);
+  return mix(pal.volt, pal.bone, (lum - 0.4) / 0.6);
 }
 
 function mix(a: string, b: string, t: number): string {

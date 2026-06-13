@@ -4,6 +4,10 @@ Cinematic, scroll-driven portfolio for Ishan Kumar (Backend & GenAI Engineer).
 Built on the brief in [`handoff/`](./handoff) — read `docs/PRD.md`,
 `DESIGN-SPEC.md`, and `CONTENT.md` before changing structure or copy.
 
+**Live:** [ishan-kumar.netlify.app](https://ishan-kumar.netlify.app/) — click the preview to open it.
+
+[![Ishan Kumar — live portfolio](docs/preview.png)](https://ishan-kumar.netlify.app/)
+
 ## Stack
 
 - **Next.js 16** (App Router) + **React 19.2** + **TypeScript**
@@ -45,6 +49,26 @@ notes/DECISION-LOG.md   resolved decisions (append-only)
   pane). The site's voice is electric indigo (`--volt`); `--volt-bright` is the
   AA-safe variant for small accent text.
 - Quality bar (verified mobile Lighthouse): Perf 90 · A11y 100 · BP 100 · SEO 100.
+- **Back/forward scroll memory** — Lenis drives scrolling, which defeats native
+  scroll restoration. `components/providers/ScrollRestoration.tsx` (mounted inside
+  `SmoothScroll`) takes manual control, remembers the last scroll offset per route
+  in `sessionStorage` (bounded LRU), and restores it on a real Back/Forward or a
+  reload — via `lenis.scrollTo(..., { immediate })`, or `window.scrollTo` under
+  reduced motion. Forward link clicks still land at the top; renders `null` (no-JS
+  safe). See `notes/DECISION-LOG.md` (2026-06-14).
+
+## Deploy (Netlify)
+
+Connect this repo on Netlify — it auto-detects Next.js and installs
+`@netlify/plugin-nextjs`, which keeps ISR (the hourly `now.log`) and the edge
+OG/favicon routes working. **No static export, no `netlify.toml`, no manual
+publish dir.** Build command is `npm run build`; everything else (content, fonts,
+`resume.pdf`) is bundled — the only runtime dependency is GitHub's public README
+for `now.log`, which falls back to `src/content/nowlog.fallback.json` if offline.
+
+> `SITE_URL` in `src/content/site.ts` only feeds SEO/social metadata (OpenGraph,
+> sitemap, robots, JSON-LD). It does **not** affect the build — point it at the
+> live host. Buying a domain later? Change that one line and redeploy.
 
 ## Owner TODO before launch
 

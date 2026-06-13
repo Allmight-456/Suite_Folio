@@ -15,12 +15,14 @@ export default async function Home() {
     <main id="main">
       <Hero chip={chip} />
       <Message />
-      <Figure />
       <Worlds />
       <WorkIndex />
       <Marquee />
       <NowLog data={nowlog} />
       <Footer />
+      {/* The figure closes the page: a final sign-off below "the best resume is
+          a git log" — the engineer dissolving back into the bits. */}
+      <Figure />
     </main>
   );
 }

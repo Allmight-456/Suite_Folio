@@ -40,3 +40,16 @@
   repos. Replaced Hall-of-Fame grid with a `ls -la ./work` index: personal/ +
   client/ + field-notes/ groups, expandable rows. Learnings content = now.log study
   themes + per-project lessons (owner's explicit pick); client work from role bullets.
+
+- 2026-06-14 · **Back/forward scroll restoration (owner-requested)** — Lenis drives
+  scrolling, which defeats the browser's and Next's native scroll restoration:
+  pressing Back dropped you at the top instead of where you left. Added
+  `components/providers/ScrollRestoration.tsx` (mounted inside `SmoothScroll`):
+  takes manual control (`history.scrollRestoration = "manual"`), snapshots the
+  outgoing offset per pathname at navigation start (pushState patch + popstate +
+  pagehide) into a bounded LRU in sessionStorage (12 entries = "a few steps"),
+  and restores via `lenis.scrollTo(y, { immediate, force })` — or `window.scrollTo`
+  under reduced motion — on genuine Back/Forward (popstate) and reload. Forward
+  link clicks still go to top by design; hash deep-links (`/#contact`) are left to
+  the anchor. Restore is an immediate jump, never an animated scroll, so the
+  reduced-motion floor holds. No-JS safe (renders null). Owner-verified working.

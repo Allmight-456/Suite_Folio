@@ -104,22 +104,41 @@ body {
 }
 
 /* Figure: static indigo-duotone cutout (the no-JS / mobile / reduced-motion
-   view). When the desktop canvas dissolve is active, this fades out. */
+   view). When the desktop canvas dissolve is active, this fades out.
+   Duotone is built in two passes so the face actually reads: a brighter,
+   higher-contrast grayscale base, then a soft-light indigo tint that lifts
+   highlights toward bone instead of flattening everything into one dark wash. */
 .duotone-figure img {
-  filter: grayscale(1) brightness(0.92) contrast(1.05);
+  filter: grayscale(1) brightness(1.08) contrast(1.18);
 }
 .duotone-figure::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--volt) 60%, transparent),
-    color-mix(in srgb, var(--volt-dim) 55%, transparent)
+    165deg,
+    color-mix(in srgb, var(--volt-bright) 70%, transparent),
+    color-mix(in srgb, var(--volt) 55%, transparent) 55%,
+    color-mix(in srgb, var(--volt-dim) 65%, transparent)
   );
-  mix-blend-mode: color;
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
   pointer-events: none;
   /* confine the tint to the cutout silhouette, not the bounding box */
+  -webkit-mask: url(/images/figure.png) bottom / contain no-repeat;
+  mask: url(/images/figure.png) bottom / contain no-repeat;
+}
+/* second pass: a low hue wash so the silhouette still reads as indigo, not
+   pure grayscale, without crushing the midtones the way `color` blend did. */
+.duotone-figure::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--volt);
+  mix-blend-mode: color;
+  opacity: 0.45;
+  pointer-events: none;
   -webkit-mask: url(/images/figure.png) bottom / contain no-repeat;
   mask: url(/images/figure.png) bottom / contain no-repeat;
 }
