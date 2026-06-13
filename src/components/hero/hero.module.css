@@ -1,0 +1,80 @@
+/* Variant A — cinematic name. All colors via tokens from globals.css. */
+
+/* Letter settle: pure CSS so it runs (and finishes) without JS. */
+.letter {
+  display: inline-block;
+  animation: letter-settle 0.6s var(--ease-site) both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@keyframes letter-settle {
+  from {
+    opacity: 0;
+    transform: translateY(0.22em);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 -10% 0);
+  }
+}
+
+/* Chip appears after the name has settled; no-JS users get it fully typed. */
+.chipWrap {
+  animation: chip-in 0.3s var(--ease-site) 1s both;
+}
+
+@keyframes chip-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Commit-message ticker: vertical crawl, 4–6% opacity texture (DECISIONS D6-A). */
+.ticker {
+  position: absolute;
+  top: 0;
+  right: clamp(0.5rem, 4vw, 4rem);
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tickerInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: ticker-crawl 90s linear infinite;
+}
+
+@keyframes ticker-crawl {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+/* Static radial indigo glow — ALWAYS rendered; the shader layers on top (D9). */
+.glowFallback {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 55% at 38% 45%,
+    var(--volt-dim) 0%,
+    transparent 70%
+  );
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter {
+    animation: none;
+  }
+  .chipWrap {
+    animation: none;
+  }
+  .tickerInner {
+    animation: none;
+  }
+}
