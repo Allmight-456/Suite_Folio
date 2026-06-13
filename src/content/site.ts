@@ -1,6 +1,10 @@
 // All copy sourced from handoff/docs/CONTENT.md — edit there first, here second.
 import { CertSchema, type Cert } from "./schema";
 
+// Canonical origin. D7 interim default = Vercel subdomain; swap to the bought
+// domain (ishankumar.dev) when DNS is set, and add a 301 from the old Netlify URL.
+export const SITE_URL = "https://ishan-kumar.vercel.app";
+
 export const hero = {
   eyebrow: "backend & genai engineer",
   name: "ISHAN KUMAR",

@@ -5,6 +5,7 @@ import { projects } from "@/content/projects";
 import { deepDives } from "@/content/deepdives";
 import { Schematic, type SchematicKind } from "@/components/ui/Schematic";
 import { Reveal } from "@/components/ui/Reveal";
+import { SoftwareJsonLd } from "@/components/ui/JsonLd";
 
 const schematicFor: Record<string, SchematicKind> = {
   skillforge: "ast",
@@ -44,6 +45,7 @@ export default async function WorkPage({
 
   return (
     <main id="main" className="px-6 pb-32 pt-32 md:px-16">
+      <SoftwareJsonLd project={project} />
       <div className="mx-auto max-w-4xl">
         <Link
           href="/#work"

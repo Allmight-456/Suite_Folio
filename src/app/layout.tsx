@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { Nav } from "@/components/ui/Nav";
+import { PersonJsonLd } from "@/components/ui/JsonLd";
+import { SITE_URL } from "@/content/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,10 +23,31 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const description =
+  "Production FastAPI/Go services, RAG pipelines that survive free-tier rate limits, and long-horizon agent infrastructure. Bengaluru.";
+
 export const metadata: Metadata = {
-  title: "Ishan Kumar — Backend & GenAI Engineer",
-  description:
-    "Production FastAPI/Go services, RAG pipelines that survive free-tier rate limits, and long-horizon agent infrastructure. Bengaluru.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Ishan Kumar — Backend & GenAI Engineer",
+    template: "%s · Ishan Kumar",
+  },
+  description,
+  authors: [{ name: "Ishan Kumar" }],
+  openGraph: {
+    type: "website",
+    title: "Ishan Kumar — Backend & GenAI Engineer",
+    description,
+    url: SITE_URL,
+    siteName: "Ishan Kumar",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@kuma10296",
+    title: "Ishan Kumar — Backend & GenAI Engineer",
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -37,6 +60,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <PersonJsonLd />
         <a href="#main" className="skip-link">
           skip to content
         </a>
