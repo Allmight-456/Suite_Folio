@@ -1,13 +1,26 @@
 import { Hero } from "@/components/hero/Hero";
-import { getHeroChip } from "@/lib/nowlog";
+import { Message } from "@/components/message/Message";
+import { Strip } from "@/components/strip/Strip";
+import { Worlds } from "@/components/worlds/Worlds";
+import { Hall } from "@/components/hall/Hall";
+import { Marquee } from "@/components/marquee/Marquee";
+import { NowLog } from "@/components/nowlog/NowLog";
+import { Footer } from "@/components/footer/Footer";
+import { getHeroChip, getNowLog } from "@/lib/nowlog";
 
 export default async function Home() {
-  const chip = await getHeroChip();
+  const [chip, nowlog] = await Promise.all([getHeroChip(), getNowLog()]);
 
   return (
     <main id="main">
       <Hero chip={chip} />
-      {/* M2: message → strip → two worlds → hall of fame → stack → now.log → contact */}
+      <Message />
+      <Strip />
+      <Worlds />
+      <Hall />
+      <Marquee />
+      <NowLog data={nowlog} />
+      <Footer />
     </main>
   );
 }

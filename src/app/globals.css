@@ -78,9 +78,67 @@ body {
   animation: cursor-blink 1.1s step-end infinite;
 }
 
+/* Indigo duotone for Strip photos (DECISIONS D3-A). Toggle to natural by
+   removing .duotone. Layered: desaturate the image, tint via blend overlay. */
+.duotone img {
+  filter: grayscale(1) contrast(1.05) brightness(0.9);
+}
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--volt) 55%, transparent),
+    color-mix(in srgb, var(--ink) 70%, transparent)
+  );
+  mix-blend-mode: color;
+  pointer-events: none;
+}
+
+/* Schematic hover state (Hall of Fame D4-A): static at rest (lines drawn),
+   re-draws on card hover. The card carries .group; Schematic sets the dash. */
+.schematic-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 0;
+}
+.group:hover [data-animate="true"] .schematic-line {
+  animation: schematic-draw 0.7s var(--ease-site) both;
+}
+@keyframes schematic-draw {
+  from {
+    stroke-dashoffset: 200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Stack marquee crawl (DESIGN-SPEC §3.6). Track holds the list twice; -50%
+   loops seamlessly. Pauses on hover via utility class. */
+.marquee-track {
+  animation: marquee-crawl 38s linear infinite;
+}
+@keyframes marquee-crawl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cursor-blink {
     animation: none;
+  }
+  .schematic-line {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
   }
   html {
     scroll-behavior: auto;

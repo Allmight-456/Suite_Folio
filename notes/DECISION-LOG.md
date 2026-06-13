@@ -3,6 +3,9 @@
 - 2026-06-10 · **D1 Hero treatment** — owner chose to build BOTH variants in parallel
   worktrees (`feature/hero-cinematic` on :3000, `feature/hero-boot` on :3001) and
   compare live before merging a winner. Spec recommendation (A with C's chip) noted.
+- 2026-06-13 · **D1 RESOLVED → A (Cinematic name)** — after live side-by-side, owner
+  picked variant A. Merged `feature/hero-cinematic` to main (no-ff); both worktrees
+  removed, `feature/hero-boot` deleted. Boot variant available in reflog if revived.
 - 2026-06-10 · **D2 Accent color** — A, electric indigo `#5B5BF0`. Phosphor green
   `#9BE89B` stays quarantined inside terminal panes per DESIGN-SPEC.
 - 2026-06-10 · **D3 Photo treatment** — A, indigo duotone for all Strip frames

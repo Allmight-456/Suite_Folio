@@ -17,7 +17,8 @@ export const nav = [
 ] as const;
 
 // Message block (§2). Bold spans rendered in --volt.
-export const message = {
+type MessagePart = { text: string; volt?: boolean };
+export const message: { parts: MessagePart[]; signature: string } = {
   parts: [
     { text: "I build " },
     { text: "production", volt: true },
@@ -36,7 +37,7 @@ export const message = {
     { text: "." },
   ],
   signature: "ishan@prod:~$",
-} as const;
+};
 
 export const worlds = [
   {
