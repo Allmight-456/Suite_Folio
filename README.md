@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ishan-portfolio
 
-## Getting Started
+Cinematic, scroll-driven portfolio for Ishan Kumar (Backend & GenAI Engineer).
+Built on the brief in [`handoff/`](./handoff) — read `docs/PRD.md`,
+`DESIGN-SPEC.md`, and `CONTENT.md` before changing structure or copy.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) + **React 19.2** + **TypeScript**
+- **Tailwind v4** — tokens live only in `globals.css` / `@theme` (never inline hex)
+- **Motion 12** + **Lenis** for choreography; **Paper Shaders** for the desktop hero glow
+- Native **View Transitions** for route changes
+- `zod`-typed content in `src/content/`
+- Live `now.log` parsed from the GitHub profile README via ISR (hourly)
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # production build (all routes SSG/ISR)
+npm run lint
+npm test             # vitest — now.log parser contract test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+  app/            routes: / · /work · /work/[slug] · /lab · /now · /now.json
+                  + sitemap · robots · opengraph-image · icon
+  components/     one folder per section (hero, message, strip, worlds, hall,
+                  marquee, nowlog, footer) + ui/ (Nav, Reveal, Schematic, JsonLd)
+  content/        zod schemas + typed data from handoff/docs/CONTENT.md
+  lib/            nowlog.ts (fetch+parse) · choreo.ts (motion grammar)
+notes/DECISION-LOG.md   resolved decisions (append-only)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Conventions & guardrails
 
-## Learn More
+- All copy comes from `handoff/docs/CONTENT.md`; claims stay inside its facts registry.
+- Every scroll choreography goes through `useChoreo()` so the reduced-motion
+  branch is in one place. Content is visible without JS and under reduced motion.
+- Phosphor green (`--phosphor`) is quarantined to terminal panes (the now.log
+  pane). The site's voice is electric indigo (`--volt`); `--volt-bright` is the
+  AA-safe variant for small accent text.
+- Quality bar (verified mobile Lighthouse): Perf 90 · A11y 100 · BP 100 · SEO 100.
 
-To learn more about Next.js, take a look at the following resources:
+## Owner TODO before launch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Replace `public/resume.pdf` on each résumé version bump.
+- Supply real Strip screenshots (TicketFlow logs, htop/agent-box, AI_Bubble,
+  campus) — they currently render as SVG schematics; see `src/content/strip.ts`.
+- Provide the Hashnode URL (omitted — not in any source doc; see footer/lab TODOs).
+- D7: buy domain, set `SITE_URL` in `src/content/site.ts`, 301 the old Netlify URL.
