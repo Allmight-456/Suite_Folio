@@ -31,7 +31,9 @@ export function Hero({ chip }: { chip: string }) {
           {hero.name.split("").map((ch, i) =>
             ch === " " ? (
               <span key={i} aria-hidden="true">
-                {" "}
+                {/* wrap with intent on mobile (DESIGN-SPEC §5), space on desktop */}
+                <br className="md:hidden" />
+                <span className="hidden md:inline">{" "}</span>
               </span>
             ) : (
               <span
@@ -61,7 +63,7 @@ function CommitTicker() {
   // List duplicated so the -50% crawl loops seamlessly.
   const lines = [...commitTexture, ...commitTexture];
   return (
-    <div className={styles.ticker} aria-hidden="true">
+    <div className={`hidden md:block ${styles.ticker}`} aria-hidden="true">
       <div className={styles.tickerInner}>
         {lines.map((line, i) => (
           <span key={i} className="font-mono text-xs whitespace-nowrap text-bone">
