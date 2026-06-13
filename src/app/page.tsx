@@ -1,8 +1,8 @@
 import { Hero } from "@/components/hero/Hero";
 import { Message } from "@/components/message/Message";
-import { Strip } from "@/components/strip/Strip";
+import { Figure } from "@/components/figure/Figure";
 import { Worlds } from "@/components/worlds/Worlds";
-import { Hall } from "@/components/hall/Hall";
+import { WorkIndex } from "@/components/index/WorkIndex";
 import { Marquee } from "@/components/marquee/Marquee";
 import { NowLog } from "@/components/nowlog/NowLog";
 import { Footer } from "@/components/footer/Footer";
@@ -15,9 +15,9 @@ export default async function Home() {
     <main id="main">
       <Hero chip={chip} />
       <Message />
-      <Strip />
+      <Figure />
       <Worlds />
-      <Hall />
+      <WorkIndex />
       <Marquee />
       <NowLog data={nowlog} />
       <Footer />

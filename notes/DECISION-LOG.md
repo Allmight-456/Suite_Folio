@@ -26,3 +26,17 @@
 - 2026-06-10 · **Scaffold** — Next 16.2.9 / React 19.2.7 / Tailwind v4 / Motion 12 /
   Lenis 1.3 / zod 4. `next lint` removed in Next 16 → `lint: eslint .`, vitest for
   the nowlog parser contract test.
+
+- 2026-06-14 · **Figure + binary dissolve (owner-directed redesign)** — the two
+  raw photos in the Strip read as "just put my image". Replaced with ONE
+  background-removed cutout (selfie/IMG_1547, Vision foreground mask) as a
+  scroll-driven figure that mosaics in and dissolves into drifting binary bits.
+  This is a second bold moment alongside now.log (CLAUDE.md rule 6) — sanctioned
+  by owner. Bits use --volt/--bone (NOT phosphor; the quarantine holds). Canvas
+  effect is desktop-only (perf, like the shader); mobile/reduced-motion/no-JS get
+  a static indigo-duotone <Image>. Strip's two photos removed.
+- 2026-06-14 · **Work section redesign → explorable terminal index** — owner found
+  the card grid generic and wanted broader knowledge exposed, not just 5-6 personal
+  repos. Replaced Hall-of-Fame grid with a `ls -la ./work` index: personal/ +
+  client/ + field-notes/ groups, expandable rows. Learnings content = now.log study
+  themes + per-project lessons (owner's explicit pick); client work from role bullets.

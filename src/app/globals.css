@@ -35,6 +35,11 @@ html {
   color-scheme: dark;
 }
 
+/* Anchored sections (#work, #contact) clear the fixed nav when jumped to. */
+[id] {
+  scroll-margin-top: 5rem;
+}
+
 body {
   background: var(--ink);
   color: var(--bone);
@@ -98,6 +103,36 @@ body {
   pointer-events: none;
 }
 
+/* Figure: static indigo-duotone cutout (the no-JS / mobile / reduced-motion
+   view). When the desktop canvas dissolve is active, this fades out. */
+.duotone-figure img {
+  filter: grayscale(1) brightness(0.92) contrast(1.05);
+}
+.duotone-figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--volt) 60%, transparent),
+    color-mix(in srgb, var(--volt-dim) 55%, transparent)
+  );
+  mix-blend-mode: color;
+  pointer-events: none;
+  /* confine the tint to the cutout silhouette, not the bounding box */
+  -webkit-mask: url(/images/figure.png) bottom / contain no-repeat;
+  mask: url(/images/figure.png) bottom / contain no-repeat;
+}
+.duotone-figure {
+  transition: opacity 0.4s var(--ease-site);
+}
+.duotone-figure[data-hidden="true"] {
+  opacity: 0;
+}
+canvas[data-active="false"] {
+  opacity: 0;
+}
+
 /* Schematic hover state (Hall of Fame D4-A): static at rest (lines drawn),
    re-draws on card hover. The card carries .group; Schematic sets the dash. */
 .schematic-line {
@@ -114,6 +149,18 @@ body {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Terminal index rows: native <details>, caret rotates when open. */
+.index-row summary::-webkit-details-marker {
+  display: none;
+}
+.index-caret {
+  display: inline-block;
+  transition: transform 0.2s var(--ease-site);
+}
+.index-row[open] .index-caret {
+  transform: rotate(90deg);
 }
 
 /* Stack marquee crawl (DESIGN-SPEC §3.6). Track holds the list twice; -50%
