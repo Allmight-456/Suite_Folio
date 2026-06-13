@@ -8,22 +8,20 @@ import { Schematic, type SchematicKind } from "@/components/ui/Schematic";
 import { useChoreo } from "@/lib/choreo";
 
 /**
- * The Strip (DESIGN-SPEC §3.3): horizontal scroll-scrub band of frames with
- * mono captions. Desktop pins and scrubs horizontally as you scroll the tall
- * section; mobile (and reduced motion) falls back to a native swipe rail.
+ * The Strip (DESIGN-SPEC §3.3): horizontal scroll-scrub band with mono captions.
+ * SSR and first client paint render the native swipe rail (StripRail) so markup
+ * matches and works without JS; after mount, non-reduced-motion viewers upgrade
+ * to the pinned horizontal scrub (StripScrub). useScroll lives only in the scrub
+ * child, which mounts client-side, so its target ref is always hydrated.
  */
 export function Strip() {
-  const { reduced } = useChoreo();
-  const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: targetRef });
-  // scrub the row left by ~ (n-1.2) frame-widths over the section's scroll
-  const x = useTransform(scrollYProgress, [0, 1], ["2%", "-72%"]);
+  const { reduced, mounted } = useChoreo();
 
-  if (reduced) {
+  if (!mounted || reduced) {
     return (
       <section aria-label="On and off track" className="py-24">
-        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 md:px-16">
-          {frames.map((f, i) => (
+        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 md:px-16">
+          {frames.map((_, i) => (
             <div key={i} className="snap-start shrink-0">
               <FrameCard index={i} />
             </div>
@@ -33,6 +31,14 @@ export function Strip() {
     );
   }
 
+  return <StripScrub />;
+}
+
+function StripScrub() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: targetRef });
+  const x = useTransform(scrollYProgress, [0, 1], ["2%", "-72%"]);
+
   return (
     <section
       ref={targetRef}
@@ -41,7 +47,7 @@ export function Strip() {
     >
       <div className="sticky top-0 flex h-svh items-center overflow-hidden">
         <motion.div style={{ x }} className="flex gap-6 px-6 md:px-16">
-          {frames.map((f, i) => (
+          {frames.map((_, i) => (
             <FrameCard key={i} index={i} />
           ))}
         </motion.div>

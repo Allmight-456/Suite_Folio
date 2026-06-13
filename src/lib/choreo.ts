@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import type { Variants, Transition } from "motion/react";
 
@@ -33,10 +34,27 @@ const stagger: Variants = {
 
 export function useChoreo() {
   const reduced = useReducedMotion();
+  // `mounted` is false during SSR and the first client paint, so anything
+  // that branches on it renders identically on both sides (no hydration
+  // mismatch) — and content is never gated on JS. Motion enhances after mount.
+  const [mounted, setMounted] = useState(false);
+  // Canonical "has hydrated" flag: the one-shot flip after mount is the intended
+  // signal, not a render cascade — content is visible before it, enhanced after.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMounted(true), []);
+
+  const inert = !mounted || !!reduced;
+
   return {
     reduced: !!reduced,
-    reveal: reduced ? revealReduced : reveal,
-    stagger: reduced ? revealReduced : stagger,
+    mounted,
+    // Before mount (and under reduced motion) variants are inert → content is
+    // visible and static. After mount, the real reveal/stagger kicks in.
+    reveal: inert ? revealReduced : reveal,
+    stagger: inert ? revealReduced : stagger,
+    // Until mounted, render at the resting "visible" state so SSR HTML shows
+    // the content; switch to "hidden" entrance only once motion can drive it.
+    initial: inert ? "visible" : "hidden",
     viewport: { once: true, amount: 0.3 } as const,
   };
 }

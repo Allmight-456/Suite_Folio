@@ -26,7 +26,7 @@ export function Reveal({
     <MotionTag
       className={className}
       variants={stagger ? choreo.stagger : choreo.reveal}
-      initial="hidden"
+      initial={choreo.initial}
       whileInView="visible"
       viewport={choreo.viewport}
     >
