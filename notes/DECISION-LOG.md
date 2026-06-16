@@ -53,3 +53,37 @@
   link clicks still go to top by design; hash deep-links (`/#contact`) are left to
   the anchor. Restore is an immediate jump, never an animated scroll, so the
   reduced-motion floor holds. No-JS safe (renders null). Owner-verified working.
+
+- 2026-06-16 · **Round-1 refinement (owner-directed, 4 forks resolved live)** —
+  (1) **whoami → boot-sequence terminal.** The floating `$ whoami` statement read
+  as a generic subheader; replaced `components/message` with `components/whoami`, a
+  Mac-window pane that types `whoami` / `cat role.txt` on scroll-in and reveals the
+  output. Copy reused verbatim from `site.ts` `hero`+`message` (no new claims).
+  Accent stays `--volt`; phosphor remains quarantined to now.log.
+  (2) **ON/OFF PROD doors → pinned horizontal Journey.** Owner found the two doors
+  gated experience behind a click. Replaced `components/worlds` with
+  `components/journey`: a `count*100vh` section whose sticky inner track translates
+  on X by scroll progress (Shopify-Editions feel) through Experience → Shipped →
+  Agentic → Go-deeper panels, each opening with a shell command. Desktop pins;
+  mobile / reduced-motion / no-JS stack vertically (useJourneyChoreo gate).
+  (3) **Redundancy cleanup.** Homepage = curated highlights; `/work` = the single
+  exhaustive index (`WorkIndex` + experience timeline + writing links). `/lab`'s
+  content duplicated the field-notes/ directory → `/lab` now 301s to
+  `/work#field-notes`; nav "lab" points there; removed from sitemap. `worlds` data
+  + `Message`/`Worlds` components deleted.
+  (4) **Schematics extended** to client/ + field-notes/ rows (owner ask): added
+  `api`, `migration`, `deploy`, `loop` kinds to `Schematic`.
+  Deferred to Round 2: open-source panel (GitHub stars + Notion), now.log live data
+  (pushed repos / contributions / stars), figure relocation, inter-section TUI
+  transitions.
+
+- 2026-06-16 · **Back/forward restore — prod-build fix.** Owner reported the
+  scroll-restoration (logged 06-14) worked in `next dev` but not on the Netlify
+  build. Verified the code WAS deployed (storage key present in the live bundle), so
+  it was a timing regression: a production build settles later than dev (slower
+  hydration, Lenis re-measuring the restored route's height after the jump, the
+  `viewTransition` DOM swap), and the one-shot `rAF×2 + 60ms` restore landed before
+  that and got overridden. Fix: `ScrollRestoration` now re-asserts the saved offset
+  every frame (with `lenis.resize()`) until it holds for ~3 frames or a ~0.75s cap,
+  and aborts on genuine user scroll (wheel/touch/key). Still an immediate jump,
+  never animated — reduced-motion/no-JS branches unchanged.

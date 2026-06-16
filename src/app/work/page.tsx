@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projects } from "@/content/projects";
 import { experience } from "@/content/site";
-import { Reveal, RevealItem } from "@/components/ui/Reveal";
+import { writingLinks } from "@/content/lab";
+import { WorkIndex } from "@/components/index/WorkIndex";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "work — Ishan Kumar",
-  description: "Production systems, migrations, and the constraints they survived.",
+  description:
+    "Production systems, client work, and field notes — the full index.",
 };
 
-export default function WorkIndex() {
+/**
+ * The canonical, exhaustive index (redundancy cleanup): personal repos, client
+ * work, and field notes all live here via WorkIndex, with the experience timeline
+ * up top. The homepage Journey only summarizes and links in — no fact is stated
+ * in two places. /lab redirects to #field-notes here.
+ */
+export default function WorkPage() {
   return (
     <main id="main" className="px-6 pb-32 pt-32 md:px-16">
       <div className="mx-auto max-w-5xl">
@@ -23,38 +31,45 @@ export default function WorkIndex() {
           On Prod
         </h1>
         <p className="mt-3 max-w-xl font-mono text-sm text-bone-dim">
-          Production systems, migrations, and the constraints they survived.
+          Production systems, the constraints they survived, and what I learn off
+          prod.
         </p>
 
-        <Reveal stagger className="mt-12 divide-y divide-volt-dim border-y border-volt-dim">
-          {projects.map((p) => (
-            <RevealItem key={p.slug}>
-              <Link
-                href={`/work/${p.slug}`}
-                className="group flex flex-col gap-2 py-6 md:flex-row md:items-baseline md:justify-between"
+        <Reveal className="mt-12">
+          <h2 className="font-mono text-sm uppercase tracking-wider text-bone-dim">
+            $ uptime --career
+          </h2>
+          <ul className="mt-4 space-y-2 font-mono text-sm">
+            {experience.map((e) => (
+              <li
+                key={e.role}
+                className="flex flex-col gap-1 md:flex-row md:gap-6"
               >
-                <span className="font-display text-2xl text-bone transition-colors group-hover:text-volt">
-                  {p.name}
-                </span>
-                <span className="font-mono text-xs text-bone-dim md:text-right">
-                  {p.stat} · {p.year}
-                </span>
-              </Link>
-            </RevealItem>
-          ))}
+                <span className="text-bone-dim md:w-56">{e.period}</span>
+                <span className="text-bone">{e.role}</span>
+              </li>
+            ))}
+          </ul>
         </Reveal>
+      </div>
 
-        <h2 className="mt-20 font-mono text-sm uppercase tracking-wider text-bone-dim">
-          $ uptime --career
-        </h2>
-        <ul className="mt-4 space-y-2 font-mono text-sm">
-          {experience.map((e) => (
-            <li key={e.role} className="flex flex-col gap-1 md:flex-row md:gap-6">
-              <span className="text-bone-dim">{e.period}</span>
-              <span className="text-bone">{e.role}</span>
-            </li>
-          ))}
-        </ul>
+      <WorkIndex />
+
+      <div className="mx-auto max-w-5xl px-0 md:px-16">
+        <div className="border-t border-volt-dim pt-8">
+          <h2 className="font-mono text-sm uppercase tracking-wider text-bone-dim">
+            Writing
+          </h2>
+          <ul className="mt-4 flex flex-wrap gap-6 font-mono text-sm">
+            {writingLinks.map((l) => (
+              <li key={l.label}>
+                <a href={l.href} className="text-volt-bright hover:underline">
+                  {l.label} ↗
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </main>
   );

@@ -3,7 +3,8 @@ import { SITE_URL } from "@/content/site";
 import { projects } from "@/content/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/work", "/lab", "/now"].map((path) => ({
+  // /lab intentionally omitted — it 301s to /work#field-notes (no dup index).
+  const routes = ["", "/work", "/now"].map((path) => ({
     url: `${SITE_URL}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,

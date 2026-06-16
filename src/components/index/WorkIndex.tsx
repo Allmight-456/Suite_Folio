@@ -13,11 +13,26 @@ import { Reveal } from "@/components/ui/Reveal";
  */
 
 const schematicFor: Record<string, SchematicKind> = {
+  // personal/
   skillforge: "ast",
   autodocxpdf: "pipeline",
   ticketflow: "lock",
   "market-research": "pipeline",
   "ai-bubble": "ast",
+  // client/ (owner ask: extend the diagram treatment here too)
+  "plot-management-api": "api",
+  "firebase→postgres": "migration",
+  "azure-deploys": "deploy",
+  "voting-platform-api": "api",
+  // field-notes/
+  "harness-engineering": "loop",
+  "agent-memory": "ast",
+  "tree-retrieval": "ast",
+  "agent-boxes": "loop",
+  tooling: "loop",
+  "lesson: rate-limits-as-architecture": "pipeline",
+  "lesson: layered-concurrency": "lock",
+  "lesson: artifact-shaped-agents": "pipeline",
 };
 
 const personalRows: WorkRow[] = projects.map((p) => ({
@@ -49,11 +64,18 @@ export function WorkIndex() {
 
       <Reveal className="mt-12 space-y-10">
         <Directory dir="personal/" note="my repos" rows={personalRows} schematics />
-        <Directory dir={clientWork.dir} note={clientWork.note} rows={clientWork.rows} />
         <Directory
+          dir={clientWork.dir}
+          note={clientWork.note}
+          rows={clientWork.rows}
+          schematics
+        />
+        <Directory
+          id="field-notes"
           dir={fieldNotesGroup.dir}
           note={fieldNotesGroup.note}
           rows={fieldNotesGroup.rows}
+          schematics
         />
 
         <p className="border-t border-volt-dim pt-6 font-mono text-xs text-bone-dim">
@@ -77,14 +99,16 @@ function Directory({
   note,
   rows,
   schematics = false,
+  id,
 }: {
   dir: string;
   note?: string;
   rows: WorkRow[];
   schematics?: boolean;
+  id?: string;
 }) {
   return (
-    <div>
+    <div id={id} className="scroll-mt-20">
       <p className="font-mono text-sm">
         <span className="text-volt-bright">drwx</span>{" "}
         <span className="text-bone">{dir}</span>

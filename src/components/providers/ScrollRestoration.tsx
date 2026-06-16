@@ -126,15 +126,58 @@ export function ScrollRestoration() {
     const saved = readStore()[pathname];
     if (typeof saved !== "number" || saved <= 0) return;
 
-    const restore = () => {
+    // Resilient restore. A single rAF×2 + 60ms backstop is enough in `next dev`,
+    // but the production build (what Netlify serves) settles *later*: hydration is
+    // slower, Lenis re-measures the restored route's height after we'd already
+    // jumped (clamping the target short), and `viewTransition` swaps the DOM on a
+    // delay. A one-shot restore lands before any of that and gets overridden — the
+    // dev/prod split the owner saw. So instead of firing once we re-assert the
+    // saved offset every frame until the position actually holds for a few frames
+    // (or a ~0.75s cap), and bail the instant the user scrolls so we never fight
+    // real input. Still an immediate jump, never an animated scroll (a11y floor).
+    let raf = 0;
+    let settled = 0;
+    let frames = 0;
+    let cancelled = false;
+    const MAX_FRAMES = 45; // ~0.75s @ 60fps — outlasts hydration + view transition
+
+    const current = () => (lenis ? lenis.scroll : window.scrollY);
+    const apply = () => {
+      // Re-measure first: on a prod build Lenis may not yet know the restored
+      // route is tall enough, which would clamp scrollTo short of `saved`.
+      lenis?.resize();
       if (lenis) lenis.scrollTo(saved, { immediate: true, force: true });
       else window.scrollTo(0, saved);
     };
-    // Two frames so the restored route has laid out its full height (and so we
-    // land after any default scroll-to-top), then a short backstop.
-    requestAnimationFrame(() => requestAnimationFrame(restore));
-    const t = setTimeout(restore, 60);
-    return () => clearTimeout(t);
+
+    const tick = () => {
+      if (cancelled) return;
+      apply();
+      settled = Math.abs(current() - saved) < 2 ? settled + 1 : 0;
+      frames += 1;
+      if (settled >= 3 || frames >= MAX_FRAMES) return; // held, or gave up
+      raf = requestAnimationFrame(tick);
+    };
+
+    // Genuine user intent aborts the restore (wheel/touch/key) — programmatic
+    // scrolls from `apply()` itself don't fire these, so there's no self-cancel.
+    const onUserScroll = () => {
+      cancelled = true;
+      cancelAnimationFrame(raf);
+    };
+    window.addEventListener("wheel", onUserScroll, { passive: true });
+    window.addEventListener("touchstart", onUserScroll, { passive: true });
+    window.addEventListener("keydown", onUserScroll);
+
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(raf);
+      window.removeEventListener("wheel", onUserScroll);
+      window.removeEventListener("touchstart", onUserScroll);
+      window.removeEventListener("keydown", onUserScroll);
+    };
   }, [pathname, lenis]);
 
   return null;

@@ -1,8 +1,7 @@
 import { Hero } from "@/components/hero/Hero";
-import { Message } from "@/components/message/Message";
+import { Whoami } from "@/components/whoami/Whoami";
+import { Journey } from "@/components/journey/Journey";
 import { Figure } from "@/components/figure/Figure";
-import { Worlds } from "@/components/worlds/Worlds";
-import { WorkIndex } from "@/components/index/WorkIndex";
 import { Marquee } from "@/components/marquee/Marquee";
 import { NowLog } from "@/components/nowlog/NowLog";
 import { Footer } from "@/components/footer/Footer";
@@ -14,9 +13,12 @@ export default async function Home() {
   return (
     <main id="main">
       <Hero chip={chip} />
-      <Message />
-      <Worlds />
-      <WorkIndex />
+      {/* whoami terminal: the signature statement as a boot sequence. */}
+      <Whoami />
+      {/* Pinned horizontal scroll — experience, shipped work, interests, links.
+          Replaces the two ON/OFF PROD doors; the exhaustive index lives at /work
+          so no fact is stated in two places. */}
+      <Journey />
       <Marquee />
       <NowLog data={nowlog} />
       <Footer />
