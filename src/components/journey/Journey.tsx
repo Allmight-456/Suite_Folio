@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { EASE_SITE } from "@/lib/choreo";
@@ -25,7 +25,7 @@ const commands = journeyPanels.map((p) => p.cmd);
  */
 export function Journey() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { pinned, step, text, typed, outputVisible, cursor, activeDot } =
+  const { pinned, step, text, typed, outputVisible, cursor, busy, activeDot } =
     useJourneyChoreo(sectionRef, commands);
 
   // Stacked: server render + mobile + reduced-motion. Every screen, readable.
@@ -100,9 +100,14 @@ export function Journey() {
                 </div>
               </motion.div>
             </div>
-          </div>
 
-          <ProgressDots count={journeyPanels.length} active={activeDot} />
+            <StatusBar
+              tags={journeyPanels.map((p) => p.tag)}
+              active={activeDot}
+              total={journeyPanels.length}
+              busy={busy}
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -243,21 +248,73 @@ function Cursor() {
   );
 }
 
-/** Decorative progress indicator; the terminal output carries the content. */
-function ProgressDots({ count, active }: { count: number; active: number }) {
+/**
+ * tmux/Claude-Code-style status line at the foot of the window (replaces the old
+ * floating dots — owner wanted something more intuitive + "terminally"). Left: a
+ * Claude-Code spinner while a command runs, else a ready marker. Right: the
+ * command breadcrumb with the active one lit, plus a [n/total] counter.
+ */
+function StatusBar({
+  tags,
+  active,
+  total,
+  busy,
+}: {
+  tags: readonly string[];
+  active: number;
+  total: number;
+  busy: boolean;
+}) {
   return (
-    <div
-      aria-hidden="true"
-      className="mt-6 flex justify-center gap-2"
-    >
-      {Array.from({ length: count }).map((_, i) => (
-        <span
-          key={i}
-          className={`h-1.5 rounded-full transition-all duration-300 ${
-            i === active ? "w-6 bg-volt" : "w-1.5 bg-volt-dim"
-          }`}
-        />
-      ))}
+    <div className="flex items-center justify-between gap-4 border-t border-volt-dim bg-ink px-4 py-2.5 font-mono text-[11px]">
+      <span className="flex min-w-[7rem] items-center gap-2">
+        {busy ? (
+          <Spinner />
+        ) : (
+          <>
+            <span className="text-volt-bright">▸</span>
+            <span className="text-bone-dim">ready</span>
+          </>
+        )}
+      </span>
+      <span aria-hidden="true" className="flex items-center gap-2.5">
+        {tags.map((t, i) => (
+          <span
+            key={t}
+            className={
+              i === active
+                ? "text-volt-bright"
+                : "text-bone-dim/40 transition-colors"
+            }
+          >
+            {t}
+          </span>
+        ))}
+        <span className="ml-1 rounded bg-volt-dim/40 px-1.5 py-0.5 text-bone-dim">
+          {active + 1}/{total}
+        </span>
+      </span>
     </div>
+  );
+}
+
+/** Claude-Code-flavoured spinner: a cycling asterisk + gerund while a command
+    "runs" during the clear/type transition. Only mounted while busy, so the
+    interval is idle the rest of the time. */
+const SPIN_GLYPHS = ["✻", "✶", "✳", "✺", "✸"];
+const SPIN_WORDS = ["booting", "running", "loading", "compiling"];
+function Spinner() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI((v) => v + 1), 120);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <span className="flex items-center gap-2">
+      <span className="text-volt-bright">{SPIN_GLYPHS[i % SPIN_GLYPHS.length]}</span>
+      <span className="italic text-bone-dim">
+        {SPIN_WORDS[Math.floor(i / 7) % SPIN_WORDS.length]}…
+      </span>
+    </span>
   );
 }

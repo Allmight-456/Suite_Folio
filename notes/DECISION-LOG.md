@@ -104,3 +104,21 @@
   set-state-in-effect cascade; fast scroll skips intermediates to the landed band).
   Verified pacing ~1.3s via filmstrip. Desktop only; mobile / reduced-motion / no-JS
   render the four commands as a plain readable terminal stack (hard rules 3 + 5).
+
+- 2026-06-16 · **Final touches (owner-directed).**
+  (1) **Title future-proofing:** "GenAI" → "AI" everywhere in live copy (hero eyebrow,
+  layout metadata, JSON-LD jobTitle, OG image, the market-research deep-dive line) —
+  owner's call that "genai" may date. Governing docs (CONTENT.md §1, DESIGN-SPEC §3.1)
+  updated to match. Title is now `backend & ai engineer`.
+  (2) **Figure relocated** from after the footer (where it sat below the copyright and
+  was easy to miss) to right BEFORE the footer: NowLog → Figure → Footer. Rationale —
+  the dissolve is a sign-off, so it ends the page, but contact/copyright must be the
+  literal end; placing it before the footer makes it the climax that hands into "the
+  best resume is a git log" and puts it in the path to contact. Height trimmed 200→170vh
+  to cut the empty lead-in.
+  (3) **Journey indicator → tmux/Claude-Code status bar** (replaces the floating dots,
+  owner wanted more intuitive + "terminally"; satisfies the "add Claude Code feel" ask,
+  rule-6 logged here). A status line at the foot of the terminal window: a command
+  breadcrumb (career · shipped · agents · home) with the active lit + [n/4], and a
+  Claude-Code `✻ booting…` cycling spinner shown while a command runs during the
+  clear/type transition. Indigo palette held (no Claude orange); phosphor untouched.

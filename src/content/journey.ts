@@ -24,24 +24,28 @@ export const headlineProjects = projects.filter((p) =>
 export const journeyPanels = [
   {
     id: "experience",
+    tag: "career",
     cmd: "uptime --career",
     title: "On the clock",
     blurb: "~1 year shipping production backends — Rayvector, Bengaluru.",
   },
   {
     id: "work",
+    tag: "shipped",
     cmd: "ls ./shipped",
     title: "What I've shipped",
     blurb: "Systems that survived the constraints they were built under.",
   },
   {
     id: "agentic",
+    tag: "agents",
     cmd: "tail -f ~/agents/*.log",
     title: "Where I'm digging",
     blurb: "Agent loops, memory, retrieval, evals — off prod, on purpose.",
   },
   {
     id: "more",
+    tag: "home",
     cmd: "cd ~ && open .",
     title: "Go deeper",
     blurb: "The full index, the git log, and a way to reach me.",

@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 // Default OG image (TECH-ARCHITECTURE §5) in the terminal-pane style.
 export const runtime = "edge";
-export const alt = "Ishan Kumar — Backend & GenAI Engineer";
+export const alt = "Ishan Kumar — Backend & AI Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -29,7 +29,7 @@ export default function OG() {
         }}
       >
         <div style={{ color: BONE_DIM, fontSize: 28 }}>
-          backend &amp; genai engineer
+          backend &amp; ai engineer
         </div>
         <div
           style={{

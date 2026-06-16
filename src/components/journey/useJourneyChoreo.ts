@@ -131,6 +131,7 @@ export function useJourneyChoreo(
     typed,
     outputVisible: phase === "idle",
     cursor: phase !== "idle",
+    busy: phase !== "idle", // drives the status-bar spinner during clear/type
     activeDot: step,
   };
 }

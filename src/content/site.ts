@@ -7,7 +7,7 @@ import { CertSchema, type Cert } from "./schema";
 export const SITE_URL = "https://ishan-kumar.netlify.app";
 
 export const hero = {
-  eyebrow: "backend & genai engineer",
+  eyebrow: "backend & ai engineer",
   name: "ISHAN KUMAR",
   subline: "bengaluru, india · utc+5:30",
   chipFallback: "▸ currently building — SkillForge",

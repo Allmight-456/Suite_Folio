@@ -54,7 +54,7 @@ Don't fake commands for decoration — structure is information.
 
 ### 3.1 HERO — Lando's "name + next race"
 - Full viewport. `ISHAN KUMAR` in display type at viewport-filling scale,
-  `backend & genai engineer` as mono eyebrow above, `bengaluru, india` below.
+  `backend & ai engineer` as mono eyebrow above, `bengaluru, india` below.
 - Right/bottom: the live element. Lando shows *Next Race: Barcelona GP*; we show a
   compact terminal chip: `▸ currently building — SkillForge` pulled from now.log's
   top `[BUILDING]` entry. Click → /now.

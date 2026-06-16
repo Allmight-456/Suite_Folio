@@ -29,14 +29,14 @@ const description =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Ishan Kumar — Backend & GenAI Engineer",
+    default: "Ishan Kumar — Backend & AI Engineer",
     template: "%s · Ishan Kumar",
   },
   description,
   authors: [{ name: "Ishan Kumar" }],
   openGraph: {
     type: "website",
-    title: "Ishan Kumar — Backend & GenAI Engineer",
+    title: "Ishan Kumar — Backend & AI Engineer",
     description,
     url: SITE_URL,
     siteName: "Ishan Kumar",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@kuma10296",
-    title: "Ishan Kumar — Backend & GenAI Engineer",
+    title: "Ishan Kumar — Backend & AI Engineer",
     description,
   },
 };

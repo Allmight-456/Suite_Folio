@@ -22,7 +22,7 @@ export function Figure() {
     <section
       ref={sectionRef}
       aria-label="The engineer"
-      className="relative h-[200vh]"
+      className="relative h-[170vh]"
     >
       <div className="sticky top-0 flex h-svh items-center justify-center overflow-hidden">
         <div className="relative flex w-full max-w-5xl flex-col items-center px-6 md:flex-row md:items-end md:justify-between md:px-16">

@@ -5,7 +5,7 @@ Every word on the site comes from here. Edit here first, code second.
 
 ## 1. Hero
 
-- eyebrow (mono): `backend & genai engineer`
+- eyebrow (mono): `backend & ai engineer` (was "genai" — owner future-proofed 2026-06-16)
 - name: `ISHAN KUMAR`
 - subline (mono): `bengaluru, india · utc+5:30`
 - live chip (from now.log, fallback static): `▸ currently building — SkillForge`
