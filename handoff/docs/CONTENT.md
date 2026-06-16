@@ -62,6 +62,7 @@ Every word on the site comes from here. Edit here first, code second.
 ```
 sept 2025 – present    SWE-1 · Rayvector Technologies · Bengaluru
 may 2025  – aug 2025   SWE Intern · Rayvector Technologies
+nov 2024  – jan 2025   Software Developer (Intern) · Sambin Technologies
 dec 2021  – june 2025  B.Tech CSE · RGIPT
 ```
 Role bullets (use on /work, max 4 — resume v5 phrasing):
@@ -102,7 +103,9 @@ Stack groups: reuse the `$ stack --grouped` block from the GitHub README verbati
 ## 10. FACTS REGISTRY — the hard boundary
 
 May claim: ~1 year production experience (Rayvector, May 2025–present incl. internship);
-multinational client; zero-downtime Firebase→PostgreSQL migration; Azure VM + Nginx +
+multinational client; a prior Software Developer internship at Sambin Technologies
+(Nov 2024–Jan 2025) — timeline mention only, no project claims or metrics;
+zero-downtime Firebase→PostgreSQL migration; Azure VM + Nginx +
 Docker deploys; AWS EC2 voting API; AutoDocxPdf v1.2.6, 4 agents, Gemini 2.5 Flash-Lite,
 12 req/min throttle, in internal daily use; TicketFlow concurrency design (lock +
 FOR UPDATE + optimistic version); SkillForge WIP ~50× token reduction target on
@@ -110,5 +113,6 @@ repeat-class errors; Market Research ~95% loop automation, 1000+ data points; th
 Apr 2026 certs above.
 
 May NOT claim: shipped customer *products* (AutoDocxPdf/SkillForge are internal/personal
-infra); any Sambin Technologies work; team leadership; uptime/scale numbers not listed
-here; "expert" in anything. When unsure: omit.
+infra); any Sambin Technologies *project work, deliverables, or metrics* (the internship
+is a timeline line only — owner decision 2026-06-16); team leadership; uptime/scale
+numbers not listed here; "expert" in anything. When unsure: omit.

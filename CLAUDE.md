@@ -18,8 +18,10 @@ and DESIGN-SPEC.md before structural changes, CONTENT.md before writing any copy
 1. **Copy comes from `handoff/docs/CONTENT.md`.** Do not invent claims, metrics,
    or employer names. AutoDocxPdf/SkillForge are *internal tooling / personal infra* —
    never "shipped customer product". Never fabricate stats.
-2. **No "Sambin Technologies"** anywhere on the site. Rayvector appears only as the
-   employer line in experience — never in marketing copy.
+2. **Sambin Technologies** may appear ONLY as an experience-timeline line
+   (Software Developer intern, Nov 2024 – Jan 2025) — owner-approved 2026-06-16,
+   timeline-only (no project detail, no metrics). Never in marketing copy.
+   Employer names (Rayvector, Sambin) appear only in the experience timeline.
 3. **Accessibility floor:** `prefers-reduced-motion` disables Lenis + all scroll
    choreography (content must be fully readable with zero JS motion). Visible
    `:focus-visible` states. Semantic landmarks. Lighthouse a11y ≥ 95.

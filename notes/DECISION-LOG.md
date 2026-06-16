@@ -87,3 +87,20 @@
   every frame (with `lenis.resize()`) until it holds for ~3 frames or a ~0.75s cap,
   and aborts on genuine user scroll (wheel/touch/key). Still an immediate jump,
   never animated — reduced-motion/no-JS branches unchanged.
+
+- 2026-06-16 · **Sambin Technologies — rule reversed (owner-approved, timeline-only).**
+  CLAUDE.md rule #2 and CONTENT.md previously forbade ANY Sambin mention. Owner asked
+  to add the Nov 2024–Jan 2025 Software Developer internship; chose the **timeline-only**
+  option (no project detail, no 85%/metrics). Added one line to `experience` (site.ts);
+  updated CLAUDE.md rule #2, CONTENT.md §6 timeline, and the facts registry (now permits
+  the timeline line, still forbids Sambin *project work / deliverables / metrics*).
+
+- 2026-06-16 · **Journey transition → terminal command session (owner-directed).**
+  The lateral translateX slide (Round 1) read as a stock carousel. Replaced with a
+  pinned terminal that, on scroll, runs `clear` (types it, wipes the screen) then types
+  the next command (`uptime --career → ls ./shipped → tail -f ~/agents → cd ~`) and
+  reveals its output — reversing the same way on scroll-up. useJourneyChoreo became a
+  scroll-band state machine (hysteresis kills boundary thrash; rAF kickoff avoids a
+  set-state-in-effect cascade; fast scroll skips intermediates to the landed band).
+  Verified pacing ~1.3s via filmstrip. Desktop only; mobile / reduced-motion / no-JS
+  render the four commands as a plain readable terminal stack (hard rules 3 + 5).

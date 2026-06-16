@@ -87,6 +87,10 @@ export const experience = [
     role: "SWE-1 · Rayvector Technologies · Bengaluru",
   },
   { period: "may 2025 – aug 2025", role: "SWE Intern · Rayvector Technologies" },
+  {
+    period: "nov 2024 – jan 2025",
+    role: "Software Developer (Intern) · Sambin Technologies",
+  },
   { period: "dec 2021 – june 2025", role: "B.Tech CSE · RGIPT" },
 ] as const;
 

@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import {
-  motion,
-  useMotionValueEvent,
-  type MotionValue,
-} from "motion/react";
+import { motion } from "motion/react";
+import { EASE_SITE } from "@/lib/choreo";
 import { experience } from "@/content/site";
 import { labBlocks } from "@/content/lab";
 import {
@@ -17,22 +14,21 @@ import {
 } from "@/content/journey";
 import { useJourneyChoreo } from "./useJourneyChoreo";
 
+const PROMPT = "ishan@prod:~$";
+const commands = journeyPanels.map((p) => p.cmd);
+
 /**
- * The homepage's pinned horizontal-scroll (owner-directed: replaces the two
- * click-through ON/OFF PROD doors so experience + work + interests are visible
- * without a click). Each panel opens with a shell command, keeping the terminal
- * voice. Desktop pins the section and walks sideways on scroll; mobile,
- * reduced-motion, and no-JS get a plain vertical stack (useJourneyChoreo gate).
- * Panels link into /work and /work/[slug] — the doors' destinations are kept.
+ * The homepage Journey, run as a terminal session. Desktop pins the section and,
+ * as you scroll, runs `clear` then types the next command and reveals its output
+ * (reversing on the way back) — see useJourneyChoreo. Mobile / reduced-motion /
+ * no-JS get a plain readable terminal stack. Panels link into /work + /work/[slug].
  */
 export function Journey() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { pinned, x, progress } = useJourneyChoreo(
-    sectionRef,
-    journeyPanels.length,
-  );
+  const { pinned, step, text, typed, outputVisible, cursor, activeDot } =
+    useJourneyChoreo(sectionRef, commands);
 
-  // Stacked: server render + mobile + reduced-motion. Plain readable sections.
+  // Stacked: server render + mobile + reduced-motion. Every screen, readable.
   if (!pinned) {
     return (
       <section
@@ -43,11 +39,16 @@ export function Journey() {
         {journeyPanels.map((panel, i) => (
           <div
             key={panel.id}
-            className={`px-6 py-20 md:px-16 ${i > 0 ? "border-t border-volt-dim" : ""}`}
+            className={`px-6 py-16 md:px-16 ${i > 0 ? "border-t border-volt-dim" : ""}`}
           >
             <div className="mx-auto max-w-4xl">
-              <PanelHeader panel={panel} />
-              <PanelBody id={panel.id} />
+              <p className="font-mono text-sm text-bone">
+                <span className="text-volt-bright">{PROMPT}</span> {panel.cmd}
+              </p>
+              <Caption panel={panel} />
+              <div className="mt-5">
+                <PanelBody id={panel.id} />
+              </div>
             </div>
           </div>
         ))}
@@ -55,7 +56,9 @@ export function Journey() {
     );
   }
 
-  // Pinned: tall outer section, sticky track translated on X by scroll progress.
+  // Pinned: one terminal window; scroll runs the commands.
+  const panel = journeyPanels[step];
+  const shown = text.slice(0, typed); // characters revealed so far (typewriter)
   return (
     <section
       ref={sectionRef}
@@ -63,39 +66,55 @@ export function Journey() {
       style={{ height: `${journeyPanels.length * 100}vh` }}
       className="relative border-y border-volt-dim"
     >
-      <div className="sticky top-0 h-screen overflow-hidden">
-        <motion.div style={{ x }} className="flex h-full">
-          {journeyPanels.map((panel) => (
-            <div
-              key={panel.id}
-              className="flex h-full w-screen shrink-0 items-center px-6 md:px-24"
-            >
-              <div className="mx-auto w-full max-w-4xl">
-                <PanelHeader panel={panel} />
-                <PanelBody id={panel.id} />
-              </div>
+      <div className="sticky top-0 flex h-screen items-center px-6 md:px-16">
+        <div className="mx-auto w-full max-w-4xl">
+          <div className="overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
+            <div className="flex items-center gap-2 border-b border-volt-dim bg-ink-raise px-4 py-3">
+              <span className="h-3 w-3 rounded-full bg-volt-dim" />
+              <span className="h-3 w-3 rounded-full bg-volt-dim" />
+              <span className="h-3 w-3 rounded-full bg-volt-dim" />
+              <span className="ml-3 truncate font-mono text-xs text-bone-dim">
+                {PROMPT} {shown}
+              </span>
             </div>
-          ))}
-        </motion.div>
-        <ProgressDots progress={progress} count={journeyPanels.length} />
+
+            <div className="min-h-[460px] bg-ink-raise p-6 md:p-10">
+              <p className="font-mono text-sm text-bone">
+                <span className="text-volt-bright">{PROMPT}</span> {shown}
+                {cursor && <Cursor />}
+              </p>
+
+              <motion.div
+                initial={false}
+                animate={
+                  outputVisible
+                    ? { opacity: 1, y: 0, filter: "blur(0px)" }
+                    : { opacity: 0, y: 10, filter: "blur(3px)" }
+                }
+                transition={{ duration: 0.42, ease: EASE_SITE }}
+                className="mt-6"
+              >
+                <Caption panel={panel} />
+                <div className="mt-5">
+                  <PanelBody id={panel.id} />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          <ProgressDots count={journeyPanels.length} active={activeDot} />
+        </div>
       </div>
     </section>
   );
 }
 
-function PanelHeader({ panel }: { panel: JourneyPanel }) {
+function Caption({ panel }: { panel: JourneyPanel }) {
   return (
-    <div className="mb-8">
-      <p className="font-mono text-sm text-bone-dim">
-        <span className="text-volt-bright">ishan@prod:~$</span> {panel.cmd}
-      </p>
-      <h2 className="font-display mt-3 text-[clamp(1.75rem,5vw,3.5rem)] font-bold tracking-tight text-bone">
-        {panel.title}
-      </h2>
-      <p className="mt-2 max-w-md font-mono text-xs text-bone-dim">
-        {panel.blurb}
-      </p>
-    </div>
+    <p className="font-mono text-xs leading-relaxed text-bone-dim">
+      <span className="text-volt-bright"># </span>
+      <span className="text-bone">{panel.title}</span> — {panel.blurb}
+    </p>
   );
 }
 
@@ -108,13 +127,10 @@ function PanelBody({ id }: { id: JourneyPanel["id"] }) {
 
 function ExperienceBody() {
   return (
-    <div className="space-y-8">
-      <ol className="space-y-3 font-mono text-sm">
+    <div className="space-y-6">
+      <ol className="space-y-2.5 font-mono text-sm">
         {experience.map((e) => (
-          <li
-            key={e.role}
-            className="flex flex-col gap-1 md:flex-row md:gap-6"
-          >
+          <li key={e.role} className="flex flex-col gap-1 md:flex-row md:gap-6">
             <span className="shrink-0 text-bone-dim md:w-48">{e.period}</span>
             <span className="text-bone">{e.role}</span>
           </li>
@@ -220,22 +236,19 @@ function GoDeeperBody() {
   );
 }
 
-/** Decorative progress indicator; the panels themselves carry the content. */
-function ProgressDots({
-  progress,
-  count,
-}: {
-  progress: MotionValue<number>;
-  count: number;
-}) {
-  const [active, setActive] = useState(0);
-  useMotionValueEvent(progress, "change", (v) => {
-    setActive(Math.min(count - 1, Math.max(0, Math.round(v * (count - 1)))));
-  });
+/** Blinking block cursor (--volt). .cursor-blink stops under reduced motion. */
+function Cursor() {
+  return (
+    <span className="cursor-blink ml-0.5 inline-block h-[1.05em] w-[0.5em] translate-y-[0.15em] bg-volt align-middle" />
+  );
+}
+
+/** Decorative progress indicator; the terminal output carries the content. */
+function ProgressDots({ count, active }: { count: number; active: number }) {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2"
+      className="mt-6 flex justify-center gap-2"
     >
       {Array.from({ length: count }).map((_, i) => (
         <span
