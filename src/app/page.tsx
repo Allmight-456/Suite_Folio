@@ -21,10 +21,13 @@ export default async function Home() {
       <Journey />
       <Marquee />
       <NowLog data={nowlog} />
-      <Footer />
-      {/* The figure closes the page: a final sign-off below "the best resume is
-          a git log" — the engineer dissolving back into the bits. */}
+      {/* The figure is the visual sign-off — the engineer dissolving back into the
+          bits — placed right before the footer so it lands in everyone's path to
+          contact and hands off into "the best resume is a git log" (its caption,
+          "the engineer behind the commits", sits adjacent to that line). It used to
+          sit AFTER the footer/copyright, where it was easy to miss. */}
       <Figure />
+      <Footer />
     </main>
   );
 }

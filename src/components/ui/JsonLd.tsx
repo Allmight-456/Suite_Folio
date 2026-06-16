@@ -11,7 +11,7 @@ export function PersonJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Ishan Kumar",
-    jobTitle: "Backend & GenAI Engineer",
+    jobTitle: "Backend & AI Engineer",
     url: SITE_URL,
     address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
     email: "bhardwajishansingh@gmail.com",

@@ -54,7 +54,7 @@ export const deepDives: Record<string, DeepDive> = {
   },
   "market-research": {
     slug: "market-research",
-    what: "Multi-agent LangChain + Gemini pipeline (BYOK) scanning 1000+ data points on the GenAI/LLM market into company reports and investment proposals; ~95% of the manual research loop automated. (Forked base, substantially extended.)",
+    what: "Multi-agent LangChain + Gemini pipeline (BYOK) scanning 1000+ data points on the AI/LLM market into company reports and investment proposals; ~95% of the manual research loop automated. (Forked base, substantially extended.)",
     constraint:
       "First contact with multi-agent orchestration: where do agent boundaries belong? The answer that worked — follow output artifacts (report sections), not 'roles'.",
     gitLog: [
