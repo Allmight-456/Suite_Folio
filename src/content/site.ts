@@ -15,7 +15,9 @@ export const hero = {
 
 export const nav = [
   { label: "work", href: "/work" },
-  { label: "lab", href: "/lab" },
+  // "lab" / off-prod field notes now live in the unified /work index (redundancy
+  // cleanup) — deep-link straight to that directory. /lab still 301s here.
+  { label: "lab", href: "/work#field-notes" },
   { label: "now", href: "/now" },
   // "the best resume is a git log" — the nav resume points at the GitHub profile
   // (the living résumé). The downloadable PDF still lives at /resume.pdf via the
@@ -48,23 +50,21 @@ export const message: {
   signature: "ishan@prod:~$",
 };
 
-export const worlds = [
-  {
-    title: "ON PROD",
-    blurb: "Production systems, migrations, and the constraints they survived.",
-    href: "/work",
-    tags: ["fastapi", "go", "postgres", "redis", "zero-downtime migrations"],
-  },
-  {
-    title: "OFF PROD",
-    blurb: "Agent boxes, evals, experiments — and what breaks at 3am.",
-    // OFF PROD carries a little more: the README's terminal voice + a peek at
-    // what actually runs on the box, so it doesn't read as a mirror of ON PROD.
-    note: "$ tail -f ~/agents/*.log — long-horizon loops I keep alive to watch them degrade.",
-    href: "/lab",
-    tags: ["hermes", "openclaw", "evals + guardrails", "mem0", "pageindex"],
-  },
-] as const;
+// whoami boot-sequence (CONTENT.md §1–2). Reuses hero + message copy VERBATIM —
+// the terminal is a presentation of the same facts, never a new claim. Rendered
+// by components/whoami, which types the commands on scroll-in and reveals output.
+export const whoami = {
+  prompt: "ishan@prod:~$",
+  lines: [
+    { kind: "cmd", text: "whoami" },
+    { kind: "out", text: `${hero.name.toLowerCase()} · ${hero.eyebrow}` },
+    { kind: "cmd", text: "cat role.txt" },
+    { kind: "out", parts: message.parts },
+  ],
+} as const;
+
+// (The two ON/OFF PROD "doors" were replaced by the homepage Journey section —
+// components/journey — so experience + work + interests show without a click.)
 
 export const stackMarquee = [
   "Go",

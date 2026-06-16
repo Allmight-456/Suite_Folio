@@ -4,7 +4,14 @@
  * text color; --volt accents). Server-renderable, no JS. `animate` enables the
  * Hall-of-Fame hover state (D4-A: static → animated SVG) via CSS classes.
  */
-export type SchematicKind = "pipeline" | "lock" | "ast";
+export type SchematicKind =
+  | "pipeline"
+  | "lock"
+  | "ast"
+  | "api"
+  | "migration"
+  | "deploy"
+  | "loop";
 
 const stroke = "currentColor";
 
@@ -29,6 +36,10 @@ export function Schematic({
       {kind === "pipeline" && <Pipeline />}
       {kind === "lock" && <Lock />}
       {kind === "ast" && <Ast />}
+      {kind === "api" && <Api />}
+      {kind === "migration" && <Migration />}
+      {kind === "deploy" && <Deploy />}
+      {kind === "loop" && <Loop />}
     </svg>
   );
 }
@@ -97,6 +108,96 @@ function Lock() {
         />
       ))}
       <path d="M72 60 H80 M108 60 H116" className="schematic-line" />
+    </g>
+  );
+}
+
+/* Client API: request → service → datastore (plot-management / voting APIs) */
+function Api() {
+  return (
+    <g stroke={stroke} strokeWidth="1.5">
+      <circle cx="14" cy="60" r="7" />
+      <path d="M21 60 H50" className="schematic-line" />
+      <rect x="50" y="48" width="34" height="24" rx="2" />
+      <path
+        d="M84 60 H110"
+        className="schematic-line"
+        style={{ animationDelay: "120ms" }}
+      />
+      <g stroke="var(--volt)">
+        <ellipse cx="130" cy="48" rx="14" ry="5" />
+        <path d="M116 48 V72 a14 5 0 0 0 28 0 V48" />
+      </g>
+    </g>
+  );
+}
+
+/* Zero-downtime migration: old store → new store (Firebase → Postgres) */
+function Migration() {
+  return (
+    <g stroke={stroke} strokeWidth="1.5">
+      <rect x="10" y="44" width="40" height="32" rx="2" />
+      <path d="M55 60 H104" className="schematic-line" />
+      <path d="M97 53 L106 60 L97 67" className="schematic-line" />
+      <rect
+        x="110"
+        y="44"
+        width="40"
+        height="32"
+        rx="2"
+        stroke="var(--volt)"
+      />
+    </g>
+  );
+}
+
+/* Deploy: nginx → VM running containers (Azure VM, two environments) */
+function Deploy() {
+  return (
+    <g stroke={stroke} strokeWidth="1.5">
+      <rect x="6" y="50" width="24" height="20" rx="2" />
+      <path d="M30 60 H52" className="schematic-line" />
+      <rect x="52" y="34" width="100" height="52" rx="3" opacity="0.8" />
+      {[
+        [64, 44],
+        [64, 64],
+        [110, 44],
+        [110, 64],
+      ].map(([x, y], i) => (
+        <rect
+          key={`${x}-${y}`}
+          x={x}
+          y={y}
+          width="32"
+          height="12"
+          rx="2"
+          stroke={i === 0 ? "var(--volt)" : stroke}
+          className="schematic-line"
+          style={{ animationDelay: `${i * 100}ms` }}
+        />
+      ))}
+    </g>
+  );
+}
+
+/* Agent loop: a self-feeding cycle with a watched node (field notes) */
+function Loop() {
+  return (
+    <g stroke={stroke} strokeWidth="1.5">
+      <path
+        d="M80 30 A30 30 0 1 1 53 47"
+        className="schematic-line"
+        opacity="0.7"
+      />
+      <path d="M53 47 L49 38 L60 41 Z" fill={stroke} stroke="none" />
+      <circle
+        cx="80"
+        cy="60"
+        r="9"
+        stroke="var(--volt)"
+        fill="var(--volt)"
+        fillOpacity="0.15"
+      />
     </g>
   );
 }
