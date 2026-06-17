@@ -122,3 +122,83 @@
   breadcrumb (career · shipped · agents · home) with the active lit + [n/4], and a
   Claude-Code `✻ booting…` cycling spinner shown while a command runs during the
   clear/type transition. Indigo palette held (no Claude orange); phosphor untouched.
+
+- 2026-06-17 · **Skills marquee → neofetch "stack" card (owner-directed).** The slow
+  stack marquee (`components/marquee`) forced viewers to *wait* for a skill to crawl by
+  and only showed ~12 of them. Replaced with a static `neofetch`/`fastfetch`-style card
+  (`components/stack/Stack`): an ASCII sigil + all skills grouped into 7 categories
+  (`src/content/skills.ts`, `SkillGroupSchema`, sourced from CONTENT.md §8) — caught in
+  one gaze, revealed with the shared `useChoreo` stagger (static under reduced-motion /
+  no-JS; SSR renders every skill). Uses the lighter card chrome (not the now.log
+  Mac-window signature) and site accent ONLY — **phosphor stays quarantined** to now.log.
+  Deleted `Marquee.tsx`, `stackMarquee` (site.ts), the `.marquee-track` keyframes.
+
+- 2026-06-17 · **Theme switcher — p10k-style full repaint (owner-directed, big ask).**
+  Added a zsh-powerlevel10k / Claude-Code-setup-style palette picker that repaints the
+  *whole* site (background, text, accent, borders, hero glow, terminal). Mechanism: every
+  colour already flows through CSS tokens, so each theme is a `[data-theme="id"]` block in
+  `globals.css` overriding `--ink*/--bone*/--volt*/--phosphor`; switching just sets
+  `<html data-theme>`. `:root` stays indigo → SSR / no-JS keep the locked brand (no FOUC
+  via a pre-paint inline script in `layout.tsx`; persisted to `localStorage['ik-theme']`).
+  `ThemeProvider` holds state + fires `ik:themechange`; **HeroGlow** and the figure
+  **useBinaryDissolve** (the only JS token snapshots) re-read tokens on that event — all
+  CSS-driven styles follow automatically. Two in-sync triggers: a nav popover
+  (`ThemeSwitcher`, keyboard + live-preview, Esc reverts) and the stack card colour blocks
+  (`ThemeSwatches`). Themes: indigo (default) + phosphor green · amber CRT · ember (orange)
+  · dracula · nord — all dark + AA-tuned. **This relaxes D2 (single locked accent) and the
+  phosphor quarantine, but ONLY under opt-in themes** — the default render is unchanged
+  indigo with phosphor quarantined to now.log. No inline hex (tokens-in-CSS rule holds);
+  spacing/margins unchanged (a theme recolours, it never re-lays-out). Lighthouse a11y /
+  LCP floors preserved (backgrounds kept dark, contrasts AA).
+
+- 2026-06-17 · **Skills card → terminal boot + pixel robot + niche enrichment (owner-directed
+  round 2).** The static stack card needed the site's life and the data was a verbatim copy.
+  (1) **Boots like a terminal:** `useSkillsBoot` (modelled on `useJourneyChoreo`) opens the
+  window on first scroll-in, types `skill --all`, beats a Claude-Code spinner, then streams
+  the category rows one-by-one — runs ONCE (never loops). Pre-mount / reduced-motion / no-JS
+  render the fully-booted state (every skill, command pre-typed). Shared `Cursor`/`Spinner`
+  extracted to `components/ui/Terminal` and reused in Journey (DRY). (2) **Pixel robot/agent
+  head** replaces the ASCII triangle — a token-coloured pixel grid, recolours per theme,
+  accent only (phosphor quarantine holds). (3) **Sharpened + enriched skills** from the README
+  knowledge base (MCP, AST retrieval, Clean Architecture, distributed locking, evals/guardrails,
+  Claude Skills, vector/FAISS, + a `tooling` row); `niche: true` items paint in `--volt-bright`
+  so the depth catches the eye. Mirrored in CONTENT.md §8. Command is `skill --all` (owner's wording).
+
+- 2026-06-17 · **/work → git-graph 3-branch tree + lightweight pages for all projects
+  (owner-directed round 2).** The `ls -la` index didn't match the cinematic theme, icons
+  repeated, and most projects (all older ones) had no page/context/links. (1) **`WorkTree`**
+  (`components/work`) renders `$ git log --graph --all`: `main` branches into **projects ·
+  interests · learnings**, drawing in as a top-down staggered reveal (useChoreo; nested-list
+  floor under reduced-motion / no-JS). Project nodes link to their page; interest/lesson nodes
+  expand inline (<details>, open without JS). (2) **Content reorg** — `knowledge.ts` field-notes
+  split into `interests` + `lessons`; new `content/work.ts` composes the 3 branches from existing
+  typed content (no fact stated twice). (3) **Older work promoted** — RepoMaster / PDFSage / irctc
+  moved from a dead link-list to real projects (`ProjectSchema` gained `tier` + `summary`) with
+  **lightweight `/work/[slug]` pages** (what · stack · repo links); the deep-dive template is now
+  two-tier (flagship full vs older lightweight). Copy grounded in PROJECT-DEEP-DIVES + the PDFSage
+  readme; **older-project years are approximate (2024) — owner to verify.** (4) **Icons
+  diversified** — added `vector`/`scaffold`/`editorial`/`memory`/`harness`/`scan` schematics and
+  re-mapped so no project repeats a glyph. Replaced `WorkIndex` (deleted); writing + certs now live
+  in the learnings branch (removed the standalone Writing block on /work).
+
+- 2026-06-17 · **/work → personal "What Pulls Me" (ER diagram + terminal) — owner-directed
+  round 3.** The git-graph tree read like `pstree` and re-stated the work experience already
+  shown in the homepage `uptime --career`. Redirected: /work is now **entirely personal** —
+  not a project index. Structure: an **ER / design-flow diagram** (`components/mind/MindMap`)
+  maps a root `ishan` → 3 children **curiosity · obsessions · convictions** (owner-chosen jargon
+  for interests / passion / learnings); below it a **terminal window** (`components/mind/MindTerminal`,
+  `id="field-notes"`) where each section **boots on scroll** — types its command (`cat ~/curiosity`,
+  `ls -t ~/obsessions`, `git log --oneline ~/convictions`) and streams its items. **Projects are
+  woven in as `↳ evidence` links** (every one of the 8 project pages is reachable from here — verified),
+  not re-indexed. Content `content/mind.ts` (first-person rephrasing of the old knowledge/lab/deepdive
+  copy — no new claims). Experience timeline dropped (redundant); certs kept as a slim footnote;
+  writing stays in the global footer. **Reuse/cleanup:** the skills boot hook generalised to
+  `components/ui/useTerminalBoot`; deleted `WorkTree`, `content/work.ts`, `content/knowledge.ts`
+  (now dead); `kindForProject` moved to `projects.ts`. Homepage Journey `/work` captions updated.
+  Reduced-motion / no-JS render the diagram static + terminal fully-booted (SSR carries it all).
+
+- 2026-06-17 · **Two bug fixes (owner-flagged).** (1) **Hydration mismatch** on `<html>` — the
+  pre-paint theme script sets `data-theme` before React hydrates; added `suppressHydrationWarning`
+  on `<html>` (the next-themes pattern). Verified 0 console errors with a non-default theme. (2)
+  **now.json clutter** — the big `machine-readable: /now.json` block on `/now` was eating vertical
+  space; moved to a small inline link on the breadcrumb row (endpoint kept).

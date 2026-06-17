@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { THEME_EVENT } from "@/content/themes";
 
 type Args = {
   sectionRef: RefObject<HTMLElement | null>;
@@ -53,7 +54,9 @@ export function useBinaryDissolve({ sectionRef, canvasRef, reduced, mounted }: A
     let raf = 0;
     let inView = false;
     let disposed = false;
-    const pal = tokens();
+    // `let` so a theme change can re-sample the palette (the picker fires
+    // THEME_EVENT); the dissolve colours follow without remounting the canvas.
+    let pal = tokens();
 
     // 1) Sample the cutout into a low-res luminance/alpha grid (once).
     const img = new window.Image();
@@ -165,18 +168,25 @@ export function useBinaryDissolve({ sectionRef, canvasRef, reduced, mounted }: A
     );
     io.observe(section);
 
+    const onTheme = () => {
+      pal = tokens();
+      draw(progress());
+    };
+
     size();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", () => {
       size();
       draw(progress());
     });
+    window.addEventListener(THEME_EVENT, onTheme);
 
     return () => {
       disposed = true;
       io.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener(THEME_EVENT, onTheme);
     };
   }, [mounted, reduced, sectionRef, canvasRef]);
 

@@ -3,17 +3,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { projects } from "@/content/projects";
 import { deepDives } from "@/content/deepdives";
-import { Schematic, type SchematicKind } from "@/components/ui/Schematic";
+import { kindForProject } from "@/content/projects";
+import { Schematic } from "@/components/ui/Schematic";
 import { Reveal } from "@/components/ui/Reveal";
 import { SoftwareJsonLd } from "@/components/ui/JsonLd";
-
-const schematicFor: Record<string, SchematicKind> = {
-  skillforge: "ast",
-  autodocxpdf: "pipeline",
-  ticketflow: "lock",
-  "market-research": "pipeline",
-  "ai-bubble": "ast",
-};
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -40,15 +33,17 @@ export default async function WorkPage({
 }) {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
+  if (!project) notFound();
+  // Flagship projects have a full deep-dive; older ones render a lightweight page
+  // (summary + stack + links) from the project fields alone.
   const dive = deepDives[slug];
-  if (!project || !dive) notFound();
 
   return (
     <main id="main" className="px-6 pb-32 pt-32 md:px-16">
       <SoftwareJsonLd project={project} />
       <div className="mx-auto max-w-4xl">
         <Link
-          href="/#work"
+          href="/work#work"
           className="font-mono text-sm text-bone-dim transition-colors hover:text-bone"
         >
           ← work
@@ -62,6 +57,9 @@ export default async function WorkPage({
             </h1>
             <span className="shrink-0 font-mono text-sm text-bone-dim">
               {project.year}
+              {project.tier === "older" && (
+                <span className="ml-2 text-bone-dim/60">· older</span>
+              )}
               {project.wip && (
                 <span className="ml-2 text-volt-bright">wip</span>
               )}
@@ -74,32 +72,38 @@ export default async function WorkPage({
 
         <Reveal className="mt-10 flex justify-center text-bone-dim">
           <Schematic
-            kind={schematicFor[slug]}
+            kind={kindForProject[slug]}
             className="h-40 w-auto"
             animate
           />
         </Reveal>
 
-        <Section title="The problem">{dive.what}</Section>
-        <Section title="The constraint">{dive.constraint}</Section>
+        {dive ? (
+          <>
+            <Section title="The problem">{dive.what}</Section>
+            <Section title="The constraint">{dive.constraint}</Section>
 
-        <Reveal className="mt-16">
-          <h2 className="font-mono text-sm uppercase tracking-wider text-bone-dim">
-            What the git log says
-          </h2>
-          <ul className="mt-4 space-y-2 border-l border-volt-dim pl-5">
-            {dive.gitLog.map((line, i) => (
-              <li
-                key={i}
-                className="font-mono text-xs leading-relaxed text-bone-dim"
-              >
-                <span className="text-volt-bright">$</span> {line}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+            <Reveal className="mt-16">
+              <h2 className="font-mono text-sm uppercase tracking-wider text-bone-dim">
+                What the git log says
+              </h2>
+              <ul className="mt-4 space-y-2 border-l border-volt-dim pl-5">
+                {dive.gitLog.map((line, i) => (
+                  <li
+                    key={i}
+                    className="font-mono text-xs leading-relaxed text-bone-dim"
+                  >
+                    <span className="text-volt-bright">$</span> {line}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
 
-        <Section title="What I learnt">{dive.learnt}</Section>
+            <Section title="What I learnt">{dive.learnt}</Section>
+          </>
+        ) : (
+          <Section title="What it is">{project.summary ?? project.oneLiner}</Section>
+        )}
 
         <Reveal className="mt-12 flex flex-wrap gap-2">
           {project.stack.map((s) => (

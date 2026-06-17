@@ -66,21 +66,6 @@ export const whoami = {
 // (The two ON/OFF PROD "doors" were replaced by the homepage Journey section —
 // components/journey — so experience + work + interests show without a click.)
 
-export const stackMarquee = [
-  "Go",
-  "Python",
-  "FastAPI",
-  "PostgreSQL",
-  "Redis",
-  "Docker",
-  "AWS",
-  "Azure",
-  "LangChain",
-  "Claude",
-  "Gemini",
-  "MCP",
-] as const;
-
 export const experience = [
   {
     period: "sept 2025 – present",

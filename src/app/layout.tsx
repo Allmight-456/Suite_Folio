@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Nav } from "@/components/ui/Nav";
 import { PersonJsonLd } from "@/components/ui/JsonLd";
 import { SITE_URL } from "@/content/site";
+import { STORAGE_KEY, THEME_IDS } from "@/content/themes";
 import "./globals.css";
+
+// Pre-paint theme init (no FOUC): applies the persisted theme to <html> before
+// React hydrates, so the page never flashes the default indigo first. Inlined
+// from the single THEME_IDS source so it can't drift from the registry.
+const themeInit = `(function(){try{var t=localStorage.getItem(${JSON.stringify(
+  STORAGE_KEY,
+)});if(t&&${JSON.stringify(
+  THEME_IDS,
+)}.indexOf(t)>-1){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -56,7 +67,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning: the themeInit script sets data-theme on <html>
+    // before React hydrates, so the attribute intentionally differs from SSR.
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
       >
@@ -64,8 +80,10 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           skip to content
         </a>
-        <Nav />
-        <SmoothScroll>{children}</SmoothScroll>
+        <ThemeProvider>
+          <Nav />
+          <SmoothScroll>{children}</SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

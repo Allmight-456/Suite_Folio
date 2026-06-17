@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { EASE_SITE } from "@/lib/choreo";
+import { TerminalCursor, TerminalSpinner } from "@/components/ui/Terminal";
 import { experience } from "@/content/site";
 import { labBlocks } from "@/content/lab";
 import {
@@ -81,7 +82,7 @@ export function Journey() {
             <div className="min-h-[460px] bg-ink-raise p-6 md:p-10">
               <p className="font-mono text-sm text-bone">
                 <span className="text-volt-bright">{PROMPT}</span> {shown}
-                {cursor && <Cursor />}
+                {cursor && <TerminalCursor />}
               </p>
 
               <motion.div
@@ -184,7 +185,7 @@ function ShippedBody() {
         href="/work"
         className="inline-block font-mono text-xs text-volt-bright hover:underline"
       >
-        ls -la ./work → the full index
+        whoami --deep → what pulls me
       </Link>
     </div>
   );
@@ -206,14 +207,14 @@ function AgenticBody() {
 function GoDeeperBody() {
   const links = [
     {
-      label: "ls -la ./work",
+      label: "whoami --deep",
       href: "/work",
-      note: "every project, client engagement & field note",
+      note: "what pulls me — curiosities, obsessions & convictions",
     },
     {
       label: "git log",
       href: "https://github.com/Allmight-456",
-      note: "the living résumé",
+      note: "the living résumé — every repo",
     },
     { label: "mail -s 'hi'", href: "#contact", note: "start a conversation" },
   ];
@@ -241,13 +242,6 @@ function GoDeeperBody() {
   );
 }
 
-/** Blinking block cursor (--volt). .cursor-blink stops under reduced motion. */
-function Cursor() {
-  return (
-    <span className="cursor-blink ml-0.5 inline-block h-[1.05em] w-[0.5em] translate-y-[0.15em] bg-volt align-middle" />
-  );
-}
-
 /**
  * tmux/Claude-Code-style status line at the foot of the window (replaces the old
  * floating dots — owner wanted something more intuitive + "terminally"). Left: a
@@ -269,7 +263,7 @@ function StatusBar({
     <div className="flex items-center justify-between gap-4 border-t border-volt-dim bg-ink px-4 py-2.5 font-mono text-[11px]">
       <span className="flex min-w-[7rem] items-center gap-2">
         {busy ? (
-          <Spinner />
+          <TerminalSpinner />
         ) : (
           <>
             <span className="text-volt-bright">▸</span>
@@ -295,26 +289,5 @@ function StatusBar({
         </span>
       </span>
     </div>
-  );
-}
-
-/** Claude-Code-flavoured spinner: a cycling asterisk + gerund while a command
-    "runs" during the clear/type transition. Only mounted while busy, so the
-    interval is idle the rest of the time. */
-const SPIN_GLYPHS = ["✻", "✶", "✳", "✺", "✸"];
-const SPIN_WORDS = ["booting", "running", "loading", "compiling"];
-function Spinner() {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setI((v) => v + 1), 120);
-    return () => clearInterval(id);
-  }, []);
-  return (
-    <span className="flex items-center gap-2">
-      <span className="text-volt-bright">{SPIN_GLYPHS[i % SPIN_GLYPHS.length]}</span>
-      <span className="italic text-bone-dim">
-        {SPIN_WORDS[Math.floor(i / 7) % SPIN_WORDS.length]}…
-      </span>
-    </span>
   );
 }

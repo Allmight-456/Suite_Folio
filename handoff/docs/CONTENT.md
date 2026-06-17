@@ -55,7 +55,15 @@ Every word on the site comes from here. Edit here first, code second.
 5. **AI_Bubble** · 2026 · `0 dependencies, 1 page, 7 sections` ·
    A designed editorial knowledge base on AI valuations vs. historical bubbles —
    vanilla ES modules, print stylesheet, a11y-audited.
-6. Older work rail: `RepoMaster · PDFSage · irctc_api_express_postgres`
+6. Older work — promoted 2026-06-17 from a link rail to real lightweight `/work/[slug]`
+   pages (summary + stack + repo link). Copy grounded in PROJECT-DEEP-DIVES.md "Older work
+   rail" + research/pdfsage_readme. **Years approximate (2024) — owner to verify.**
+   - **PDFSage** · ~2024 · `FAISS · Gemini Q&A` · RAG over PDFs — chunk+embed with Google
+     Generative AI, FAISS vector search, conversational Q&A. Streamlit backend, Next.js frontend.
+   - **RepoMaster** · ~2024 · `repo → scaffolding` · AI scaffolding: generates README /
+     Dockerfile / docker-compose from a repo URL (the idea AutoDocxPdf later matured).
+   - **irctc-api** · ~2024 · `atomic bookings` · Train-reservation REST API in Express +
+     PostgreSQL; atomic transactions under concurrent bookings (TicketFlow's first attempt).
 
 ## 6. Experience (compact timeline, /work top or footer of home)
 
@@ -74,6 +82,13 @@ Role bullets (use on /work, max 4 — resume v5 phrasing):
 
 ## 7. /lab content blocks (from now.log themes — keep present-tense, hedged honestly)
 
+> **/work is now the personal "What Pulls Me" page (2026-06-17):** an ER diagram (root
+> `ishan` → curiosity · obsessions · convictions) + a terminal that types a command per
+> section and lays out its items. It is NOT a project index or a résumé — work experience
+> lives in the homepage `uptime --career`. Projects appear only as `↳ evidence` links woven
+> into the relevant curiosity/obsession/conviction (every project page stays reachable).
+> Source: `src/content/mind.ts` (first-person rephrasing of the blocks below + the lessons).
+
 - **Agent boxes** — Hermes & OpenClaw, self-hosted on a Hostinger VPS, kept alive to
   watch where production-grade agent loops degrade: tool-loop convergence, memory
   bleed across runs, behavior under sustained load. Notes feed back into SkillForge.
@@ -90,7 +105,36 @@ Role bullets (use on /work, max 4 — resume v5 phrasing):
 apr 2026   Google       Orchestrate Complex Multi-Agent Workflows   #23424455
 apr 2026   Databricks   AI Agent Fundamentals                       #178739338
 ```
-Stack groups: reuse the `$ stack --grouped` block from the GitHub README verbatim.
+### Skills — grouped stack (owner-supplied 2026-06-17; source for `src/content/skills.ts`)
+
+Rendered on the homepage as the terminal "skill --all" card (`components/stack`, which
+replaced the marquee). Site accent only — never phosphor (quarantine holds). Sharpened
+and enriched 2026-06-17 from the README knowledge base + project deep-dives; **niche /
+depth items are painted in the accent**. All grounded — no invented capability.
+
+- **Languages:** Python · TypeScript · JavaScript · SQL · *Go*
+- **Frontend:** React · Next.js · Tailwind CSS · HTML/CSS · *accessibility (a11y ·
+  reduced-motion · semantic)*
+- **Backend & APIs:** FastAPI · Node.js · Express.js · GraphQL ·
+  *REST design (versioning · pagination · idempotency)* · *Clean Architecture* ·
+  JWT/RBAC · *distributed locking (Redis lock · SELECT FOR UPDATE · optimistic version)* ·
+  *rate limiting (sliding-window · Redis + Lua)* · multi-tenancy
+- **Cloud & DevOps:** AWS (EC2 · Lambda · S3 · IAM · API Gateway · CloudWatch) ·
+  Azure (VM · Blob Storage · Flexible Server) · Docker · *multi-stage builds* · Nginx ·
+  CI/CD · Linux
+- **Databases & Caching:** PostgreSQL · MongoDB · Firebase Firestore ·
+  Redis (caching · pub/sub · rate limiting) · *vector search (FAISS)* ·
+  *indexing & query tuning* · *JSONB*
+- **AI / ML:** *RAG pipelines* · LangChain · *multi-agent orchestration* ·
+  *AST-based retrieval* · *procedural & episodic memory (SkillForge · mem0)* ·
+  *MCP* · *Claude Skills* · *tree retrieval (PageIndex · agentic RAG)* ·
+  *evals & guardrails* · Gemini API · OpenAI API
+- **Security & Quality:** secure coding · *authN/authZ* · secrets management ·
+  unit & integration testing · Jest · Pytest · Git
+- **Tooling:** Git · Postman · *Repomix* · Puppeteer · Selenium · *mermaid-cli* ·
+  *Claude Code* · Cursor
+
+(Italic = `niche: true` in the data — rendered in `--volt-bright`.)
 
 ## 9. Footer
 
@@ -110,7 +154,10 @@ Docker deploys; AWS EC2 voting API; AutoDocxPdf v1.2.6, 4 agents, Gemini 2.5 Fla
 12 req/min throttle, in internal daily use; TicketFlow concurrency design (lock +
 FOR UPDATE + optimistic version); SkillForge WIP ~50× token reduction target on
 repeat-class errors; Market Research ~95% loop automation, 1000+ data points; the two
-Apr 2026 certs above.
+Apr 2026 certs above. Older personal repos (real, public on GitHub) — PDFSage (RAG over
+PDFs, FAISS + Gemini), RepoMaster (repo→scaffolding generator), irctc-api (Express/Postgres
+atomic-booking API) — may be described qualitatively; **their years are approximate (~2024),
+flag as unverified, never attach metrics.**
 
 May NOT claim: shipped customer *products* (AutoDocxPdf/SkillForge are internal/personal
 infra); any Sambin Technologies *project work, deliverables, or metrics* (the internship

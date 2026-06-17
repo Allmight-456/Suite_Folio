@@ -2,7 +2,7 @@ import { Hero } from "@/components/hero/Hero";
 import { Whoami } from "@/components/whoami/Whoami";
 import { Journey } from "@/components/journey/Journey";
 import { Figure } from "@/components/figure/Figure";
-import { Marquee } from "@/components/marquee/Marquee";
+import { Stack } from "@/components/stack/Stack";
 import { NowLog } from "@/components/nowlog/NowLog";
 import { Footer } from "@/components/footer/Footer";
 import { getHeroChip, getNowLog } from "@/lib/nowlog";
@@ -19,7 +19,9 @@ export default async function Home() {
           Replaces the two ON/OFF PROD doors; the exhaustive index lives at /work
           so no fact is stated in two places. */}
       <Journey />
-      <Marquee />
+      {/* Skills as a neofetch "stack" card — every skill in one gaze, no crawl;
+          its colour-blocks footer is the live theme picker. Replaced the marquee. */}
+      <Stack />
       <NowLog data={nowlog} />
       {/* The figure is the visual sign-off — the engineer dissolving back into the
           bits — placed right before the footer so it lands in everyone's path to

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav } from "@/content/site";
+import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 
 /**
  * Persistent compact nav (PRD §5: recruiter reaches keywords/contact within
@@ -41,25 +42,28 @@ export function Nav() {
       >
         ishan@prod
       </Link>
-      <ul className="flex items-center gap-4 rounded-full border border-volt-dim bg-ink-raise/80 px-4 py-2 backdrop-blur-md md:gap-6">
-        {nav.map((item) => {
-          // External links (e.g. the GitHub résumé) open in a new tab so the
-          // portfolio isn't lost; internal routes stay in-app.
-          const external = item.href.startsWith("http");
-          return (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                target={external ? "_blank" : undefined}
-                rel={external ? "noopener noreferrer" : undefined}
-                className="lowercase text-bone-dim transition-colors hover:text-bone"
-              >
-                {item.label}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="flex items-center gap-3">
+        <ul className="flex items-center gap-4 rounded-full border border-volt-dim bg-ink-raise/80 px-4 py-2 backdrop-blur-md md:gap-6">
+          {nav.map((item) => {
+            // External links (e.g. the GitHub résumé) open in a new tab so the
+            // portfolio isn't lost; internal routes stay in-app.
+            const external = item.href.startsWith("http");
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  className="lowercase text-bone-dim transition-colors hover:text-bone"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <ThemeSwitcher />
+      </div>
     </nav>
   );
 }

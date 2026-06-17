@@ -12,6 +12,10 @@ and DESIGN-SPEC.md before structural changes, CONTENT.md before writing any copy
 - Motion: Framer Motion (`motion/react`) + Lenis for smooth scroll
 - Content: static TS/MDX data modules in `src/content/` — no CMS
 - Live layer: `now.log` parsed from GitHub README via ISR (revalidate: 3600)
+- Theming: palette is fully token-driven. A p10k-style picker swaps `[data-theme]`
+  blocks (`globals.css`) at runtime; default = indigo "Night Shift", with phosphor
+  quarantined to now.log. Themes are opt-in (relaxing D2 only when chosen). No inline
+  hex still holds. See DECISION-LOG 2026-06-17.
 
 ## Hard rules
 

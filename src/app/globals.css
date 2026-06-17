@@ -30,6 +30,75 @@
   --font-mono: var(--font-jetbrains-mono);
 }
 
+/* ── Theme palettes (p10k-style picker) ───────────────────────────────────
+   Each theme overrides the shared tokens; everything driven by them (accent,
+   borders, focus rings, ::selection, duotone color-mix, terminal panes) follows.
+   :root above stays indigo so SSR / no-JS render the locked brand default.
+   All values are HEX so the figure-dissolve hex() parser keeps working.
+   Declared AFTER :root so the active [data-theme] wins on <html>; swatches set
+   data-theme on themselves to preview a palette in isolation. AA-tuned: --bone
+   ≥ 7:1 and --volt-bright ≥ 4.5:1 on each --ink; backgrounds kept dark. */
+[data-theme="indigo"] {
+  --ink: #0a0a0f;
+  --ink-raise: #12121a;
+  --bone: #e8e6e1;
+  --bone-dim: #8b8a94;
+  --volt: #5b5bf0;
+  --volt-bright: #7b7bf2;
+  --volt-dim: #2e2e7a;
+  --phosphor: #9be89b;
+}
+[data-theme="green"] {
+  --ink: #060a07;
+  --ink-raise: #0e150f;
+  --bone: #e3ede4;
+  --bone-dim: #7f9686;
+  --volt: #2fbf6b;
+  --volt-bright: #5fe08f;
+  --volt-dim: #154428;
+  --phosphor: #9be89b;
+}
+[data-theme="amber"] {
+  --ink: #0c0a05;
+  --ink-raise: #16120a;
+  --bone: #ece6d8;
+  --bone-dim: #9a9078;
+  --volt: #e0a23a;
+  --volt-bright: #ffc061;
+  --volt-dim: #553a12;
+  --phosphor: #f2c46b;
+}
+[data-theme="ember"] {
+  --ink: #0d0805;
+  --ink-raise: #17100a;
+  --bone: #f0e7df;
+  --bone-dim: #a08d7e;
+  --volt: #ff7a1a;
+  --volt-bright: #ff9f52;
+  --volt-dim: #5a2c0c;
+  --phosphor: #ffb27a;
+}
+[data-theme="dracula"] {
+  --ink: #15161e;
+  --ink-raise: #21222c;
+  --bone: #f8f8f2;
+  --bone-dim: #9a93b5;
+  --volt: #bd93f9;
+  --volt-bright: #d3b6fb;
+  --volt-dim: #423866;
+  --phosphor: #50fa7b;
+}
+[data-theme="nord"] {
+  --ink: #14181f;
+  --ink-raise: #232a36;
+  --bone: #eceff4;
+  --bone-dim: #94a1b6;
+  --volt: #88c0d0;
+  --volt-bright: #a8d4e1;
+  --volt-dim: #3a4d5c;
+  --phosphor: #a3be8c;
+}
+
 html {
   background: var(--ink);
   color-scheme: dark;
@@ -182,20 +251,6 @@ canvas[data-active="false"] {
   transform: rotate(90deg);
 }
 
-/* Stack marquee crawl (DESIGN-SPEC §3.6). Track holds the list twice; -50%
-   loops seamlessly. Pauses on hover via utility class. */
-.marquee-track {
-  animation: marquee-crawl 38s linear infinite;
-}
-@keyframes marquee-crawl {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .cursor-blink {
     animation: none;
@@ -203,10 +258,6 @@ canvas[data-active="false"] {
   .schematic-line {
     animation: none !important;
     stroke-dashoffset: 0 !important;
-  }
-  .marquee-track {
-    animation: none;
-    flex-wrap: wrap;
   }
   html {
     scroll-behavior: auto;

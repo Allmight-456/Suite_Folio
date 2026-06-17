@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { Component, useEffect, useState, type ReactNode } from "react";
 import { useChoreo } from "@/lib/choreo";
+import { THEME_EVENT } from "@/content/themes";
 
 const MeshGradient = dynamic(
   () => import("@paper-design/shaders-react").then((m) => m.MeshGradient),
@@ -52,18 +53,24 @@ export function HeroGlow() {
     // touch/small screens keep the static gradient fallback.
     if (!window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches)
       return;
-    const idle =
-      window.requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 200));
-    const id = idle(() => {
+    // Read the palette from CSS tokens so the glow stays single-sourced — and
+    // re-read on theme change (the picker fires THEME_EVENT) since this snapshots
+    // colors into JS rather than consuming the CSS vars live.
+    const readColors = () => {
       const css = getComputedStyle(document.documentElement);
       const token = (name: string) => css.getPropertyValue(name).trim();
       const ink = token("--ink");
       const voltDim = token("--volt-dim");
       const volt = token("--volt");
       if (ink && voltDim && volt) setColors([ink, voltDim, ink, volt, ink]);
-    });
+    };
+    const idle =
+      window.requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 200));
+    const id = idle(readColors);
+    window.addEventListener(THEME_EVENT, readColors);
     return () => {
       if (window.cancelIdleCallback) window.cancelIdleCallback(id as number);
+      window.removeEventListener(THEME_EVENT, readColors);
     };
   }, [reduced]);
 
