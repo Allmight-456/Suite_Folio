@@ -41,11 +41,20 @@ export const FrameSchema = z.object({
 });
 export type Frame = z.infer<typeof FrameSchema>;
 
+// Certifications, rendered as skill-card-style windows on /work with a pixel logo.
+// `logo` picks the brand pixel-art (Google G / Gemini spark / Databricks mark);
+// brand colours are a scoped, theme-independent exception to palette discipline —
+// see globals.css brand tokens + DECISION-LOG 2026-06-18. Copy lives in CONTENT.md §8.
 export const CertSchema = z.object({
   date: z.string(),
-  issuer: z.string(),
+  issuer: z.string(), // short, for the one-line / facts registry
+  issuerFull: z.string(), // e.g. "Google · Cloud Skills Boost"
   name: z.string(),
-  id: z.string(),
+  id: z.string(), // badge / credential reference shown in the window title
+  logo: z.enum(["google-g", "google-gemini", "databricks"]),
+  blurb: z.string(), // what the credential covers (sourced, never invented)
+  skills: z.array(z.string()).min(1),
+  verifyUrl: z.string().url(),
 });
 export type Cert = z.infer<typeof CertSchema>;
 

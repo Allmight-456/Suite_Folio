@@ -83,14 +83,58 @@ export const certs: Cert[] = [
   {
     date: "apr 2026",
     issuer: "Google",
+    issuerFull: "Google · Cloud Skills Boost",
+    name: "Gen AI Agents: Transform Your Organization",
+    id: "badge #24918574",
+    logo: "google-g",
+    blurb:
+      "Building gen AI agents — models, reasoning loops and tools — and leading organizational transformation with gen AI. The capstone of the Gen AI Leader learning path.",
+    skills: [
+      "agent components",
+      "reasoning loops",
+      "Google Cloud gen-AI",
+      "measuring impact",
+      "adoption",
+    ],
+    verifyUrl:
+      "https://www.skills.google/public_profiles/c41daeea-edd0-45a7-ba5d-c30dce00e4d6/badges/24918574",
+  },
+  {
+    date: "apr 2026",
+    issuer: "Google",
+    issuerFull: "Google · Cloud Skills Boost",
     name: "Orchestrate Complex Multi-Agent Workflows",
-    id: "#23424455",
+    id: "badge #23424455",
+    logo: "google-gemini",
+    blurb:
+      "Orchestrating multi-agent workflows: unifying data across first- and third-party sources, automating actions across systems, and balancing machine speed with human oversight.",
+    skills: [
+      "multi-agent orchestration",
+      "agentic assistants",
+      "human-in-the-loop",
+      "cross-system automation",
+    ],
+    verifyUrl:
+      "https://www.skills.google/public_profiles/c41daeea-edd0-45a7-ba5d-c30dce00e4d6/badges/23424455",
   },
   {
     date: "apr 2026",
     issuer: "Databricks",
+    issuerFull: "Databricks Academy",
     name: "AI Agent Fundamentals",
-    id: "#178739338",
+    id: "accreditation",
+    logo: "databricks",
+    blurb:
+      "Foundations of AI agents on Databricks — Mosaic AI and Agent Bricks; agentic workflows and multi-agent systems; building, deploying and evaluating enterprise-ready agents.",
+    skills: [
+      "Mosaic AI",
+      "Agent Bricks",
+      "agentic workflows",
+      "multi-agent systems",
+      "enterprise agents",
+    ],
+    verifyUrl:
+      "https://credentials.databricks.com/31088abc-7b21-4ebf-97b8-fb31715304d0",
   },
 ].map((c) => CertSchema.parse(c));
 
