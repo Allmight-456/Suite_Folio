@@ -202,3 +202,31 @@
   on `<html>` (the next-themes pattern). Verified 0 console errors with a non-default theme. (2)
   **now.json clutter** — the big `machine-readable: /now.json` block on `/now` was eating vertical
   space; moved to a small inline link on the breadcrumb row (endpoint kept).
+
+- 2026-06-18 · **/work terminal → single pinned pane; certifications section added — owner-directed.**
+  The mind terminal (`components/mind/MindTerminal`) stacked all three sections (curiosity ·
+  obsessions · convictions) in **one tall window** that booted block-by-block — owner found it
+  too long and too visually dominant. Reworked to a **single pinned pane** that re-paints instead
+  of elongating: it now mirrors the homepage Journey grammar (`components/journey`). New
+  `components/mind/useMindChoreo` (parallel to `useJourneyChoreo`, kept separate so Journey stays
+  zero-risk) pins the section, maps scroll bands → commands, and runs `clear` + retypes the next
+  command on crossing — **plus `goTo(i)`** so clicking a **tree node** (now interactive, `MindMap`
+  gained `active`/`onSelect`/`pinned`) or a **status-bar breadcrumb** scrolls to that band (scroll
+  stays the single source of truth — no click/scroll fight). New `components/mind/MindExplorer`
+  owns the hook and renders tree + pane; `MindTerminal` **deleted** (logic folded in; per-block
+  `useTerminalBoot` no longer used by /work, still used by the skills card). Reduced-motion / no-JS /
+  narrow fall back to the **plain stacked sections** (each `#id`, tree nodes become anchor jumps) —
+  hard rules 3 + 5 hold; the elongated view survives only as the accessible fallback.
+
+- 2026-06-18 · **Brand colours for cert logos — scoped exception to palette discipline.** New
+  certifications section on `/work` (`components/certs/Certifications`) presents each credential as
+  a **skill-card-style window** (pixel logo + details, static — no boot). Owner-approved: the pixel
+  logos use **real brand colours** (Google blue/red/yellow/green "G" + Gemini spark; Databricks
+  red/orange stacked mark) so they stay recognisable. These are declared as **`--brand-*` tokens in
+  `:root` only** (globals.css) and **not** mirrored into the `[data-theme]` blocks, so — unlike the
+  rest of the palette — they're **theme-independent** and don't recolour with the picker. This is a
+  deliberate, narrowly-scoped exception (same spirit as the `now.log` phosphor quarantine): no inline
+  hex (first-class `bg-brand-…` utilities registered in `@theme inline`), confined to the three cert
+  logos. Third cert added
+  (Gen AI Agents: Transform Your Organization), so the facts registry now reads **three** Apr 2026
+  certs; copy sourced from the official Google/Databricks course pages (CONTENT.md §8), never invented.

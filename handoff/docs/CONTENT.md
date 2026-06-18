@@ -99,12 +99,31 @@ Role bullets (use on /work, max 4 — resume v5 phrasing):
 - **Retrieval** — PageIndex and tree-structured retrieval; past vector-only RAG.
 - **Writing** — links: Hashnode (primary), LinkedIn, X.
 
-## 8. Certifications & stack (footer-adjacent, mono table)
+## 8. Certifications & stack
+
+Rendered on `/work` (below the mind terminal) as skill-card-style windows — pixel
+brand logo + details (`components/certs/Certifications`). Source for
+`src/content/site.ts` `certs`. Three Apr 2026 credentials (owner-supplied; blurbs/
+skills paraphrased from the official course pages — sourced, never invented):
 
 ```
-apr 2026   Google       Orchestrate Complex Multi-Agent Workflows   #23424455
-apr 2026   Databricks   AI Agent Fundamentals                       #178739338
+apr 2026   Google · Cloud Skills Boost   Gen AI Agents: Transform Your Organization   badge #24918574
+apr 2026   Google · Cloud Skills Boost   Orchestrate Complex Multi-Agent Workflows     badge #23424455
+apr 2026   Databricks Academy            AI Agent Fundamentals (accreditation)          31088abc…
 ```
+
+- **Gen AI Agents: Transform Your Organization** (Google) — building gen AI agents
+  (models · reasoning loops · tools) and leading organizational transformation with
+  gen AI; capstone of the Gen AI Leader path. Logo: 4-colour Google "G".
+  verify: https://www.skills.google/public_profiles/c41daeea-edd0-45a7-ba5d-c30dce00e4d6/badges/24918574
+- **Orchestrate Complex Multi-Agent Workflows** (Google) — orchestrating multi-agent
+  workflows: unifying data across first/third-party sources, automating actions across
+  systems, balancing machine speed with human oversight. Logo: Google/Gemini spark.
+  verify: https://www.skills.google/public_profiles/c41daeea-edd0-45a7-ba5d-c30dce00e4d6/badges/23424455
+- **AI Agent Fundamentals** (Databricks Academy accreditation) — foundations of AI
+  agents on Databricks (Mosaic AI · Agent Bricks); agentic workflows & multi-agent
+  systems; build/deploy/evaluate enterprise agents (introductory). Logo: Databricks mark.
+  verify: https://credentials.databricks.com/31088abc-7b21-4ebf-97b8-fb31715304d0
 ### Skills — grouped stack (owner-supplied 2026-06-17; source for `src/content/skills.ts`)
 
 Rendered on the homepage as the terminal "skill --all" card (`components/stack`, which
@@ -153,7 +172,7 @@ zero-downtime Firebase→PostgreSQL migration; Azure VM + Nginx +
 Docker deploys; AWS EC2 voting API; AutoDocxPdf v1.2.6, 4 agents, Gemini 2.5 Flash-Lite,
 12 req/min throttle, in internal daily use; TicketFlow concurrency design (lock +
 FOR UPDATE + optimistic version); SkillForge WIP ~50× token reduction target on
-repeat-class errors; Market Research ~95% loop automation, 1000+ data points; the two
+repeat-class errors; Market Research ~95% loop automation, 1000+ data points; the three
 Apr 2026 certs above. Older personal repos (real, public on GitHub) — PDFSage (RAG over
 PDFs, FAISS + Gemini), RepoMaster (repo→scaffolding generator), irctc-api (Express/Postgres
 atomic-booking API) — may be described qualitatively; **their years are approximate (~2024),

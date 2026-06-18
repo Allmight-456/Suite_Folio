@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { certs } from "@/content/site";
-import { MindMap } from "@/components/mind/MindMap";
-import { MindTerminal } from "@/components/mind/MindTerminal";
-import { Reveal } from "@/components/ui/Reveal";
+import { MindExplorer } from "@/components/mind/MindExplorer";
+import { Certifications } from "@/components/certs/Certifications";
 
 export const metadata: Metadata = {
   title: "what pulls me — Ishan Kumar",
@@ -15,14 +13,15 @@ export const metadata: Metadata = {
  * /work, reconceived as a personal map (owner-directed). Work experience already
  * lives in the homepage `uptime --career`, so this isn't a project index — it's
  * what pulls me, framed as three children off "ishan": curiosity · obsessions ·
- * convictions. An ER/flow diagram maps them; the terminal below types a command
- * per section and lays out its content (projects woven in as `↳ evidence` links).
+ * convictions. An ER/flow diagram maps them; clicking a node — or scrolling — runs
+ * the matching command in a single pinned terminal (MindExplorer), instead of one
+ * long stacked window. Certifications follow as skill-card-style windows.
  * /lab 301s to #field-notes (the terminal section).
  */
 export default function WorkPage() {
   return (
-    <main id="main" className="px-6 pb-32 pt-32 md:px-16">
-      <div className="mx-auto max-w-3xl">
+    <main id="main" className="pb-32 pt-32">
+      <div className="mx-auto max-w-3xl px-6 md:px-16">
         <Link
           href="/"
           className="font-mono text-sm text-bone-dim transition-colors hover:text-bone"
@@ -40,34 +39,11 @@ export default function WorkPage() {
           </Link>{" "}
           line. This is the map of what I&apos;m drawn to.
         </p>
-
-        <Reveal className="mt-14">
-          <MindMap />
-        </Reveal>
       </div>
 
-      <MindTerminal />
+      <MindExplorer />
 
-      <div className="mx-auto max-w-3xl">
-        <p className="border-t border-volt-dim/40 pt-6 font-mono text-xs text-bone-dim">
-          <span className="text-volt-bright">$ cat certifications.log</span>
-          {"  "}
-          {certs.map((c, i) => (
-            <span key={c.id}>
-              {i > 0 && " · "}
-              {c.issuer} {c.name} ({c.date})
-            </span>
-          ))}{" "}
-          <a
-            href="https://www.linkedin.com/in/ishan-kumar-/details/certifications/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-volt-bright hover:underline"
-          >
-            ↗ verify
-          </a>
-        </p>
-      </div>
+      <Certifications />
     </main>
   );
 }

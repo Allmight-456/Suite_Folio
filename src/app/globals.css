@@ -13,6 +13,17 @@
   --phosphor: #9be89b; /* terminal panes ONLY */
 
   --ease-site: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Brand colours for the certification pixel-logos — a scoped, theme-INDEPENDENT
+     exception to palette discipline (like phosphor for now.log). Declared once
+     here only; NOT overridden in the [data-theme] blocks, so the Google / Databricks
+     marks stay recognisable across every theme. See DECISION-LOG 2026-06-18. */
+  --brand-g-blue: #4285f4;
+  --brand-g-red: #ea4335;
+  --brand-g-yellow: #fbbc05;
+  --brand-g-green: #34a853;
+  --brand-dbx-red: #ff3621;
+  --brand-dbx-orange: #ff8a4c;
 }
 
 @theme inline {
@@ -24,6 +35,15 @@
   --color-volt-bright: var(--volt-bright);
   --color-volt-dim: var(--volt-dim);
   --color-phosphor: var(--phosphor);
+
+  /* Brand colours for cert logos — first-class tokens so utilities are
+     `bg-brand-*` (no arbitrary-value var()). Theme-independent (see :root). */
+  --color-brand-g-blue: var(--brand-g-blue);
+  --color-brand-g-red: var(--brand-g-red);
+  --color-brand-g-yellow: var(--brand-g-yellow);
+  --color-brand-g-green: var(--brand-g-green);
+  --color-brand-dbx-red: var(--brand-dbx-red);
+  --color-brand-dbx-orange: var(--brand-dbx-orange);
 
   --font-display: var(--font-space-grotesk);
   --font-sans: var(--font-inter);
