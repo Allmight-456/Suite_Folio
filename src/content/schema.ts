@@ -13,6 +13,12 @@ export const ProjectSchema = z.object({
   repo: z.string().url().optional(),
   live: z.string().url().optional(),
   stack: z.array(z.string()),
+  // Provenance line for builds with an origin worth stating — e.g. the hackathon
+  // a project was submitted to. Records the submission ONLY: placings and awards
+  // are never written here without owner confirmation (facts registry, CONTENT §10).
+  context: z.string().optional(),
+  // Optional brand pixel-mark for that provenance (ui/PixelLogo registry).
+  brand: z.enum(["slack", "emergent"]).optional(),
 });
 export type Project = z.infer<typeof ProjectSchema>;
 

@@ -2,6 +2,18 @@
   "entries": [
     {
       "tag": "Building",
+      "emoji": "🤖",
+      "title": "Rasputin_Loop: a Slack-native agent, one brain, no router",
+      "bodyMd": "A single Strands agent loop (MiniMax M3) that thinks, calls a tool, and replies in-thread -> no intent parser, no command router. Provenance-stamped episodic memory in SQLite, hybrid RAG over libSQL/Turso fusing FTS5 + local embeddings via Reciprocal Rank Fusion, runtime MCP tools, Jira auto-triage, guardrails, and a `loop-eval` golden-set CI gate. Runs several distinct Slack apps from one process. Repo: [github.com/Allmight-456/Rasputin_Loop](https://github.com/Allmight-456/Rasputin_Loop).",
+      "links": [
+        {
+          "label": "github.com/Allmight-456/Rasputin_Loop",
+          "href": "https://github.com/Allmight-456/Rasputin_Loop"
+        }
+      ]
+    },
+    {
+      "tag": "Building",
       "emoji": "🛠️",
       "title": "SkillForge: agents that auto-detect their own skills",
       "bodyMd": "AST-based retrieval over a Claude Skill library, human-gated approval loop. Cuts repeat-class error context from **~3000 → ~80 tokens (~50×)**. Repo: [github.com/Allmight-456/SkillForge](https://github.com/Allmight-456).",
@@ -23,14 +35,14 @@
       "tag": "Harness engineering",
       "emoji": "🧪",
       "title": "guardrails, evals, agent loops",
-      "bodyMd": "Wiring them *into* the LLM workflow itself, not bolted on after. The open question: where do evals belong — pre-tool, post-tool, or as a separate critic agent?",
+      "bodyMd": "Wiring them *into* the LLM workflow itself, not bolted on after. The open question: where do evals belong -> pre-tool, post-tool, or as a separate critic agent?",
       "links": []
     },
     {
       "tag": "Agent memory",
       "emoji": "🧠",
       "title": "mem0 vs SkillForge",
-      "bodyMd": "[mem0](https://github.com/mem0ai/mem0) for long-horizon memory. Mapping the gap between mem0 (episodic, vector-backed) and SkillForge (procedural, AST-indexed) — different halves of the same problem.",
+      "bodyMd": "[mem0](https://github.com/mem0ai/mem0) for long-horizon memory. Mapping the gap between mem0 (episodic, vector-backed) and SkillForge (procedural, AST-indexed) -> different halves of the same problem.",
       "links": [
         {
           "label": "mem0",
@@ -42,7 +54,7 @@
       "tag": "Retrieval",
       "emoji": "🔍",
       "title": "PageIndex & Agentic RAG",
-      "bodyMd": "[PageIndex](https://github.com/VectifyAI/PageIndex) and tree-structured retrieval — moving past vector-only. Reads more like how you'd actually search a codebase or a textbook.",
+      "bodyMd": "[PageIndex](https://github.com/VectifyAI/PageIndex) and tree-structured retrieval -> moving past vector-only. Reads more like how you'd actually search a codebase or a textbook.",
       "links": [
         {
           "label": "PageIndex",
@@ -65,6 +77,6 @@
       "links": []
     }
   ],
-  "fetchedAt": "2026-06-10T18:16:37.752Z",
-  "source": "github.com/Allmight-456 (build snapshot)"
+  "fetchedAt": "2026-08-14T15:25:29.129Z",
+  "source": "github.com/Allmight-456"
 }

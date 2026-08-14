@@ -5,6 +5,7 @@ import { projects } from "@/content/projects";
 import { deepDives } from "@/content/deepdives";
 import { kindForProject } from "@/content/projects";
 import { Schematic } from "@/components/ui/Schematic";
+import { PixelLogo } from "@/components/ui/PixelLogo";
 import { Reveal } from "@/components/ui/Reveal";
 import { SoftwareJsonLd } from "@/components/ui/JsonLd";
 
@@ -68,6 +69,12 @@ export default async function WorkPage({
           <p className="mt-2 font-mono text-sm text-volt-bright">
             {project.stat}
           </p>
+          {project.context && (
+            <p className="mt-3 flex items-center gap-2.5 font-mono text-xs text-bone-dim">
+              {project.brand && <PixelLogo kind={project.brand} size={0.2} />}
+              {project.context}
+            </p>
+          )}
         </Reveal>
 
         <Reveal className="mt-10 flex justify-center text-bone-dim">

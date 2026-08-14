@@ -9,6 +9,7 @@ import { EASE_SITE } from "@/lib/choreo";
 import { TerminalCursor, TerminalSpinner } from "@/components/ui/Terminal";
 import { MindMap } from "./MindMap";
 import { useMindChoreo } from "./useMindChoreo";
+import { WindowChrome } from "@/components/ui/WindowChrome";
 
 const PROMPT = "ishan@prod:~$";
 const commands = mind.map((s) => s.command);
@@ -76,14 +77,7 @@ export function MindExplorer() {
         <div className="sticky top-0 flex h-screen items-center px-6 md:px-16">
           <div className="mx-auto w-full max-w-3xl">
             <div className="overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
-              <div className="flex items-center gap-2 border-b border-volt-dim bg-ink-raise px-4 py-3">
-                <span className="h-3 w-3 rounded-full bg-volt-dim" />
-                <span className="h-3 w-3 rounded-full bg-volt-dim" />
-                <span className="h-3 w-3 rounded-full bg-volt-dim" />
-                <span className="ml-3 truncate font-mono text-xs text-bone-dim">
-                  ishan@prod ─ ~/mind
-                </span>
-              </div>
+              <WindowChrome label="ishan@prod ─ ~/mind" />
 
               <div className="min-h-[460px] bg-ink-raise p-6 md:p-8">
                 <p className="font-mono text-sm text-bone">

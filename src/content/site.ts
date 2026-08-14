@@ -66,9 +66,19 @@ export const whoami = {
 // (The two ON/OFF PROD "doors" were replaced by the homepage Journey section —
 // components/journey — so experience + work + interests show without a click.)
 
+// Experience timeline — the ONLY place employer names appear (hard rule 2).
+// `logo` renders the shared ui/PixelLogo mark beside the row; only Emergent has
+// one, so the other rows stay plain rather than inventing marks for them.
+// Titles are owner-confirmed 2026-08-14: "L3 Engineer" is Emergent's internal
+// level name, chosen over the public "Forward Deployed Engineer" posting title.
 export const experience = [
   {
-    period: "sept 2025 – present",
+    period: "aug 2026 – present",
+    role: "L3 Engineer · Emergent · Bengaluru",
+    logo: "emergent",
+  },
+  {
+    period: "sept 2025 – jul 2026",
     role: "SWE-1 · Rayvector Technologies · Bengaluru",
   },
   { period: "may 2025 – aug 2025", role: "SWE Intern · Rayvector Technologies" },

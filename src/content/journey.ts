@@ -5,16 +5,33 @@
 import { projects } from "./projects";
 
 // Role bullets — CONTENT.md §6 (resume v5 phrasing, inside the facts registry).
-export const roleBullets = [
-  "Production FastAPI backend for a Plot Management System (multinational client): JWT auth, cursor-based pagination, Redis caching.",
-  "Full Firebase→PostgreSQL migration with zero downtime — APIs, schema, and cloud infra redesigned in place.",
-  "Dockerized services on an Azure VM behind Nginx; DNS and pipelines for two live environments.",
-  "Voting Platform REST API on AWS EC2 with PostgreSQL — full CRUD, in production.",
+// Grouped by employer since the timeline now spans two: an unlabelled flat list
+// would silently attribute Rayvector's backend work to Emergent.
+// TODO(owner): the Emergent bullets are the FDE side only — owner said more
+// detail will follow as the role develops (2026-08-14). Extend, don't invent.
+export const roleHighlights = [
+  {
+    at: "Emergent",
+    bullets: [
+      "Forward-deployed on the Emergent platform: building full-stack applications with the Emergent AI harness — for customers, and alongside them.",
+      "Customer support that ends in a patch — bug fixes across Emergent's own app as well as client applications.",
+      "Working across Kubernetes, Grafana, Redash and PostHog: deploys, dashboards, and the product analytics behind what ships.",
+    ],
+  },
+  {
+    at: "Rayvector",
+    bullets: [
+      "Production FastAPI backend for a Plot Management System (multinational client): JWT auth, cursor-based pagination, Redis caching.",
+      "Full Firebase→PostgreSQL migration with zero downtime — APIs, schema, and cloud infra redesigned in place.",
+      "Dockerized services on an Azure VM behind Nginx; DNS and pipelines for two live environments.",
+      "Voting Platform REST API on AWS EC2 with PostgreSQL — full CRUD, in production.",
+    ],
+  },
 ] as const;
 
 // Headline projects for the Journey "shipped" panel; the full set lives in the
 // /work index. Filter (not re-list) so order + copy stay single-sourced.
-const HEADLINE = ["skillforge", "autodocxpdf", "ticketflow"] as const;
+const HEADLINE = ["rasputin-loop", "amadeus", "skillforge"] as const;
 export const headlineProjects = projects.filter((p) =>
   (HEADLINE as readonly string[]).includes(p.slug),
 );
@@ -27,14 +44,14 @@ export const journeyPanels = [
     tag: "career",
     cmd: "uptime --career",
     title: "On the clock",
-    blurb: "~1 year shipping production backends — Rayvector, Bengaluru.",
+    blurb: "Production backends at Rayvector; now forward-deployed at Emergent.",
   },
   {
     id: "work",
     tag: "shipped",
     cmd: "ls ./shipped",
     title: "What I've shipped",
-    blurb: "Systems that survived the constraints they were built under.",
+    blurb: "Agents, harnesses and backends that held under their constraints.",
   },
   {
     id: "agentic",

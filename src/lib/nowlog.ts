@@ -33,9 +33,13 @@ export function parseNowLog(markdown: string): LogEntry[] {
     const bodyMd = m[2].trim();
 
     // summary shape: "🛠️  Building — SkillForge: agents that …"
-    const dash = summary.indexOf("—");
-    const head = dash === -1 ? summary : summary.slice(0, dash).trim();
-    const title = dash === -1 ? "" : summary.slice(dash + 1).trim();
+    // The README is hand-edited, so the separator drifts between the em-dash and
+    // ASCII arrows (`->`, `–`, `→`). Accept all of them: matching only "—" made
+    // every title parse to "" and folded the whole line into `tag`, which silently
+    // degraded the hero chip to its hardcoded fallback. See DECISION-LOG 2026-08-14.
+    const sep = summary.match(/\s(—|–|->|→)\s/);
+    const head = sep ? summary.slice(0, sep.index).trim() : summary;
+    const title = sep ? summary.slice(sep.index! + sep[0].length).trim() : "";
     // head = "🛠️  Building" → emoji (non-word leading cluster) + tag
     const headMatch = head.match(/^(\S+)\s+(.*)$/);
     const emoji = headMatch ? headMatch[1] : "";

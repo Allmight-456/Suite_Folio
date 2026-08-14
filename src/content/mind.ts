@@ -16,8 +16,11 @@ export const mind: MindSection[] = [
       {
         name: "retrieval",
         detail:
-          "Tree-structured & agentic RAG (PageIndex) — moving past vector-only. Reads more like how you'd actually search a codebase or a textbook.",
-        evidence: [{ label: "pdfsage", slug: "pdfsage" }],
+          "Tree-structured & agentic RAG (PageIndex) — moving past vector-only. Reads more like how you'd actually search a codebase or a textbook. In practice: FTS5 and local embeddings fused by Reciprocal Rank Fusion, because lexical and semantic recall fail on different queries.",
+        evidence: [
+          { label: "rasputin_loop", slug: "rasputin-loop" },
+          { label: "pdfsage", slug: "pdfsage" },
+        ],
       },
       {
         name: "agent-tooling",
@@ -46,13 +49,18 @@ export const mind: MindSection[] = [
       {
         name: "agent-memory",
         detail:
-          "Procedural memory (AST-indexed) vs episodic (vector-backed) — the two halves coding agents need. Retrieval precision beats recall when a human gates the library.",
-        evidence: [{ label: "skillforge", slug: "skillforge" }],
+          "Procedural memory (AST-indexed) vs episodic (vector-backed) — the two halves coding agents need. Retrieval precision beats recall when a human gates the library; and a memory without provenance is a rumour, so every episode gets stamped with who, where and when.",
+        evidence: [
+          { label: "skillforge", slug: "skillforge" },
+          { label: "amadeus", slug: "amadeus" },
+          { label: "rasputin_loop", slug: "rasputin-loop" },
+        ],
       },
       {
         name: "harness-engineering",
         detail:
-          "Wiring evals & guardrails into the LLM workflow itself, not bolted on after. Open question: pre-tool, post-tool, or a separate critic agent?",
+          "Wiring evals & guardrails into the LLM workflow itself, not bolted on after. Open question: pre-tool, post-tool, or a separate critic agent? The part I keep landing on: the boundary that stops a plausible skill from activating itself.",
+        evidence: [{ label: "amadeus", slug: "amadeus" }],
       },
       {
         name: "multi-agent-orchestration",

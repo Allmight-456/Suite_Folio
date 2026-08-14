@@ -9,11 +9,13 @@ import { experience } from "@/content/site";
 import { labBlocks } from "@/content/lab";
 import {
   journeyPanels,
-  roleBullets,
+  roleHighlights,
   headlineProjects,
   type JourneyPanel,
 } from "@/content/journey";
 import { useJourneyChoreo } from "./useJourneyChoreo";
+import { WindowChrome } from "@/components/ui/WindowChrome";
+import { PixelLogo } from "@/components/ui/PixelLogo";
 
 const PROMPT = "ishan@prod:~$";
 const commands = journeyPanels.map((p) => p.cmd);
@@ -70,14 +72,7 @@ export function Journey() {
       <div className="sticky top-0 flex h-screen items-center px-6 md:px-16">
         <div className="mx-auto w-full max-w-4xl">
           <div className="overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
-            <div className="flex items-center gap-2 border-b border-volt-dim bg-ink-raise px-4 py-3">
-              <span className="h-3 w-3 rounded-full bg-volt-dim" />
-              <span className="h-3 w-3 rounded-full bg-volt-dim" />
-              <span className="h-3 w-3 rounded-full bg-volt-dim" />
-              <span className="ml-3 truncate font-mono text-xs text-bone-dim">
-                {PROMPT} {shown}
-              </span>
-            </div>
+            <WindowChrome label={`${PROMPT} ${shown}`} />
 
             <div className="min-h-[460px] bg-ink-raise p-6 md:p-10">
               <p className="font-mono text-sm text-bone">
@@ -138,17 +133,33 @@ function ExperienceBody() {
         {experience.map((e) => (
           <li key={e.role} className="flex flex-col gap-1 md:flex-row md:gap-6">
             <span className="shrink-0 text-bone-dim md:w-48">{e.period}</span>
-            <span className="text-bone">{e.role}</span>
+            {/* The mark's slot is reserved on every row (not just the one that
+                has a logo) so the role column stays aligned down the timeline. */}
+            <span className="flex items-center gap-2 text-bone">
+              <span className="flex w-9 shrink-0 justify-center">
+                {"logo" in e && <PixelLogo kind={e.logo} size={0.14} />}
+              </span>
+              {e.role}
+            </span>
           </li>
         ))}
       </ol>
-      <ul className="max-w-2xl space-y-2 text-sm leading-relaxed text-bone-dim">
-        {roleBullets.map((b, i) => (
-          <li key={i} className="border-l-2 border-volt-dim pl-4">
-            {b}
-          </li>
+      <div className="max-w-2xl space-y-5">
+        {roleHighlights.map((group) => (
+          <div key={group.at}>
+            <p className="font-mono text-xs uppercase tracking-wider text-volt">
+              {group.at}
+            </p>
+            <ul className="mt-2 space-y-2 text-sm leading-relaxed text-bone-dim">
+              {group.bullets.map((b) => (
+                <li key={b} className="border-l-2 border-volt-dim pl-4">
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
@@ -177,6 +188,12 @@ function ShippedBody() {
               <span className="mt-1 block max-w-xl text-sm leading-relaxed text-bone-dim">
                 {p.oneLiner}
               </span>
+              {p.context && (
+                <span className="mt-1.5 flex items-center gap-2 font-mono text-xs text-bone-dim/70">
+                  {p.brand && <PixelLogo kind={p.brand} size={0.13} />}
+                  {p.context}
+                </span>
+              )}
             </Link>
           </li>
         ))}

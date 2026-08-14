@@ -55,7 +55,17 @@ Every word on the site comes from here. Edit here first, code second.
 5. **AI_Bubble** · 2026 · `0 dependencies, 1 page, 7 sections` ·
    A designed editorial knowledge base on AI valuations vs. historical bubbles —
    vanilla ES modules, print stylesheet, a11y-audited.
-6. Older work — promoted 2026-06-17 from a link rail to real lightweight `/work/[slug]`
+6. **Rasputin_Loop** · 2026 · `one agent loop, no router` ·
+   Slack-native agent on a single Strands loop — no intent parser, no command router.
+   Provenance-stamped episodic memory, hybrid RAG, runtime MCP tools, Jira auto-triage;
+   several Slack apps from one process. Provenance line: *Built for the Slack Agent
+   Builder Challenge · submitted jul 2026* (see §10 — submission only, no placing).
+7. **Amadeus** · 2026 · `consented run → reviewed skill` · *(WIP)*
+   Cross-harness procedural-memory compiler for coding agents — turns a Codex run a
+   human opted into, into a reviewed skill or deterministic script. Local-first CLI,
+   MCP server and dashboard. Provenance line: *Built for OpenAI Build Week · submitted
+   jul 2026* (see §10 — submission only, results were not out).
+8. Older work — promoted 2026-06-17 from a link rail to real lightweight `/work/[slug]`
    pages (summary + stack + repo link). Copy grounded in PROJECT-DEEP-DIVES.md "Older work
    rail" + research/pdfsage_readme. **Years approximate (2024) — owner to verify.**
    - **PDFSage** · ~2024 · `FAISS · Gemini Q&A` · RAG over PDFs — chunk+embed with Google
@@ -68,12 +78,32 @@ Every word on the site comes from here. Edit here first, code second.
 ## 6. Experience (compact timeline, /work top or footer of home)
 
 ```
-sept 2025 – present    SWE-1 · Rayvector Technologies · Bengaluru
+aug 2026  – present    L3 Engineer · Emergent · Bengaluru
+sept 2025 – jul 2026   SWE-1 · Rayvector Technologies · Bengaluru
 may 2025  – aug 2025   SWE Intern · Rayvector Technologies
 nov 2024  – jan 2025   Software Developer (Intern) · Sambin Technologies
 dec 2021  – june 2025  B.Tech CSE · RGIPT
 ```
-Role bullets (use on /work, max 4 — resume v5 phrasing):
+
+> **Emergent (owner-supplied 2026-08-14).** Title: "L3 Engineer" — Emergent's internal
+> level name. Owner chose it over the public posting title ("Forward Deployed Engineer")
+> after being shown both; the FDE framing survives in the bullets, not the title line.
+> The work is FDE-shaped: building on the Emergent platform / AI harness for customers.
+> **This description is provisional** — owner said more detail follows as the role
+> develops. Extend it from what the owner supplies; never fill the gap by inference.
+
+Role bullets, **grouped by employer** (a flat list silently misattributes Rayvector's
+backend work to Emergent). Source for `src/content/journey.ts` `roleHighlights`:
+
+*Emergent*
+- Forward-deployed on the Emergent platform: building full-stack applications with the
+  Emergent AI harness — for customers, and alongside them.
+- Customer support that ends in a patch — bug fixes across Emergent's own app as well
+  as client applications.
+- Working across Kubernetes, Grafana, Redash and PostHog: deploys, dashboards, and the
+  product analytics behind what ships.
+
+*Rayvector (resume v5 phrasing)*
 - Production FastAPI backend for a Plot Management System (multinational client):
   JWT auth, cursor-based pagination, Redis caching.
 - Full Firebase→PostgreSQL migration with zero downtime: APIs, schema, cloud infra redesigned.
@@ -165,7 +195,27 @@ depth items are painted in the accent**. All grounded — no invented capability
 
 ## 10. FACTS REGISTRY — the hard boundary
 
-May claim: ~1 year production experience (Rayvector, May 2025–present incl. internship);
+**Hackathon builds (owner-confirmed 2026-08-14).** Two 2026 projects were built for
+public hackathons. What may be stated is the *submission* and its date, nothing more:
+
+| Project | Hackathon | Window | Status |
+|---|---|---|---|
+| Rasputin_Loop | Slack Agent Builder Challenge | 20 may – 13 jul 2026 | Submitted. **Did not win** — never claim a placing, and do not state the loss on the site either. |
+| Amadeus | OpenAI Build Week | 13 – 21 jul 2026 | Submitted. **Results were not out** as of 2026-08-14 — no placing, no "finalist", no "shortlisted". |
+
+The site therefore renders only `Built for <hackathon> · submitted <month year>`
+(`Project.context` in `src/content/schema.ts`). If a result later lands, the owner
+supplies it — do not go looking for one and write it in.
+
+Emergent, since 2026-08: an L3 Engineer role whose day-to-day is forward-deployed
+(FDE-shaped) work on the Emergent platform and AI harness — customer builds, customer
+support, and bug fixes on Emergent's own app as well as client apps; exposure to
+Kubernetes, Grafana, Redash, PostHog and MCP. **May NOT claim**: ownership of Emergent
+product surfaces, customer names, revenue/scale/uptime numbers, or team leadership.
+Emergent's own company facts (funding, ARR, user counts) are the *company's*, not
+Ishan's — they must never appear as his.
+
+May claim: ~1 year production experience (Rayvector, May 2025–Jul 2026 incl. internship);
 multinational client; a prior Software Developer internship at Sambin Technologies
 (Nov 2024–Jan 2025) — timeline mention only, no project claims or metrics;
 zero-downtime Firebase→PostgreSQL migration; Azure VM + Nginx +

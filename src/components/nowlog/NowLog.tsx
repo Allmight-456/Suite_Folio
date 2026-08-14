@@ -1,4 +1,5 @@
 import type { NowLog as NowLogData } from "@/content/schema";
+import { WindowChrome } from "@/components/ui/WindowChrome";
 
 /**
  * THE signature element (DESIGN-SPEC §3.7): a terminal pane rendering the
@@ -13,14 +14,7 @@ export function NowLog({ data }: { data: NowLogData }) {
       className="px-6 py-24 md:px-16 md:py-32"
     >
       <div className="mx-auto max-w-4xl overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
-        <div className="flex items-center gap-2 border-b border-volt-dim bg-ink-raise px-4 py-3">
-          <span className="h-3 w-3 rounded-full bg-volt-dim" />
-          <span className="h-3 w-3 rounded-full bg-volt-dim" />
-          <span className="h-3 w-3 rounded-full bg-volt-dim" />
-          <span className="ml-3 font-mono text-xs text-bone-dim">
-            ishan@prod:~$ tail -f ./now.log
-          </span>
-        </div>
+        <WindowChrome label="ishan@prod:~$ tail -f ./now.log" />
 
         <div className="terminal-pane min-h-[420px] space-y-6 p-6 text-sm leading-relaxed md:p-8">
           {data.entries.map((e, i) => (

@@ -230,3 +230,47 @@
   logos. Third cert added
   (Gen AI Agents: Transform Your Organization), so the facts registry now reads **three** Apr 2026
   certs; copy sourced from the official Google/Databricks course pages (CONTENT.md §8), never invented.
+
+## 2026-08-14 — Emergent role, hackathon builds, window chrome, now.log parser
+
+**Owner input (verbatim decisions, asked before writing any copy):**
+
+- **Title = "L3 Engineer · Emergent".** Research found Emergent's Bengaluru job board
+  posts *Forward Deployed Engineer (FDE)* as a real public title, and L3 reads as an
+  internal level with no meaning outside the company. Owner was shown both framings
+  (plus "FDE (L3)") and picked the literal internal one. Honoured — with the FDE
+  framing carried in the role bullets instead, so the signal isn't lost.
+- **Timeline:** Emergent from aug 2026; Rayvector closed at jul 2026.
+- **Hackathons:** Rasputin_Loop → Slack Agent Builder Challenge (submitted, *did not
+  win*); Amadeus → OpenAI Build Week (submitted, *results not out* as of today).
+  The site states the submission only. The loss is not stated either — a portfolio
+  owes no confession, and "did not win" is not a fact a reader needs. See CONTENT §10.
+- **Window chrome:** real macOS traffic lights with glyphs always visible.
+
+**D-2026-08-14a — Traffic lights are theme-independent.** The six windows shared six
+hand-copied `bg-volt-dim` dot triples; they're now one `ui/WindowChrome` (a server
+component — the bar is static, so it ships no JS). Colours are fixed `--win-*` tokens
+that the p10k picker does NOT retint, the same carve-out already granted to the cert
+brand marks and now.log phosphor: the dots read as "window" precisely *because* those
+three colours are constant in every real terminal. Glyphs are stroked in `--ink` at
+55% so they read as engraved rather than painted on.
+
+**D-2026-08-14b — Emergent + Slack pixel marks; no OpenAI mark.** `ui/PixelLogo` now
+owns the grid registry (lifted out of `components/certs`) so new marks reuse the cert
+vernacular instead of inventing a second logo style. Added: Emergent's monoline "e"
+(ring broken upper-right, diagonal bar) beside the Emergent timeline row, and Slack's
+four-arm pinwheel on Rasputin_Loop's provenance line. **The OpenAI knot was attempted
+and dropped** — rendered at 11–13px it reads as a target/aperture, not the mark;
+Amadeus keeps its `harness` schematic instead. A bad logo is worse than no logo.
+
+**D-2026-08-14c — now.log separator tolerance (live bug fix).** `parseNowLog` split
+the `<summary>` on an em-dash only, but the profile README had switched to `->`. Every
+entry therefore parsed with `title: ""` and the whole line folded into `tag`, and
+`getHeroChip` silently degraded to its hardcoded "SkillForge" fallback — invisible,
+because the fallback path looks identical to success. The parser now accepts
+`— – -> →`, with a regression test per separator. The README is hand-edited; the
+parser is the right place to be tolerant.
+
+**Role bullets are now grouped by employer** (`roleHighlights`, was a flat
+`roleBullets`). With two employers on the timeline, an unlabelled list silently
+attributed Rayvector's FastAPI/migration work to Emergent.

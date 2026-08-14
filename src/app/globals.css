@@ -24,6 +24,20 @@
   --brand-g-green: #34a853;
   --brand-dbx-red: #ff3621;
   --brand-dbx-orange: #ff8a4c;
+  /* Slack (Agent Builder Challenge) + monochrome marks (Emergent "e", OpenAI
+     knot). Same theme-independent rule as above. See DECISION-LOG 2026-08-14. */
+  --brand-slack-blue: #36c5f0;
+  --brand-slack-green: #2eb67d;
+  --brand-slack-yellow: #ecb22e;
+  --brand-slack-red: #e01e5a;
+  --brand-mono: #f5f5f7;
+
+  /* macOS traffic lights for the window chrome. Also theme-independent: the dots
+     read as "this is a window" precisely because the three colours are fixed, the
+     way they are in every real terminal. See DECISION-LOG 2026-08-14. */
+  --win-close: #ff5f57;
+  --win-min: #febc2e;
+  --win-max: #28c840;
 }
 
 @theme inline {
@@ -44,6 +58,15 @@
   --color-brand-g-green: var(--brand-g-green);
   --color-brand-dbx-red: var(--brand-dbx-red);
   --color-brand-dbx-orange: var(--brand-dbx-orange);
+  --color-brand-slack-blue: var(--brand-slack-blue);
+  --color-brand-slack-green: var(--brand-slack-green);
+  --color-brand-slack-yellow: var(--brand-slack-yellow);
+  --color-brand-slack-red: var(--brand-slack-red);
+  --color-brand-mono: var(--brand-mono);
+
+  --color-win-close: var(--win-close);
+  --color-win-min: var(--win-min);
+  --color-win-max: var(--win-max);
 
   --font-display: var(--font-space-grotesk);
   --font-sans: var(--font-inter);
