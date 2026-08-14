@@ -274,3 +274,59 @@ parser is the right place to be tolerant.
 **Role bullets are now grouped by employer** (`roleHighlights`, was a flat
 `roleBullets`). With two employers on the timeline, an unlabelled list silently
 attributed Rayvector's FastAPI/migration work to Emergent.
+
+## 2026-08-14 (later) — review pass on the Emergent update
+
+Owner reviewed the first pass against five screenshots. Every item below is a
+correction to work committed earlier the same day.
+
+**D-2026-08-14d — The Emergent mark moves off the timeline row.** Inline with a
+`aug 2026 – present  L3 Engineer · Emergent` line it read as clutter and forced
+a reserved-width hack on every other row just to keep the column aligned. It now
+sits as a **side rail on the role card**, which is the placement the certification
+windows and the skills card already established. `experience[]` is mark-free again.
+
+**D-2026-08-14e — Role cards lead with a summary, not bullets.** The career panel
+had grown to seven full-sentence bullets — "no one will read all this content"
+(owner). Restructured: each role is now one bold summary line (the hook) plus
+short mono fragments (the scan), with the full timeline underneath. `roleBullets`
+→ `roleHighlights` gained `summary` + `period`; bullets became fragments, not prose.
+
+**D-2026-08-14f — Amadeus and SkillForge never appear adjacent.** They are the
+same lineage (procedural memory for coding agents) and back-to-back they read as
+one project listed twice. Fixed three ways: the Journey headline set is now chosen
+for RANGE (`rasputin-loop`, `amadeus`, `ticketflow` — agent / harness tooling /
+production Go backend); `projects.ts` order separates them; and Amadeus's copy now
+leads on **governance** (consent, named review, promotion, abstention) rather than
+"procedural memory", which is SkillForge's phrase along with the ~50× stat.
+**Open for the owner:** SkillForge (Python/Claude Skills, WIP since may) may simply
+be superseded by Amadeus (TypeScript/Codex/cross-harness, jul). Retiring it to
+`tier: "older"` is a content call, not ours.
+
+**D-2026-08-14g — Pinned windows are viewport-capped, not fixed-height.** A
+`min-h-[460px]` body plus padding overflowed the pane on short laptop windows and
+landscape tablets, pushing the status bar off screen. Both pinned terminals
+(Journey, MindExplorer) are now `h-svh` flex columns capped at `max-h-full` with a
+**scrolling body** and a `min-h-[min(24rem,42svh)]` floor. Status bars drop their
+breadcrumbs below `lg` so the row never clips. The pin threshold also gained a
+height test — `(min-width: 768px) and (min-height: 640px)` — so short windows get
+the readable stack instead of a cramped pinned terminal.
+
+**D-2026-08-14h — Section rules fade instead of slab.** A full-bleed 1px
+`--volt-dim` border cut the page in two. `.rule-top` / `.rule-bottom` draw a
+gradient that fades to transparent at both ends — a tmux pane divider, not a wall.
+
+**D-2026-08-14i — PixelLogo goes solid below ~6px/cell.** Gaps and corner rounding
+cost a constant device pixel, so on a 1-cell-wide monoline mark (Emergent's ring,
+Slack's arms) they ate the stroke and the logo shattered into loose dots. Marks
+under `0.4rem` per cell now render gapless and unrounded, with grid rows pinned
+explicitly (`gridAutoRows` + `lineHeight: 0`) — left to content sizing, sub-pixel
+rounding opened seams that merged the mark horizontally but striped it vertically.
+
+**now.log was rewritten, and identity copy was synced everywhere.** The log had
+drifted into vague filler ("Studying — nanochat") that said nothing; it is now
+seven entries that each make a concrete claim, led by the Emergent work. The
+committed fallback is generated from that exact markdown so both paths agree.
+CONTENT.md §2 now lists every file that repeats the identity claim — `site.ts`,
+`layout.tsx` metadata, `JsonLd`, `opengraph-image`, `nowlog.ts`'s chip fallback,
+and the profile README — because this pass found them out of step with each other.

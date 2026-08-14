@@ -7,10 +7,14 @@ import { CertSchema, type Cert } from "./schema";
 export const SITE_URL = "https://ishan-kumar.netlify.app";
 
 export const hero = {
+  // Eyebrow stays the locked brand line (CONTENT.md §1). The role change is
+  // carried by `message` / the timeline, not by re-branding the hero.
   eyebrow: "backend & ai engineer",
   name: "ISHAN KUMAR",
   subline: "bengaluru, india · utc+5:30",
-  chipFallback: "▸ currently building — SkillForge",
+  // Last-resort only: the real chip comes from now.log's first Building entry.
+  // Keep in sync with lib/nowlog.ts's fallback — both are the same promise.
+  chipFallback: "▸ currently building — Amadeus",
 } as const;
 
 export const nav = [
@@ -36,16 +40,20 @@ export const message: {
   signature: string;
 } = {
   eyebrow: "$ whoami",
+  // Updated 2026-08-14 for the Emergent move: the old copy stopped at "backends
+  // + agent loops" and read a year out of date. Same voice, same closing beat.
   parts: [
     { text: "I ship " },
     { text: "production", volt: true },
     { text: " backends — Go and FastAPI under real rate limits, migrations with " },
     { text: "zero downtime", volt: true },
-    { text: ". Then I run the " },
-    { text: "agent", volt: true },
-    { text: " loops that sit on top of them until they " },
-    { text: "break", volt: true },
-    { text: " — because that's where the engineering actually is." },
+    { text: ". Now I'm " },
+    { text: "forward-deployed", volt: true },
+    { text: ": whole applications built on an AI harness, with the customer in the room. Same job either way — run the " },
+    { text: "loop", volt: true },
+    { text: " until it " },
+    { text: "breaks", volt: true },
+    { text: ", then own what broke." },
   ],
   signature: "ishan@prod:~$",
 };
@@ -67,15 +75,15 @@ export const whoami = {
 // components/journey — so experience + work + interests show without a click.)
 
 // Experience timeline — the ONLY place employer names appear (hard rule 2).
-// `logo` renders the shared ui/PixelLogo mark beside the row; only Emergent has
-// one, so the other rows stay plain rather than inventing marks for them.
+// Deliberately mark-free: a logo inline with a timeline row reads as clutter
+// (owner, 2026-08-14). The Emergent mark lives on the role *card* below instead,
+// as a side rail — the placement the certs and skills windows already use.
 // Titles are owner-confirmed 2026-08-14: "L3 Engineer" is Emergent's internal
 // level name, chosen over the public "Forward Deployed Engineer" posting title.
 export const experience = [
   {
     period: "aug 2026 – present",
     role: "L3 Engineer · Emergent · Bengaluru",
-    logo: "emergent",
   },
   {
     period: "sept 2025 – jul 2026",

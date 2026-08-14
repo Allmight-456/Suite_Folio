@@ -22,24 +22,16 @@ export const projects: Project[] = [
     slug: "amadeus",
     name: "Amadeus",
     year: 2026,
-    stat: "consented run → reviewed skill",
+    stat: "nothing activates itself",
+    // Leads on GOVERNANCE, not "procedural memory" — SkillForge already owns that
+    // phrase, and two cards opening the same way read as one project listed twice.
+    // Amadeus's distinct half is the control plane: consent, review, promotion.
     oneLiner:
-      "Cross-harness procedural-memory compiler for coding agents — turns a Codex run a human opted into, into a reviewed skill or deterministic script. Local-first CLI, MCP server and dashboard.",
+      "An evaluation control plane for agent skills. Captures a Codex run a human consented to, compiles it into a reviewed candidate, and refuses to activate anything a named human hasn't promoted — retrieval abstains rather than guess.",
     wip: true,
     repo: "https://github.com/Allmight-456/Amadeus_Skill",
     context: "Built for OpenAI Build Week · submitted jul 2026",
     stack: ["TypeScript", "Node", "Codex CLI", "MCP", "SQLite/FTS5"],
-  },
-  {
-    slug: "skillforge",
-    name: "SkillForge",
-    year: 2026,
-    stat: "~3000 → ~80 tokens (~50×)",
-    oneLiner:
-      "Procedural memory for AI coding agents — distills LLM bug-fixes into reusable Claude Skill files via AST-based retrieval and human-gated approval.",
-    wip: true,
-    repo: "https://github.com/Allmight-456/SkillForge",
-    stack: ["Python", "AST", "Claude Skills", "MCP", "Multi-agent"],
   },
   {
     slug: "autodocxpdf",
@@ -62,6 +54,17 @@ export const projects: Project[] = [
     wip: false,
     repo: "https://github.com/Allmight-456/Go_Ticket_booking_app",
     stack: ["Go", "PostgreSQL", "Redis", "JWT", "Docker"],
+  },
+  {
+    slug: "skillforge",
+    name: "SkillForge",
+    year: 2026,
+    stat: "~3000 → ~80 tokens (~50×)",
+    oneLiner:
+      "Procedural memory for AI coding agents — distills LLM bug-fixes into reusable Claude Skill files via AST-based retrieval and human-gated approval.",
+    wip: true,
+    repo: "https://github.com/Allmight-456/SkillForge",
+    stack: ["Python", "AST", "Claude Skills", "MCP", "Multi-agent"],
   },
   {
     slug: "market-research",

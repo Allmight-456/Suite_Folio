@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="border-t border-volt-dim px-6 py-24 md:px-16 md:py-32"
+      className="rule-top px-6 py-24 md:px-16 md:py-32"
     >
       <p className="font-display text-[clamp(2rem,7vw,5.5rem)] font-bold leading-[1.05] tracking-tight text-bone">
         {footer.closing}

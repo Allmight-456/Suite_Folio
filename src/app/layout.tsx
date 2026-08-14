@@ -34,8 +34,9 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// Kept in step with content/site.ts `message` — both answer "what does he do now?"
 const description =
-  "Production FastAPI/Go services, RAG pipelines that survive free-tier rate limits, and long-horizon agent infrastructure. Bengaluru.";
+  "Forward-deployed engineer in Bengaluru. Production FastAPI/Go services, zero-downtime migrations, and full-stack applications built on an AI harness — plus the agent loops and evals underneath them.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

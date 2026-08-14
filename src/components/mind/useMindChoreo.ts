@@ -44,7 +44,10 @@ export function useMindChoreo(
   // Desktop only — pinned scroll-jacking is poor on phones, and content must
   // never be gated, so narrow screens fall back to the readable stack.
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    // Height matters as much as width: a 768px-wide landscape tablet or a short
+    // laptop window can't hold a pinned terminal without the pane overflowing,
+    // so those fall back to the readable stack too (owner, 2026-08-14).
+    const mq = window.matchMedia("(min-width: 768px) and (min-height: 640px)");
     const update = () => setWide(mq.matches);
     update();
     mq.addEventListener("change", update);

@@ -117,20 +117,34 @@ export function PixelLogo({
 }) {
   const grid = GRIDS[kind];
   const cols = grid[0].length;
+  // Below ~6px per cell the grid goes SOLID: gaps and corner rounding are a
+  // constant device-pixel cost, so on a 1-cell-wide monoline mark (Emergent's
+  // ring, Slack's arms) they eat the stroke and it reads as scattered dots.
+  // Large marks keep the visible pixel grid — that's the whole cert vernacular.
+  const dense = size < 0.4;
+  const gap = dense ? 0 : size / 8;
   return (
     <div
       role={label ? "img" : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : "true"}
-      className="grid shrink-0 gap-px"
-      style={{ gridTemplateColumns: `repeat(${cols}, ${size}rem)` }}
+      className="grid shrink-0"
+      style={{
+        gridTemplateColumns: `repeat(${cols}, ${size}rem)`,
+        // Rows pinned explicitly (not `auto`) and leading zeroed: left to content
+        // sizing, sub-pixel rounding opened seams between rows, so a dense mark
+        // merged horizontally but stayed striped vertically.
+        gridAutoRows: `${size}rem`,
+        lineHeight: 0,
+        gap: `${gap}rem`,
+      }}
     >
       {grid.flatMap((row, y) =>
         row.split("").map((ch, x) => (
           <span
             key={`${y}-${x}`}
             style={{ height: `${size}rem`, width: `${size}rem` }}
-            className={`rounded-[1px] ${CELL[ch] ?? ""}`}
+            className={`${dense ? "" : "rounded-[1px]"} ${CELL[ch] ?? ""}`}
           />
         )),
       )}

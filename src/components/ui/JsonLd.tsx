@@ -23,9 +23,12 @@ export function PersonJsonLd() {
       "FastAPI",
       "Go",
       "PostgreSQL",
+      "Kubernetes",
       "Retrieval-Augmented Generation",
       "Multi-agent systems",
       "Agent infrastructure",
+      "Model Context Protocol",
+      "Observability and product analytics",
     ],
   };
   return <Script data={data} />;

@@ -9,29 +9,44 @@ import { projects } from "./projects";
 // would silently attribute Rayvector's backend work to Emergent.
 // TODO(owner): the Emergent bullets are the FDE side only — owner said more
 // detail will follow as the role develops (2026-08-14). Extend, don't invent.
+// Each role leads with ONE line that can be read at a glance — the previous
+// shape was seven full-sentence bullets nobody finishes (owner, 2026-08-14).
+// `summary` is the hook; `bullets` are fragments, not prose; `logo` renders a
+// side rail (certs/skills placement), which is why only Emergent carries one.
 export const roleHighlights = [
   {
     at: "Emergent",
+    period: "aug 2026 → present",
+    summary:
+      "I build the customer's application on Emergent's AI harness — then keep it alive.",
     bullets: [
-      "Forward-deployed on the Emergent platform: building full-stack applications with the Emergent AI harness — for customers, and alongside them.",
-      "Customer support that ends in a patch — bug fixes across Emergent's own app as well as client applications.",
-      "Working across Kubernetes, Grafana, Redash and PostHog: deploys, dashboards, and the product analytics behind what ships.",
+      "full-stack customer builds, forward-deployed",
+      "bug fixes across Emergent's own app + client apps",
+      "Kubernetes · Grafana · Redash · PostHog",
     ],
+    logo: "emergent",
   },
   {
     at: "Rayvector",
+    period: "may 2025 → jul 2026",
+    summary:
+      "Production backends for a multinational client — and the zero-downtime migration underneath them.",
     bullets: [
-      "Production FastAPI backend for a Plot Management System (multinational client): JWT auth, cursor-based pagination, Redis caching.",
-      "Full Firebase→PostgreSQL migration with zero downtime — APIs, schema, and cloud infra redesigned in place.",
-      "Dockerized services on an Azure VM behind Nginx; DNS and pipelines for two live environments.",
-      "Voting Platform REST API on AWS EC2 with PostgreSQL — full CRUD, in production.",
+      "FastAPI: JWT auth, cursor pagination, Redis caching",
+      "Firebase → PostgreSQL migration, zero downtime",
+      "Docker on an Azure VM behind Nginx, two live envs",
+      "Voting Platform REST API on AWS EC2 + PostgreSQL",
     ],
   },
 ] as const;
 
 // Headline projects for the Journey "shipped" panel; the full set lives in the
 // /work index. Filter (not re-list) so order + copy stay single-sourced.
-const HEADLINE = ["rasputin-loop", "amadeus", "skillforge"] as const;
+// Chosen for RANGE, not recency: a shipped agent, agent tooling, and a
+// production Go backend. Amadeus and SkillForge are the same lineage
+// (procedural memory for coding agents) so they never headline together —
+// back-to-back they read as one project listed twice (owner, 2026-08-14).
+const HEADLINE = ["rasputin-loop", "amadeus", "ticketflow"] as const;
 export const headlineProjects = projects.filter((p) =>
   (HEADLINE as readonly string[]).includes(p.slug),
 );

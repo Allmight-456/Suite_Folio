@@ -1,5 +1,6 @@
 import { NowLogSchema, type LogEntry, type NowLog } from "@/content/schema";
 import fallback from "@/content/nowlog.fallback.json";
+import { hero } from "@/content/site";
 
 const README_URL =
   "https://raw.githubusercontent.com/Allmight-456/Allmight-456/main/README.md";
@@ -76,8 +77,9 @@ export async function getNowLog(): Promise<NowLog> {
 export async function getHeroChip(): Promise<string> {
   const log = await getNowLog();
   const building = log.entries.find((e) => /building/i.test(e.tag));
-  if (!building) return "▸ currently building — SkillForge";
-  // titles read like "SkillForge: agents that auto-detect their own skills"
+  // Fallback mirrors content/site.ts `hero.chipFallback` — keep the two in step.
+  if (!building) return hero.chipFallback;
+  // titles read like "Amadeus: procedural memory that has to earn activation"
   const short = building.title.split(":")[0].trim();
-  return `▸ currently building — ${short || "SkillForge"}`;
+  return short ? `▸ currently building — ${short}` : hero.chipFallback;
 }

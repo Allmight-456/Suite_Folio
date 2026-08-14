@@ -71,63 +71,45 @@ $ tail -f ./now.log
 > Live notes on what I'm building, breaking, and reading. Cross-posted weekly to [LinkedIn](https://linkedin.com/in/ishan-kumar-) and [X](https://x.com/kuma10296).
 
 <details>
-<summary><b>🛰️  Forward-deployed — the Emergent platform, end to end</b></summary>
+<summary><b>🛰️  Forward-deployed — the Emergent harness, end to end</b></summary>
 
-Building full-stack applications on the Emergent AI harness: for customers, alongside customers, and through to the bug fixes that follow — on Emergent's own app as well as client apps. The infra surface that came with it: Kubernetes, Grafana, Redash, PostHog. FDE work is where harness engineering stops being a side project and starts being the job.
+I build the customer's application on Emergent's AI harness and then stay on it: the bug that shows up in week three is mine too, on our own app as much as theirs. What's changed my thinking: a harness is not a framework you pick, it's a set of constraints you inherit — and the interesting engineering is what you do inside them, in front of someone who is watching.
 </details>
 
 <details>
-<summary><b>🎼  Building — Amadeus: procedural memory that has to earn activation</b></summary>
+<summary><b>🎼  Building — Amadeus: skills that have to earn activation</b></summary>
 
-A cross-harness skill compiler for coding agents. It captures a Codex run a human explicitly consented to, helps that human distill it into a compact skill or a deterministic script, and stores the result as a **reviewed preview** — never an active skill. Retrieval abstains unless the top match clears both a score threshold and a margin over the runner-up. Local-first: CLI, project-scoped MCP server, dashboard, SQLite/FTS5. Built for OpenAI Build Week (submitted jul 2026). Repo: [github.com/Allmight-456/Amadeus_Skill](https://github.com/Allmight-456/Amadeus_Skill).
+A control plane for agent skills. It captures a Codex run I explicitly consented to, compiles it into a reviewed candidate, and then refuses to activate it — nothing goes live without a named human and a written reason. Retrieval abstains unless the top match clears both a score threshold and a margin over the runner-up. The hard part was never generation; it was the boundary. Repo: [github.com/Allmight-456/Amadeus_Skill](https://github.com/Allmight-456/Amadeus_Skill).
 </details>
 
 <details>
-<summary><b>🤖  Building — Rasputin_Loop: a Slack-native agent, one brain, no router</b></summary>
+<summary><b>🤖  Shipped — Rasputin_Loop: one Slack agent loop, no router</b></summary>
 
-A single Strands agent loop (MiniMax M3) that thinks, calls a tool, and replies in-thread — no intent parser, no command router. Provenance-stamped episodic memory in SQLite, hybrid RAG over libSQL/Turso fusing FTS5 + local embeddings via Reciprocal Rank Fusion, runtime MCP tools, Jira auto-triage, guardrails, and a `loop-eval` golden-set CI gate. Runs several distinct Slack apps from one process. Built for the Slack Agent Builder Challenge (submitted jul 2026). Repo: [github.com/Allmight-456/Rasputin_Loop](https://github.com/Allmight-456/Rasputin_Loop).
+A single Strands agent that thinks, calls a tool, and replies in-thread. No intent parser, no command router, no extraction pipeline — the routing logic I didn't write is the routing logic that can't be wrong. Provenance-stamped episodic memory in SQLite, hybrid recall over libSQL/Turso fusing FTS5 with local embeddings via Reciprocal Rank Fusion, and a `loop-eval` golden set gating regressions in CI. Repo: [github.com/Allmight-456/Rasputin_Loop](https://github.com/Allmight-456/Rasputin_Loop).
 </details>
 
 <details>
-<summary><b>🛠️  Building — SkillForge: agents that auto-detect their own skills</b></summary>
+<summary><b>📊  Learning — to read production before changing it</b></summary>
 
-AST-based retrieval over a Claude Skill library, human-gated approval loop. Cuts repeat-class error context from **~3000 → ~80 tokens (~50×)**. Repo: [github.com/Allmight-456/SkillForge](https://github.com/Allmight-456/SkillForge).
+Kubernetes for what's actually running, Grafana for whether it's healthy, Redash for what the data says, PostHog for what people did with it. The lesson I keep re-learning: most "bugs" reported by a customer are answered by a dashboard before they're answered by a debugger.
 </details>
 
 <details>
-<summary><b>🔁  Running — Hermes & OpenClaw on Hostinger cloud</b></summary>
+<summary><b>🔁  Running — Hermes & OpenClaw on a Hostinger box</b></summary>
 
-Self-hosted long-running agent boxes, kept alive specifically to watch where production-grade agent loops degrade. Tool-loop convergence, memory bleed across runs, where they crack under sustained load. Operational notes feed back into SkillForge.
+Two long-running agents kept alive specifically to watch how they rot: tool-loop convergence, memory bleed across runs, behaviour under sustained load. Short demos never show you this; a process that has been up for weeks does.
 </details>
 
 <details>
-<summary><b>🧪  Harness engineering — guardrails, evals, agent loops</b></summary>
+<summary><b>🧪  Open question — where do evals belong in the loop?</b></summary>
 
-Wiring them *into* the LLM workflow itself, not bolted on after. The open question: where do evals belong — pre-tool, post-tool, or as a separate critic agent?
+Pre-tool, post-tool, or as a separate critic agent? Pre-tool catches the dumb calls but can't see outcomes. Post-tool sees outcomes but has already paid for them. A critic agent sees both and doubles your cost and your failure modes. I have shipped the post-tool version twice and I'm still not convinced.
 </details>
 
 <details>
-<summary><b>🧠  Agent memory — mem0 vs SkillForge</b></summary>
+<summary><b>🧠  Reading — memory, and what retrieval is actually for</b></summary>
 
-[mem0](https://github.com/mem0ai/mem0) for long-horizon memory. Mapping the gap between mem0 (episodic, vector-backed) and SkillForge (procedural, AST-indexed) — different halves of the same problem.
-</details>
-
-<details>
-<summary><b>🔍  Retrieval — PageIndex & Agentic RAG</b></summary>
-
-[PageIndex](https://github.com/VectifyAI/PageIndex) and tree-structured retrieval — moving past vector-only. Reads more like how you'd actually search a codebase or a textbook.
-</details>
-
-<details>
-<summary><b>🧰  Tooling — Conductor.build & Superset side-by-side</b></summary>
-
-Running them against real PRs to see which agentic loop converges. Cursor stays the daily driver; these are the challengers.
-</details>
-
-<details>
-<summary><b>📡  Studying — Karpathy's nanochat & Autoresearch</b></summary>
-
-Single-GPU nanochat lineage. Reference for what "tiny but real" looks like at the model layer.
+[mem0](https://github.com/mem0ai/mem0) for episodic memory, [PageIndex](https://github.com/VectifyAI/PageIndex) for tree-structured retrieval past vector-only. The thread connecting them: precision beats recall once a human is gating the library, and a memory without provenance is just a rumour your agent repeats confidently.
 </details>
 
 <br/>
@@ -140,7 +122,7 @@ $ ls ./projects --sort=impact --year=2024+
 <tr><td width="50%" valign="top">
 
 ### 🎼 [Amadeus](https://github.com/Allmight-456/Amadeus_Skill) *(WIP)*
-**Procedural memory that has to earn activation.**
+**A control plane for agent skills — nothing activates itself.**
 Captures a consented Codex run, distills it into a reviewed skill or deterministic script, and refuses to activate it without a named human promotion. Retrieval abstains below threshold. CLI + project-scoped MCP server + local dashboard; secrets redacted before persistence. Built for **OpenAI Build Week** (submitted jul 2026).
 
 `TypeScript` `Node` `Codex CLI` `MCP` `SQLite/FTS5`

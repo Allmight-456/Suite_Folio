@@ -13,12 +13,21 @@ Every word on the site comes from here. Edit here first, code second.
 
 ## 2. Message block (the signature statement)
 
-> I build **production** backends and **agentic** systems — FastAPI and Go services
-> for multinational clients, RAG pipelines that survive **free-tier rate limits**,
-> and migrations that ship with **zero downtime**. Then I run long-horizon agent
-> infrastructure to study where the loops **break**.
+Updated 2026-08-14 for the Emergent move — the previous version stopped at
+"backends + agent loops" and read a year out of date:
+
+> I ship **production** backends — Go and FastAPI under real rate limits,
+> migrations with **zero downtime**. Now I'm **forward-deployed**: whole
+> applications built on an AI harness, with the customer in the room. Same job
+> either way — run the **loop** until it **breaks**, then own what broke.
 
 (bold = `--volt` spans). Closing motif: `ishan@prod:~$ ▮`
+
+Everywhere this identity is repeated, and which must move together:
+`content/site.ts` (`hero`, `message`, `whoami`), `app/layout.tsx` (metadata
+title + description), `components/ui/JsonLd.tsx` (`jobTitle`, `knowsAbout`),
+`app/opengraph-image.tsx` (alt), `lib/nowlog.ts` (chip fallback), and the
+GitHub profile README's `$ whoami` block.
 
 ## 3. The Strip — frames & captions (mono, Lando format)
 
@@ -60,11 +69,19 @@ Every word on the site comes from here. Edit here first, code second.
    Provenance-stamped episodic memory, hybrid RAG, runtime MCP tools, Jira auto-triage;
    several Slack apps from one process. Provenance line: *Built for the Slack Agent
    Builder Challenge · submitted jul 2026* (see §10 — submission only, no placing).
-7. **Amadeus** · 2026 · `consented run → reviewed skill` · *(WIP)*
-   Cross-harness procedural-memory compiler for coding agents — turns a Codex run a
-   human opted into, into a reviewed skill or deterministic script. Local-first CLI,
-   MCP server and dashboard. Provenance line: *Built for OpenAI Build Week · submitted
-   jul 2026* (see §10 — submission only, results were not out).
+7. **Amadeus** · 2026 · `nothing activates itself` · *(WIP)*
+   An evaluation control plane for agent skills — captures a consented Codex run,
+   compiles it into a reviewed candidate, and refuses to activate anything a named
+   human hasn't promoted; retrieval abstains rather than guess. Provenance line:
+   *Built for OpenAI Build Week · submitted jul 2026* (see §10 — submission only,
+   results were not out).
+
+   > **Amadeus and SkillForge are the same lineage** (procedural memory for coding
+   > agents) and must never be presented side by side — back-to-back they read as
+   > one project listed twice (owner, 2026-08-14). SkillForge owns the phrase
+   > "procedural memory" and the ~50× token stat; Amadeus leads on governance —
+   > consent, named review, promotion, abstention. They are kept apart in
+   > `projects.ts` order and never share the Journey headline set.
 8. Older work — promoted 2026-06-17 from a link rail to real lightweight `/work/[slug]`
    pages (summary + stack + repo link). Copy grounded in PROJECT-DEEP-DIVES.md "Older work
    rail" + research/pdfsage_readme. **Years approximate (2024) — owner to verify.**

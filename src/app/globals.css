@@ -182,6 +182,38 @@ body {
   left: 0;
 }
 
+/* ── Section rules ────────────────────────────────────────────────────────
+   A full-bleed 1px --volt-dim border across the viewport read as a hard slab
+   cutting the page in two (owner, 2026-08-14). These fade out at both ends
+   instead, like a tmux pane divider: same vernacular, far quieter. Applied via
+   .rule-top / .rule-bottom rather than `border-y`. */
+.rule-top,
+.rule-bottom {
+  position: relative;
+}
+.rule-top::before,
+.rule-bottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--volt-dim) 85%, transparent) 20%,
+    color-mix(in srgb, var(--volt-dim) 85%, transparent) 80%,
+    transparent
+  );
+}
+.rule-top::before {
+  top: 0;
+}
+.rule-bottom::after {
+  bottom: 0;
+}
+
 /* Terminal pane: the one place phosphor is allowed */
 .terminal-pane {
   background: var(--ink-raise);
