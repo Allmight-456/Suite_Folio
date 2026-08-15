@@ -235,11 +235,13 @@
 
 **Owner input (verbatim decisions, asked before writing any copy):**
 
-- **Title = "L3 Engineer · Emergent".** Research found Emergent's Bengaluru job board
-  posts *Forward Deployed Engineer (FDE)* as a real public title, and L3 reads as an
+- **Title = "L3 Engineer · Emergent".** Research found that Emergent's Bengaluru job
+  board posts a customer-embedded-engineer title publicly, and that L3 reads as an
   internal level with no meaning outside the company. Owner was shown both framings
-  (plus "FDE (L3)") and picked the literal internal one. Honoured — with the FDE
-  framing carried in the role bullets instead, so the signal isn't lost.
+  and picked the literal internal one. *(This entry named that industry label three
+  times when written; the term was **redacted 2026-08-15** on owner instruction —
+  see the 2026-08-15 entry. Redacted in place rather than appended-over, because
+  the point of the instruction is that the string not be in the repo at all.)*
 - **Timeline:** Emergent from aug 2026; Rayvector closed at jul 2026.
 - **Hackathons:** Rasputin_Loop → Slack Agent Builder Challenge (submitted, *did not
   win*); Amadeus → OpenAI Build Week (submitted, *results not out* as of today).
@@ -330,3 +332,37 @@ committed fallback is generated from that exact markdown so both paths agree.
 CONTENT.md §2 now lists every file that repeats the identity claim — `site.ts`,
 `layout.tsx` metadata, `JsonLd`, `opengraph-image`, `nowlog.ts`'s chip fallback,
 and the profile README — because this pass found them out of step with each other.
+
+## 2026-08-15 — Emergent role reframed; one term banned repo-wide
+
+**D-2026-08-15a — The industry label for a customer-embedded engineer is banned.**
+Owner-directed, emphatic, no expiry: it appears nowhere — not the site, not the
+profile README, not comments, not these notes. Fourteen occurrences across
+`site.ts`, `journey.ts`, `layout.tsx`, `nowlog.fallback.json`, CONTENT.md,
+DECISION-LOG.md and the suggested README were removed. **Two prior log entries were
+redacted in place**, which breaks this file's append-only rule — done deliberately,
+because appending a correction would have left the banned string sitting in the
+repo, which is the one outcome the instruction rules out. The redaction is marked
+where it happened rather than hidden. CONTENT.md §6 now opens with a banned-term
+notice so the next writer hits it before drafting Emergent copy.
+
+**D-2026-08-15b — Reframed on the facts, not the label.** New facts supplied by the
+owner: **L3** is the internal level, **AI Agent Reliability** is the team, and the
+role is **support and engineering both** — one shift, not two jobs. The framing now
+derives from what that team actually does. Timeline line becomes `L3 Engineer · AI
+Agent Reliability · Emergent · Bengaluru`; the card summary is *"Agents write the
+first version. I make it survive contact with real customers — and answer for it
+when it doesn't."*; `role.txt` in the whoami pane becomes *"Now I work where agents
+meet real users: I build what they can't finish, and I'm the one who answers when
+it breaks"*, restoring the original closing beat. The now.log lead entry is retagged
+`On call — AI Agent Reliability at Emergent`. Describing the work rather than
+reaching for the label is a better line anyway: the label is a category, the
+sentence is a claim.
+
+**D-2026-08-15c — Career mark centres on the pair, not on its own card.** The
+Emergent mark moved from a per-role rail to a single rail down the left of BOTH
+role cards, vertically centred against them (owner). It is therefore no longer a
+`roleHighlights` field but its own `careerMark` export — it anchors the block the
+way the pixel robot anchors the skills window, and calling it a per-role logo would
+have been a lie about what it now is. Each card keeps its own text label, so
+nothing implies the mark covers Rayvector.

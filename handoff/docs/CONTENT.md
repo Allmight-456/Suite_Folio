@@ -13,13 +13,13 @@ Every word on the site comes from here. Edit here first, code second.
 
 ## 2. Message block (the signature statement)
 
-Updated 2026-08-14 for the Emergent move — the previous version stopped at
+Updated 2026-08-15 for the Emergent move — the previous version stopped at
 "backends + agent loops" and read a year out of date:
 
 > I ship **production** backends — Go and FastAPI under real rate limits,
-> migrations with **zero downtime**. Now I'm **forward-deployed**: whole
-> applications built on an AI harness, with the customer in the room. Same job
-> either way — run the **loop** until it **breaks**, then own what broke.
+> migrations with **zero downtime**. Now I work where **agents** meet real
+> users: I build what they can't finish, and I'm the one who answers when it
+> **breaks** — because that's where the engineering actually is.
 
 (bold = `--volt` spans). Closing motif: `ishan@prod:~$ ▮`
 
@@ -95,30 +95,41 @@ GitHub profile README's `$ whoami` block.
 ## 6. Experience (compact timeline, /work top or footer of home)
 
 ```
-aug 2026  – present    L3 Engineer · Emergent · Bengaluru
+aug 2026  – present    L3 Engineer · AI Agent Reliability · Emergent · Bengaluru
 sept 2025 – jul 2026   SWE-1 · Rayvector Technologies · Bengaluru
 may 2025  – aug 2025   SWE Intern · Rayvector Technologies
 nov 2024  – jan 2025   Software Developer (Intern) · Sambin Technologies
 dec 2021  – june 2025  B.Tech CSE · RGIPT
 ```
 
-> **Emergent (owner-supplied 2026-08-14).** Title: "L3 Engineer" — Emergent's internal
-> level name. Owner chose it over the public posting title ("Forward Deployed Engineer")
-> after being shown both; the FDE framing survives in the bullets, not the title line.
-> The work is FDE-shaped: building on the Emergent platform / AI harness for customers.
+> ### 🚫 BANNED TERM — read before writing any Emergent copy
+>
+> **The industry label for this shape of role must not appear anywhere** — not on
+> the site, not in the README, not in this repo's comments or docs. Owner-directed
+> 2026-08-15, no expiry given. It is the three-letter acronym beginning with F for
+> a customer-embedded engineer, and its spelled-out form. Describe the *work*;
+> never reach for the label. If you think you need it, you don't.
+>
+> **Emergent (owner-supplied, 2026-08-15).** Level: **L3** (Emergent's internal
+> ladder). Team: **AI Agent Reliability**. Scope: **support and engineering
+> both** — not two separate jobs. The work: agents produce a first version of a
+> customer's application; Ishan makes it hold up in front of real users, builds
+> what's missing, takes the bug when it lands, and answers the customer while
+> fixing it. Surface: Kubernetes, Grafana, Redash, PostHog, MCP.
+>
 > **This description is provisional** — owner said more detail follows as the role
 > develops. Extend it from what the owner supplies; never fill the gap by inference.
 
-Role bullets, **grouped by employer** (a flat list silently misattributes Rayvector's
-backend work to Emergent). Source for `src/content/journey.ts` `roleHighlights`:
+Role cards, **grouped by employer** (a flat list silently misattributes Rayvector's
+backend work to Emergent). Each is one `summary` hook + short `bullets` fragments —
+source for `src/content/journey.ts` `roleHighlights`:
 
-*Emergent*
-- Forward-deployed on the Emergent platform: building full-stack applications with the
-  Emergent AI harness — for customers, and alongside them.
-- Customer support that ends in a patch — bug fixes across Emergent's own app as well
-  as client applications.
-- Working across Kubernetes, Grafana, Redash and PostHog: deploys, dashboards, and the
-  product analytics behind what ships.
+*Emergent* — summary: **"Agents write the first version. I make it survive contact
+with real customers — and answer for it when it doesn't."**
+- AI Agent Reliability — support and engineering
+- full-stack builds on the Emergent platform
+- bug fixes across Emergent's own app + client apps
+- Kubernetes · Grafana · Redash · PostHog
 
 *Rayvector (resume v5 phrasing)*
 - Production FastAPI backend for a Plot Management System (multinational client):
@@ -224,10 +235,11 @@ The site therefore renders only `Built for <hackathon> · submitted <month year>
 (`Project.context` in `src/content/schema.ts`). If a result later lands, the owner
 supplies it — do not go looking for one and write it in.
 
-Emergent, since 2026-08: an L3 Engineer role whose day-to-day is forward-deployed
-(FDE-shaped) work on the Emergent platform and AI harness — customer builds, customer
-support, and bug fixes on Emergent's own app as well as client apps; exposure to
-Kubernetes, Grafana, Redash, PostHog and MCP. **May NOT claim**: ownership of Emergent
+Emergent, since 2026-08: **L3 Engineer, AI Agent Reliability** — support and
+engineering both, on the Emergent platform: customer builds, customer support, and
+bug fixes on Emergent's own app as well as client apps; exposure to
+Kubernetes, Grafana, Redash, PostHog and MCP. The industry label for this shape of
+role is a **banned term** (see §6). **May NOT claim**: ownership of Emergent
 product surfaces, customer names, revenue/scale/uptime numbers, or team leadership.
 Emergent's own company facts (funding, ARR, user counts) are the *company's*, not
 Ishan's — they must never appear as his.

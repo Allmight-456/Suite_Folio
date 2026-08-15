@@ -46,7 +46,7 @@ $ whoami
 ```
 
 **Ishan Kumar** — Software Engineer, AI & Backend Systems · Bengaluru. <br/>
- I've shipped production FastAPI backends for multinational clients, moved critical data between stacks without breaking the app (ETL), run Database Migrations and built RAG pipelines that run on rate limits, per-step tracing instead of a fat API budget. Now forward-deployed at **Emergent** — building full-stack applications on the Emergent AI harness with customers, and fixing what breaks after. The frontier I'm on: **agentic systems** → CoALA, Strands Framework, hybrid retrieval, episodic + procedural memory, and guardrails wired straight into the loop.
+ I've shipped production FastAPI backends for multinational clients, moved critical data between stacks without breaking the app (ETL), run Database Migrations and built RAG pipelines that run on rate limits, per-step tracing instead of a fat API budget. Now on **AI Agent Reliability** at **Emergent** — agents write the first version of a customer's application, and I make it survive contact with real users: building what's missing, taking the bug when it lands, answering the customer while I'm fixing it. The frontier I'm on: **agentic systems** → CoALA, Strands Framework, hybrid retrieval, episodic + procedural memory, and guardrails wired straight into the loop.
 
 <h4>Shipping for multinational clients since 2025 · Python, Go, PostgreSQL, Kubernetes, AWS, Azure · </h4> <br/>
  <sub>`kubectl exec -it ishan -- /bin/zsh` </sub>
@@ -56,7 +56,7 @@ $ uptime --career
 ```
 
 ```
- Aug 2026  - present     L3 Engineer @ Emergent
+ Aug 2026  - present     L3 Engineer, AI Agent Reliability @ Emergent
  Sept 2025 - Jul 2026    SWE-1 @ Rayvector Technologies
  May 2025  - Aug 2025    SWE Intern @ Rayvector Technologies
  Dec 2021  - June 2025   B.Tech CSE, RGIPT
@@ -71,9 +71,9 @@ $ tail -f ./now.log
 > Live notes on what I'm building, breaking, and reading. Cross-posted weekly to [LinkedIn](https://linkedin.com/in/ishan-kumar-) and [X](https://x.com/kuma10296).
 
 <details>
-<summary><b>🛰️  Forward-deployed — the Emergent harness, end to end</b></summary>
+<summary><b>🛰️  On call — AI Agent Reliability at Emergent</b></summary>
 
-I build the customer's application on Emergent's AI harness and then stay on it: the bug that shows up in week three is mine too, on our own app as much as theirs. What's changed my thinking: a harness is not a framework you pick, it's a set of constraints you inherit — and the interesting engineering is what you do inside them, in front of someone who is watching.
+Agents write the first version of a customer's application; my job starts where that stops being enough. I build what's missing, I take the bug when it lands, and I answer the customer while I'm still fixing it — support and engineering are the same shift, not two teams. What's changed my thinking: reliability isn't a property you bolt onto agent output. It *is* the distance between a demo that works and software somebody depends on.
 </details>
 
 <details>

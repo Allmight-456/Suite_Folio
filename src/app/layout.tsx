@@ -36,7 +36,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 // Kept in step with content/site.ts `message` — both answer "what does he do now?"
 const description =
-  "Forward-deployed engineer in Bengaluru. Production FastAPI/Go services, zero-downtime migrations, and full-stack applications built on an AI harness — plus the agent loops and evals underneath them.";
+  "Backend & AI engineer in Bengaluru. Production FastAPI/Go services, zero-downtime migrations, and the reliability work behind agent-built applications — plus the agent loops, memory and evals underneath them.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

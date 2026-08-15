@@ -7,24 +7,29 @@ import { projects } from "./projects";
 // Role bullets — CONTENT.md §6 (resume v5 phrasing, inside the facts registry).
 // Grouped by employer since the timeline now spans two: an unlabelled flat list
 // would silently attribute Rayvector's backend work to Emergent.
-// TODO(owner): the Emergent bullets are the FDE side only — owner said more
-// detail will follow as the role develops (2026-08-14). Extend, don't invent.
+// TODO(owner): the Emergent bullets cover the reliability + customer side only —
+// owner said more detail follows as the role develops. Extend, don't invent.
 // Each role leads with ONE line that can be read at a glance — the previous
 // shape was seven full-sentence bullets nobody finishes (owner, 2026-08-14).
-// `summary` is the hook; `bullets` are fragments, not prose; `logo` renders a
-// side rail (certs/skills placement), which is why only Emergent carries one.
+// `summary` is the hook; `bullets` are fragments, not prose.
+//
+// The Emergent line is framed by what the AI Agent Reliability team actually
+// does — agents produce a first version, and the job is the distance between
+// that and software a customer can depend on. It deliberately does NOT use the
+// industry label for this shape of role: owner-directed 2026-08-15, that term
+// appears nowhere on the site, in the README, or in this repo's copy.
 export const roleHighlights = [
   {
     at: "Emergent",
     period: "aug 2026 → present",
     summary:
-      "I build the customer's application on Emergent's AI harness — then keep it alive.",
+      "Agents write the first version. I make it survive contact with real customers — and answer for it when it doesn't.",
     bullets: [
-      "full-stack customer builds, forward-deployed",
+      "AI Agent Reliability — support and engineering",
+      "full-stack builds on the Emergent platform",
       "bug fixes across Emergent's own app + client apps",
       "Kubernetes · Grafana · Redash · PostHog",
     ],
-    logo: "emergent",
   },
   {
     at: "Rayvector",
@@ -39,6 +44,12 @@ export const roleHighlights = [
     ],
   },
 ] as const;
+
+// The career block's brand mark. It belongs to the BLOCK, not to a single role:
+// owner wants it centred against both cards as a section anchor (2026-08-15),
+// so it is not a per-role field. Only Emergent has a mark; the Rayvector card is
+// attributed by its own label, so nothing here implies the mark covers both.
+export const careerMark = { kind: "emergent", label: "Emergent" } as const;
 
 // Headline projects for the Journey "shipped" panel; the full set lives in the
 // /work index. Filter (not re-list) so order + copy stay single-sourced.
@@ -59,7 +70,7 @@ export const journeyPanels = [
     tag: "career",
     cmd: "uptime --career",
     title: "On the clock",
-    blurb: "Production backends at Rayvector; now forward-deployed at Emergent.",
+    blurb: "Production backends at Rayvector; agent reliability at Emergent.",
   },
   {
     id: "work",

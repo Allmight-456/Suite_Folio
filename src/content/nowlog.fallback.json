@@ -1,10 +1,10 @@
 {
   "entries": [
     {
-      "tag": "Forward-deployed",
+      "tag": "On call",
       "emoji": "🛰️",
-      "title": "the Emergent harness, end to end",
-      "bodyMd": "I build the customer's application on Emergent's AI harness and then stay on it: the bug that shows up in week three is mine too, on our own app as much as theirs. What's changed my thinking: a harness is not a framework you pick, it's a set of constraints you inherit — and the interesting engineering is what you do inside them, in front of someone who is watching.",
+      "title": "AI Agent Reliability at Emergent",
+      "bodyMd": "Agents write the first version of a customer's application; my job starts where that stops being enough. I build what's missing, I take the bug when it lands, and I answer the customer while I'm still fixing it — support and engineering are the same shift, not two teams. What's changed my thinking: reliability isn't a property you bolt onto agent output. It *is* the distance between a demo that works and software somebody depends on.",
       "links": []
     },
     {
@@ -69,6 +69,6 @@
       ]
     }
   ],
-  "fetchedAt": "2026-08-14T15:56:06.572Z",
+  "fetchedAt": "2026-08-15T09:33:57.757Z",
   "source": "github.com/Allmight-456"
 }

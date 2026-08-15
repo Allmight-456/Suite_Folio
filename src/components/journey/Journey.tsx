@@ -10,6 +10,7 @@ import { labBlocks } from "@/content/lab";
 import {
   journeyPanels,
   roleHighlights,
+  careerMark,
   headlineProjects,
   type JourneyPanel,
 } from "@/content/journey";
@@ -134,28 +135,26 @@ function PanelBody({ id }: { id: JourneyPanel["id"] }) {
  * Career panel. Two beats: the role cards (a one-line hook each, then scannable
  * fragments) and then the full timeline underneath. Cards first because nobody
  * reads seven sentences of bullets — the summary is what has to land.
- * The Emergent mark sits in a side rail, the placement certs/skills already use.
+ *
+ * The Emergent mark is a rail down the LEFT of both cards, vertically centred
+ * against the pair (owner, 2026-08-15) rather than aligned to its own card — it
+ * anchors the block the way the pixel robot anchors the skills window.
  */
 function ExperienceBody() {
   return (
     <div className="space-y-7">
-      <div className="space-y-4">
-        {roleHighlights.map((group) => (
-          <div
-            key={group.at}
-            className="grid gap-x-5 gap-y-2 sm:grid-cols-[3.75rem_1fr]"
-          >
-            {/* Side rail: reserved on both cards so the text edge stays aligned. */}
-            <div className="hidden justify-center pt-1.5 sm:flex">
-              {"logo" in group && (
-                <PixelLogo
-                  kind={group.logo}
-                  size={0.375}
-                  label={`${group.at} logo`}
-                />
-              )}
-            </div>
-            <div>
+      <div className="grid gap-x-5 sm:grid-cols-[3.75rem_1fr]">
+        <div className="hidden items-center justify-center sm:flex">
+          <PixelLogo
+            kind={careerMark.kind}
+            size={0.375}
+            label={`${careerMark.label} logo`}
+          />
+        </div>
+
+        <div className="space-y-4">
+          {roleHighlights.map((group) => (
+            <div key={group.at}>
               <p className="flex flex-wrap items-baseline gap-x-3 font-mono text-xs">
                 <span className="uppercase tracking-wider text-volt-bright">
                   {group.at}
@@ -178,8 +177,8 @@ function ExperienceBody() {
                 ))}
               </ul>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <ol className="space-y-1.5 border-t border-volt-dim/40 pt-5 font-mono text-xs md:text-sm">

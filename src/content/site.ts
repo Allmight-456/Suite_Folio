@@ -47,13 +47,11 @@ export const message: {
     { text: "production", volt: true },
     { text: " backends — Go and FastAPI under real rate limits, migrations with " },
     { text: "zero downtime", volt: true },
-    { text: ". Now I'm " },
-    { text: "forward-deployed", volt: true },
-    { text: ": whole applications built on an AI harness, with the customer in the room. Same job either way — run the " },
-    { text: "loop", volt: true },
-    { text: " until it " },
+    { text: ". Now I work where " },
+    { text: "agents", volt: true },
+    { text: " meet real users: I build what they can't finish, and I'm the one who answers when it " },
     { text: "breaks", volt: true },
-    { text: ", then own what broke." },
+    { text: " — because that's where the engineering actually is." },
   ],
   signature: "ishan@prod:~$",
 };
@@ -78,12 +76,13 @@ export const whoami = {
 // Deliberately mark-free: a logo inline with a timeline row reads as clutter
 // (owner, 2026-08-14). The Emergent mark lives on the role *card* below instead,
 // as a side rail — the placement the certs and skills windows already use.
-// Titles are owner-confirmed 2026-08-14: "L3 Engineer" is Emergent's internal
-// level name, chosen over the public "Forward Deployed Engineer" posting title.
+// Owner-confirmed 2026-08-15: "L3" is Emergent's internal level and "AI Agent
+// Reliability" is the team. The industry label for this shape of role is
+// deliberately absent — owner-directed, it appears nowhere in this repo.
 export const experience = [
   {
     period: "aug 2026 – present",
-    role: "L3 Engineer · Emergent · Bengaluru",
+    role: "L3 Engineer · AI Agent Reliability · Emergent · Bengaluru",
   },
   {
     period: "sept 2025 – jul 2026",
