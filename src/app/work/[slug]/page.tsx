@@ -7,6 +7,7 @@ import { kindForProject } from "@/content/projects";
 import { Schematic } from "@/components/ui/Schematic";
 import { PixelLogo } from "@/components/ui/PixelLogo";
 import { Reveal } from "@/components/ui/Reveal";
+import { Footer } from "@/components/footer/Footer";
 import { SoftwareJsonLd } from "@/components/ui/JsonLd";
 
 export function generateStaticParams() {
@@ -40,14 +41,17 @@ export default async function WorkPage({
   const dive = deepDives[slug];
 
   return (
-    <main id="main" className="px-6 pb-32 pt-32 md:px-16">
+    <main id="main" className="pt-32">
       <SoftwareJsonLd project={project} />
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-4xl px-6 pb-24 md:px-16">
+        {/* "#work" was a dead anchor — no element ever carried that id. Points at
+            the page that actually links here (projects are woven into the mind map
+            as evidence), and uses the nav's own word for it: "lab". */}
         <Link
-          href="/work#work"
+          href="/work"
           className="font-mono text-sm text-bone-dim transition-colors hover:text-bone"
         >
-          ← work
+          ← lab
         </Link>
 
         {/* Hero: name + year + mono stat strip */}
@@ -136,6 +140,9 @@ export default async function WorkPage({
           )}
         </Reveal>
       </div>
+
+      {/* Project pages dead-ended too — same missing #contact target as /work. */}
+      <Footer />
     </main>
   );
 }

@@ -18,10 +18,15 @@ export const hero = {
 } as const;
 
 export const nav = [
-  { label: "work", href: "/work" },
-  // "lab" / off-prod field notes now live in the unified /work index (redundancy
-  // cleanup) — deep-link straight to that directory. /lab still 301s here.
-  { label: "lab", href: "/work#field-notes" },
+  // "work" = the career section on the homepage (`uptime --career`), NOT the
+  // /work route — that route holds the "what pulls me" page, which the nav calls
+  // "lab". Both entries pointed at /work until 2026-08-15, so the nav had two
+  // labels for one destination and no route to the experience at all.
+  { label: "work", href: "/#career" },
+  // "lab" / off-prod field notes live at the /work route. Deliberately NOT
+  // deep-linked to #field-notes: that drops you at the terminal mid-page, past
+  // the heading and the map that explain what you're looking at. /lab 301s here.
+  { label: "lab", href: "/work" },
   { label: "now", href: "/now" },
   // "the best resume is a git log" — the nav resume points at the GitHub profile
   // (the living résumé). The downloadable PDF still lives at /resume.pdf via the

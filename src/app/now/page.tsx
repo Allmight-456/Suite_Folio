@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { NowLog } from "@/components/nowlog/NowLog";
+import { Footer } from "@/components/footer/Footer";
 import { getNowLog } from "@/lib/nowlog";
 
 export const metadata: Metadata = {
@@ -11,8 +12,8 @@ export const metadata: Metadata = {
 export default async function NowPage() {
   const nowlog = await getNowLog();
   return (
-    <main id="main" className="px-6 pt-32 md:px-16">
-      <div className="mx-auto flex max-w-4xl items-baseline justify-between gap-4">
+    <main id="main" className="pt-32">
+      <div className="mx-auto flex max-w-4xl items-baseline justify-between gap-4 px-6 md:px-16">
         <Link
           href="/"
           className="font-mono text-sm text-bone-dim transition-colors hover:text-bone"
@@ -30,6 +31,9 @@ export default async function NowPage() {
         </a>
       </div>
       <NowLog data={nowlog} />
+      {/* Same fix as /work: without this, the nav's #contact hash resolved to
+          nothing on this route and the page had no way out. */}
+      <Footer />
     </main>
   );
 }

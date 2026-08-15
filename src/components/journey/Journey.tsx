@@ -37,8 +37,9 @@ export function Journey() {
     return (
       <section
         ref={sectionRef}
+        id="career"
         aria-label="Experience, work and interests"
-        className="rule-top rule-bottom"
+        className="rule-top rule-bottom scroll-mt-20"
       >
         {journeyPanels.map((panel, i) => (
           <div
@@ -66,6 +67,7 @@ export function Journey() {
   return (
     <section
       ref={sectionRef}
+      id="career"
       aria-label="Experience, work and interests"
       style={{ height: `${journeyPanels.length * 100}vh` }}
       className="rule-top rule-bottom relative"

@@ -390,3 +390,28 @@ gives the knot 1.45 reference-box widths, which balances the two by how much ink
 each puts on screen — which is what the eye actually compares. `size` now means
 "the edge an 11-column mark would use", so callers stay unaware of grid width.
 The Journey shipped-list mark moved 0.13 → 0.19, its legibility floor.
+
+## 2026-08-15 (nav) — two labels, one destination; and three pages with no way out
+
+**D-2026-08-15f — "work" now means the career section.** `nav` had
+`work → /work` and `lab → /work#field-notes`: two labels pointing at the same
+route, and **no link anywhere to the experience**. The /work route holds the
+"what pulls me" page, which the nav calls "lab" — so "work" was the wrong label
+on it twice over. Fixed: `work → /#career`, and the Journey section (whose first
+panel *is* `uptime --career`) gained `id="career"`. `lab → /work`, deliberately
+not `#field-notes` — that anchor drops you at the terminal, past the heading and
+map that explain what you are looking at. `/lab` redirects to `/work` for the
+same reason.
+
+**D-2026-08-15g — The footer was on the homepage only.** `/work`, `/now` and
+every `/work/[slug]` rendered no `<Footer>`, which meant two things: each page
+dead-ended with no email, no links and no closing line, and the nav's **`contact`
+entry was a dead link on all of them** — it is a bare `#contact` hash, and the
+only element carrying that id lives in the footer. Added to all three. Verified
+`id="contact"` now resolves on `/`, `/work`, `/now` and `/work/amadeus`.
+
+Also fixed: the project pages' back-link pointed at `/work#work`, an anchor no
+element has ever carried, and was labelled "work" — now `/work`, labelled "lab"
+to match the nav's own vocabulary. `content/lab.ts` `writingLinks` was deleted:
+unreferenced since the standalone /lab page merged away, and now redundant with
+the footer's LinkedIn/X links.

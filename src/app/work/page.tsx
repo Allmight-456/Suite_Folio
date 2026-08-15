@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MindExplorer } from "@/components/mind/MindExplorer";
 import { Certifications } from "@/components/certs/Certifications";
+import { Footer } from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "what pulls me — Ishan Kumar",
@@ -34,7 +35,7 @@ export default function WorkPage() {
         </h1>
         <p className="mt-3 max-w-xl font-mono text-sm text-bone-dim">
           Not a résumé — that&apos;s the{" "}
-          <Link href="/#main" className="text-volt-bright hover:underline">
+          <Link href="/#career" className="text-volt-bright hover:underline">
             uptime --career
           </Link>{" "}
           line. This is the map of what I&apos;m drawn to.
@@ -44,6 +45,11 @@ export default function WorkPage() {
       <MindExplorer />
 
       <Certifications />
+
+      {/* The page used to dead-end after the certifications link: no way to reach
+          me, and the nav's "contact" (a bare #contact hash) resolved to nothing
+          here because the only element carrying that id lives in the footer. */}
+      <Footer />
     </main>
   );
 }

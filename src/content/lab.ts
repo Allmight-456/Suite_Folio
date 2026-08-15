@@ -19,9 +19,7 @@ export const labBlocks = [
   },
 ] as const;
 
-// TODO(owner): Hashnode handle not in any source doc (README says only
-// "cross-posted to LinkedIn and X"). Add the Hashnode link once supplied.
-export const writingLinks = [
-  { label: "LinkedIn", href: "https://linkedin.com/in/ishan-kumar-" },
-  { label: "X", href: "https://x.com/kuma10296" },
-] as const;
+// (`writingLinks` lived here for the old standalone /lab page and had been
+// unreferenced since that page merged into /work. Removed 2026-08-15 — /work now
+// renders the footer, which already carries LinkedIn and X. The outstanding
+// Hashnode TODO lives with those links in site.ts `footer`.)
