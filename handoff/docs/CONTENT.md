@@ -5,10 +5,14 @@ Every word on the site comes from here. Edit here first, code second.
 
 ## 1. Hero
 
-- eyebrow (mono): `backend & ai engineer` (was "genai" — owner future-proofed 2026-06-16)
+- eyebrow (mono): `ai software engineer` (owner-directed 2026-08-15; was
+  "backend & ai engineer", and "genai" before that). Repeated verbatim by the
+  whoami pane, the metadata title, JSON-LD `jobTitle` and the OG card — all four
+  read from this line or must be changed with it.
 - name: `ISHAN KUMAR`
 - subline (mono): `bengaluru, india · utc+5:30`
-- live chip (from now.log, fallback static): `▸ currently building — SkillForge`
+- live chip (from now.log's first `Building` entry; static fallback only if the
+  README fetch fails): `▸ currently building — Amadeus`
 - nav (persistent, compact): `work · lab · now · resume · contact`
 
 ## 2. Message block (the signature statement)

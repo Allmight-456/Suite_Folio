@@ -7,9 +7,13 @@ import { CertSchema, type Cert } from "./schema";
 export const SITE_URL = "https://ishan-kumar.netlify.app";
 
 export const hero = {
-  // Eyebrow stays the locked brand line (CONTENT.md §1). The role change is
-  // carried by `message` / the timeline, not by re-branding the hero.
-  eyebrow: "backend & ai engineer",
+  // The one-line identity, owner-directed 2026-08-15 (was "backend & ai
+  // engineer"). Leads with AI because that is what the current role and the
+  // recent work actually are; the backend depth is carried by `message` and the
+  // Rayvector card rather than by the label. Repeated verbatim by the whoami
+  // pane (below), layout.tsx metadata, JsonLd `jobTitle` and the OG card —
+  // change all five together (CONTENT.md §1).
+  eyebrow: "ai software engineer",
   name: "ISHAN KUMAR",
   subline: "bengaluru, india · utc+5:30",
   // Last-resort only: the real chip comes from now.log's first Building entry.

@@ -45,7 +45,7 @@ results were not out on 2026-08-14).
 $ whoami
 ```
 
-**Ishan Kumar** — Software Engineer, AI & Backend Systems · Bengaluru. <br/>
+**Ishan Kumar** — AI Software Engineer · Bengaluru. <br/>
  I've shipped production FastAPI backends for multinational clients, moved critical data between stacks without breaking the app (ETL), run Database Migrations and built RAG pipelines that run on rate limits, per-step tracing instead of a fat API budget. Now on **AI Agent Reliability** at **Emergent** — agents write the first version of a customer's application, and I make it survive contact with real users: building what's missing, taking the bug when it lands, answering the customer while I'm fixing it. The frontier I'm on: **agentic systems** → CoALA, Strands Framework, hybrid retrieval, episodic + procedural memory, and guardrails wired straight into the loop.
 
 <h4>Shipping for multinational clients since 2025 · Python, Go, PostgreSQL, Kubernetes, AWS, Azure · </h4> <br/>

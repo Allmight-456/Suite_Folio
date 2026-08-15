@@ -415,3 +415,28 @@ element has ever carried, and was labelled "work" — now `/work`, labelled "lab
 to match the nav's own vocabulary. `content/lab.ts` `writingLinks` was deleted:
 unreferenced since the standalone /lab page merged away, and now redundant with
 the footer's LinkedIn/X links.
+
+## 2026-08-15 (title) — `ai software engineer`
+
+Supersedes the 2026-06-16 note that set the eyebrow to `backend & ai engineer`
+(that entry stands as history; this is the current value). Owner-directed.
+
+Leading with AI is the honest read now: the current role is on an AI Agent
+Reliability team, and the last three builds are agent infrastructure. "Software
+engineer" rather than "engineer" also matches the widened scope — the work is
+full-stack, not backend-only. The backend depth that differentiates the profile
+(Go concurrency, zero-downtime migration, rate-limits-as-architecture) is carried
+by `message` and the Rayvector card, which state it, rather than by a label that
+only gestures at it.
+
+**Eight places carried the string** and all moved together: `site.ts` `hero.eyebrow`
+(which the whoami pane interpolates, so that followed for free), `layout.tsx`
+metadata title ×3 + description, `JsonLd` `jobTitle`, `opengraph-image.tsx` alt
+*and* its rendered text, CONTENT.md §1, DESIGN-SPEC §hero, and the suggested
+profile README's `$ whoami` line. CONTENT.md §1 now names that list inline so the
+next change to this line doesn't have to rediscover it. Verified after build:
+`<title>`, JSON-LD `jobTitle`, the whoami output line and the OG card all render
+the new title.
+
+Also synced CONTENT.md's stale `chipFallback` note (said SkillForge; the value has
+been Amadeus since 2026-08-14).
