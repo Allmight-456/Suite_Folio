@@ -34,20 +34,21 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// Kept in step with content/site.ts `message` — both answer "what does he do now?"
 const description =
-  "Production FastAPI/Go services, RAG pipelines that survive free-tier rate limits, and long-horizon agent infrastructure. Bengaluru.";
+  "AI software engineer in Bengaluru. Production FastAPI/Go services, zero-downtime migrations, and the reliability work behind agent-built applications — plus the agent loops, memory and evals underneath them.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Ishan Kumar — Backend & AI Engineer",
+    default: "Ishan Kumar — AI Software Engineer",
     template: "%s · Ishan Kumar",
   },
   description,
   authors: [{ name: "Ishan Kumar" }],
   openGraph: {
     type: "website",
-    title: "Ishan Kumar — Backend & AI Engineer",
+    title: "Ishan Kumar — AI Software Engineer",
     description,
     url: SITE_URL,
     siteName: "Ishan Kumar",
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@kuma10296",
-    title: "Ishan Kumar — Backend & AI Engineer",
+    title: "Ishan Kumar — AI Software Engineer",
     description,
   },
 };

@@ -5,20 +5,33 @@ Every word on the site comes from here. Edit here first, code second.
 
 ## 1. Hero
 
-- eyebrow (mono): `backend & ai engineer` (was "genai" — owner future-proofed 2026-06-16)
+- eyebrow (mono): `ai software engineer` (owner-directed 2026-08-15; was
+  "backend & ai engineer", and "genai" before that). Repeated verbatim by the
+  whoami pane, the metadata title, JSON-LD `jobTitle` and the OG card — all four
+  read from this line or must be changed with it.
 - name: `ISHAN KUMAR`
 - subline (mono): `bengaluru, india · utc+5:30`
-- live chip (from now.log, fallback static): `▸ currently building — SkillForge`
+- live chip (from now.log's first `Building` entry; static fallback only if the
+  README fetch fails): `▸ currently building — Amadeus`
 - nav (persistent, compact): `work · lab · now · resume · contact`
 
 ## 2. Message block (the signature statement)
 
-> I build **production** backends and **agentic** systems — FastAPI and Go services
-> for multinational clients, RAG pipelines that survive **free-tier rate limits**,
-> and migrations that ship with **zero downtime**. Then I run long-horizon agent
-> infrastructure to study where the loops **break**.
+Updated 2026-08-15 for the Emergent move — the previous version stopped at
+"backends + agent loops" and read a year out of date:
+
+> I ship **production** backends — Go and FastAPI under real rate limits,
+> migrations with **zero downtime**. Now I work where **agents** meet real
+> users: I build what they can't finish, and I'm the one who answers when it
+> **breaks** — because that's where the engineering actually is.
 
 (bold = `--volt` spans). Closing motif: `ishan@prod:~$ ▮`
+
+Everywhere this identity is repeated, and which must move together:
+`content/site.ts` (`hero`, `message`, `whoami`), `app/layout.tsx` (metadata
+title + description), `components/ui/JsonLd.tsx` (`jobTitle`, `knowsAbout`),
+`app/opengraph-image.tsx` (alt), `lib/nowlog.ts` (chip fallback), and the
+GitHub profile README's `$ whoami` block.
 
 ## 3. The Strip — frames & captions (mono, Lando format)
 
@@ -55,7 +68,25 @@ Every word on the site comes from here. Edit here first, code second.
 5. **AI_Bubble** · 2026 · `0 dependencies, 1 page, 7 sections` ·
    A designed editorial knowledge base on AI valuations vs. historical bubbles —
    vanilla ES modules, print stylesheet, a11y-audited.
-6. Older work — promoted 2026-06-17 from a link rail to real lightweight `/work/[slug]`
+6. **Rasputin_Loop** · 2026 · `one agent loop, no router` ·
+   Slack-native agent on a single Strands loop — no intent parser, no command router.
+   Provenance-stamped episodic memory, hybrid RAG, runtime MCP tools, Jira auto-triage;
+   several Slack apps from one process. Provenance line: *Built for the Slack Agent
+   Builder Challenge · submitted jul 2026* (see §10 — submission only, no placing).
+7. **Amadeus** · 2026 · `nothing activates itself` · *(WIP)*
+   An evaluation control plane for agent skills — captures a consented Codex run,
+   compiles it into a reviewed candidate, and refuses to activate anything a named
+   human hasn't promoted; retrieval abstains rather than guess. Provenance line:
+   *Built for OpenAI Build Week · submitted jul 2026* (see §10 — submission only,
+   results were not out).
+
+   > **Amadeus and SkillForge are the same lineage** (procedural memory for coding
+   > agents) and must never be presented side by side — back-to-back they read as
+   > one project listed twice (owner, 2026-08-14). SkillForge owns the phrase
+   > "procedural memory" and the ~50× token stat; Amadeus leads on governance —
+   > consent, named review, promotion, abstention. They are kept apart in
+   > `projects.ts` order and never share the Journey headline set.
+8. Older work — promoted 2026-06-17 from a link rail to real lightweight `/work/[slug]`
    pages (summary + stack + repo link). Copy grounded in PROJECT-DEEP-DIVES.md "Older work
    rail" + research/pdfsage_readme. **Years approximate (2024) — owner to verify.**
    - **PDFSage** · ~2024 · `FAISS · Gemini Q&A` · RAG over PDFs — chunk+embed with Google
@@ -68,12 +99,43 @@ Every word on the site comes from here. Edit here first, code second.
 ## 6. Experience (compact timeline, /work top or footer of home)
 
 ```
-sept 2025 – present    SWE-1 · Rayvector Technologies · Bengaluru
+aug 2026  – present    L3 Engineer · AI Agent Reliability · Emergent · Bengaluru
+sept 2025 – jul 2026   SWE-1 · Rayvector Technologies · Bengaluru
 may 2025  – aug 2025   SWE Intern · Rayvector Technologies
 nov 2024  – jan 2025   Software Developer (Intern) · Sambin Technologies
 dec 2021  – june 2025  B.Tech CSE · RGIPT
 ```
-Role bullets (use on /work, max 4 — resume v5 phrasing):
+
+> ### 🚫 BANNED TERM — read before writing any Emergent copy
+>
+> **The industry label for this shape of role must not appear anywhere** — not on
+> the site, not in the README, not in this repo's comments or docs. Owner-directed
+> 2026-08-15, no expiry given. It is the three-letter acronym beginning with F for
+> a customer-embedded engineer, and its spelled-out form. Describe the *work*;
+> never reach for the label. If you think you need it, you don't.
+>
+> **Emergent (owner-supplied, 2026-08-15).** Level: **L3** (Emergent's internal
+> ladder). Team: **AI Agent Reliability**. Scope: **support and engineering
+> both** — not two separate jobs. The work: agents produce a first version of a
+> customer's application; Ishan makes it hold up in front of real users, builds
+> what's missing, takes the bug when it lands, and answers the customer while
+> fixing it. Surface: Kubernetes, Grafana, Redash, PostHog, MCP.
+>
+> **This description is provisional** — owner said more detail follows as the role
+> develops. Extend it from what the owner supplies; never fill the gap by inference.
+
+Role cards, **grouped by employer** (a flat list silently misattributes Rayvector's
+backend work to Emergent). Each is one `summary` hook + short `bullets` fragments —
+source for `src/content/journey.ts` `roleHighlights`:
+
+*Emergent* — summary: **"Agents write the first version. I make it survive contact
+with real customers — and answer for it when it doesn't."**
+- AI Agent Reliability — support and engineering
+- full-stack builds on the Emergent platform
+- bug fixes across Emergent's own app + client apps
+- Kubernetes · Grafana · Redash · PostHog
+
+*Rayvector (resume v5 phrasing)*
 - Production FastAPI backend for a Plot Management System (multinational client):
   JWT auth, cursor-based pagination, Redis caching.
 - Full Firebase→PostgreSQL migration with zero downtime: APIs, schema, cloud infra redesigned.
@@ -165,7 +227,28 @@ depth items are painted in the accent**. All grounded — no invented capability
 
 ## 10. FACTS REGISTRY — the hard boundary
 
-May claim: ~1 year production experience (Rayvector, May 2025–present incl. internship);
+**Hackathon builds (owner-confirmed 2026-08-14).** Two 2026 projects were built for
+public hackathons. What may be stated is the *submission* and its date, nothing more:
+
+| Project | Hackathon | Window | Status |
+|---|---|---|---|
+| Rasputin_Loop | Slack Agent Builder Challenge | 20 may – 13 jul 2026 | Submitted. **Did not win** — never claim a placing, and do not state the loss on the site either. |
+| Amadeus | OpenAI Build Week | 13 – 21 jul 2026 | Submitted. **Results were not out** as of 2026-08-14 — no placing, no "finalist", no "shortlisted". |
+
+The site therefore renders only `Built for <hackathon> · submitted <month year>`
+(`Project.context` in `src/content/schema.ts`). If a result later lands, the owner
+supplies it — do not go looking for one and write it in.
+
+Emergent, since 2026-08: **L3 Engineer, AI Agent Reliability** — support and
+engineering both, on the Emergent platform: customer builds, customer support, and
+bug fixes on Emergent's own app as well as client apps; exposure to
+Kubernetes, Grafana, Redash, PostHog and MCP. The industry label for this shape of
+role is a **banned term** (see §6). **May NOT claim**: ownership of Emergent
+product surfaces, customer names, revenue/scale/uptime numbers, or team leadership.
+Emergent's own company facts (funding, ARR, user counts) are the *company's*, not
+Ishan's — they must never appear as his.
+
+May claim: ~1 year production experience (Rayvector, May 2025–Jul 2026 incl. internship);
 multinational client; a prior Software Developer internship at Sambin Technologies
 (Nov 2024–Jan 2025) — timeline mention only, no project claims or metrics;
 zero-downtime Firebase→PostgreSQL migration; Azure VM + Nginx +

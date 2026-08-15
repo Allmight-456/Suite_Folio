@@ -11,7 +11,7 @@ export function PersonJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Ishan Kumar",
-    jobTitle: "Backend & AI Engineer",
+    jobTitle: "AI Software Engineer",
     url: SITE_URL,
     address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
     email: "bhardwajishansingh@gmail.com",
@@ -23,9 +23,12 @@ export function PersonJsonLd() {
       "FastAPI",
       "Go",
       "PostgreSQL",
+      "Kubernetes",
       "Retrieval-Augmented Generation",
       "Multi-agent systems",
       "Agent infrastructure",
+      "Model Context Protocol",
+      "Observability and product analytics",
     ],
   };
   return <Script data={data} />;

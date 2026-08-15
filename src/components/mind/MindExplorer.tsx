@@ -9,6 +9,7 @@ import { EASE_SITE } from "@/lib/choreo";
 import { TerminalCursor, TerminalSpinner } from "@/components/ui/Terminal";
 import { MindMap } from "./MindMap";
 import { useMindChoreo } from "./useMindChoreo";
+import { WindowChrome } from "@/components/ui/WindowChrome";
 
 const PROMPT = "ishan@prod:~$";
 const commands = mind.map((s) => s.command);
@@ -73,20 +74,14 @@ export function MindExplorer() {
         style={{ height: `${mind.length * 100}vh` }}
         className="relative scroll-mt-20"
       >
-        <div className="sticky top-0 flex h-screen items-center px-6 md:px-16">
-          <div className="mx-auto w-full max-w-3xl">
-            <div className="overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
-              <div className="flex items-center gap-2 border-b border-volt-dim bg-ink-raise px-4 py-3">
-                <span className="h-3 w-3 rounded-full bg-volt-dim" />
-                <span className="h-3 w-3 rounded-full bg-volt-dim" />
-                <span className="h-3 w-3 rounded-full bg-volt-dim" />
-                <span className="ml-3 truncate font-mono text-xs text-bone-dim">
-                  ishan@prod ─ ~/mind
-                </span>
-              </div>
+        {/* Capped to the viewport with a scrolling body — see Journey.tsx. */}
+        <div className="sticky top-0 flex h-svh items-center px-4 py-6 sm:px-6 md:px-16">
+          <div className="mx-auto flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
+            <WindowChrome label="ishan@prod ─ ~/mind" />
 
-              <div className="min-h-[460px] bg-ink-raise p-6 md:p-8">
-                <p className="font-mono text-sm text-bone">
+            <div className="min-h-0 flex-1 overflow-y-auto bg-ink-raise p-5 sm:p-6 md:p-8">
+              <div className="min-h-[min(24rem,42svh)]">
+                <p className="font-mono text-xs text-bone sm:text-sm">
                   <span className="text-volt-bright">{PROMPT}</span> {shown}
                   {cursor && <TerminalCursor />}
                 </p>
@@ -104,9 +99,9 @@ export function MindExplorer() {
                   <MindItems section={mind[step]} />
                 </motion.div>
               </div>
-
-              <MindStatusBar active={activeDot} busy={busy} onSelect={goTo} />
             </div>
+
+            <MindStatusBar active={activeDot} busy={busy} onSelect={goTo} />
           </div>
         </div>
       </section>
@@ -159,8 +154,8 @@ function MindStatusBar({
   onSelect: (i: number) => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-t border-volt-dim bg-ink px-4 py-2.5 font-mono text-[11px]">
-      <span className="flex min-w-[7rem] items-center gap-2">
+    <div className="flex shrink-0 items-center justify-between gap-3 border-t border-volt-dim bg-ink px-3 py-2 font-mono text-[10px] sm:px-4 sm:py-2.5 sm:text-[11px]">
+      <span className="flex min-w-0 shrink items-center gap-2 sm:min-w-[7rem]">
         {busy ? (
           <TerminalSpinner />
         ) : (
@@ -170,21 +165,21 @@ function MindStatusBar({
           </>
         )}
       </span>
-      <span className="flex items-center gap-2.5">
+      <span className="flex shrink-0 items-center gap-1.5 sm:gap-2.5">
         {mind.map((s, i) => (
           <button
             key={s.id}
             type="button"
             onClick={() => onSelect(i)}
             aria-current={i === active ? "true" : undefined}
-            className={`rounded px-1 transition-colors hover:text-volt-bright ${
+            className={`hidden rounded px-1 transition-colors hover:text-volt-bright md:inline ${
               i === active ? "text-volt-bright" : "text-bone-dim/50"
             }`}
           >
             {s.id}
           </button>
         ))}
-        <span className="ml-1 rounded bg-volt-dim/40 px-1.5 py-0.5 text-bone-dim">
+        <span className="rounded bg-volt-dim/40 px-1.5 py-0.5 text-bone-dim">
           {active + 1}/{mind.length}
         </span>
       </span>

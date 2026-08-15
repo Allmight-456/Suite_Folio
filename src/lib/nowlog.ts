@@ -1,5 +1,6 @@
 import { NowLogSchema, type LogEntry, type NowLog } from "@/content/schema";
 import fallback from "@/content/nowlog.fallback.json";
+import { hero } from "@/content/site";
 
 const README_URL =
   "https://raw.githubusercontent.com/Allmight-456/Allmight-456/main/README.md";
@@ -33,9 +34,13 @@ export function parseNowLog(markdown: string): LogEntry[] {
     const bodyMd = m[2].trim();
 
     // summary shape: "🛠️  Building — SkillForge: agents that …"
-    const dash = summary.indexOf("—");
-    const head = dash === -1 ? summary : summary.slice(0, dash).trim();
-    const title = dash === -1 ? "" : summary.slice(dash + 1).trim();
+    // The README is hand-edited, so the separator drifts between the em-dash and
+    // ASCII arrows (`->`, `–`, `→`). Accept all of them: matching only "—" made
+    // every title parse to "" and folded the whole line into `tag`, which silently
+    // degraded the hero chip to its hardcoded fallback. See DECISION-LOG 2026-08-14.
+    const sep = summary.match(/\s(—|–|->|→)\s/);
+    const head = sep ? summary.slice(0, sep.index).trim() : summary;
+    const title = sep ? summary.slice(sep.index! + sep[0].length).trim() : "";
     // head = "🛠️  Building" → emoji (non-word leading cluster) + tag
     const headMatch = head.match(/^(\S+)\s+(.*)$/);
     const emoji = headMatch ? headMatch[1] : "";
@@ -72,8 +77,9 @@ export async function getNowLog(): Promise<NowLog> {
 export async function getHeroChip(): Promise<string> {
   const log = await getNowLog();
   const building = log.entries.find((e) => /building/i.test(e.tag));
-  if (!building) return "▸ currently building — SkillForge";
-  // titles read like "SkillForge: agents that auto-detect their own skills"
+  // Fallback mirrors content/site.ts `hero.chipFallback` — keep the two in step.
+  if (!building) return hero.chipFallback;
+  // titles read like "Amadeus: procedural memory that has to earn activation"
   const short = building.title.split(":")[0].trim();
-  return `▸ currently building — ${short || "SkillForge"}`;
+  return short ? `▸ currently building — ${short}` : hero.chipFallback;
 }

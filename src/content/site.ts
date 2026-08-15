@@ -7,17 +7,30 @@ import { CertSchema, type Cert } from "./schema";
 export const SITE_URL = "https://ishan-kumar.netlify.app";
 
 export const hero = {
-  eyebrow: "backend & ai engineer",
+  // The one-line identity, owner-directed 2026-08-15 (was "backend & ai
+  // engineer"). Leads with AI because that is what the current role and the
+  // recent work actually are; the backend depth is carried by `message` and the
+  // Rayvector card rather than by the label. Repeated verbatim by the whoami
+  // pane (below), layout.tsx metadata, JsonLd `jobTitle` and the OG card —
+  // change all five together (CONTENT.md §1).
+  eyebrow: "ai software engineer",
   name: "ISHAN KUMAR",
   subline: "bengaluru, india · utc+5:30",
-  chipFallback: "▸ currently building — SkillForge",
+  // Last-resort only: the real chip comes from now.log's first Building entry.
+  // Keep in sync with lib/nowlog.ts's fallback — both are the same promise.
+  chipFallback: "▸ currently building — Amadeus",
 } as const;
 
 export const nav = [
-  { label: "work", href: "/work" },
-  // "lab" / off-prod field notes now live in the unified /work index (redundancy
-  // cleanup) — deep-link straight to that directory. /lab still 301s here.
-  { label: "lab", href: "/work#field-notes" },
+  // "work" = the career section on the homepage (`uptime --career`), NOT the
+  // /work route — that route holds the "what pulls me" page, which the nav calls
+  // "lab". Both entries pointed at /work until 2026-08-15, so the nav had two
+  // labels for one destination and no route to the experience at all.
+  { label: "work", href: "/#career" },
+  // "lab" / off-prod field notes live at the /work route. Deliberately NOT
+  // deep-linked to #field-notes: that drops you at the terminal mid-page, past
+  // the heading and the map that explain what you're looking at. /lab 301s here.
+  { label: "lab", href: "/work" },
   { label: "now", href: "/now" },
   // "the best resume is a git log" — the nav resume points at the GitHub profile
   // (the living résumé). The downloadable PDF still lives at /resume.pdf via the
@@ -36,15 +49,17 @@ export const message: {
   signature: string;
 } = {
   eyebrow: "$ whoami",
+  // Updated 2026-08-14 for the Emergent move: the old copy stopped at "backends
+  // + agent loops" and read a year out of date. Same voice, same closing beat.
   parts: [
     { text: "I ship " },
     { text: "production", volt: true },
     { text: " backends — Go and FastAPI under real rate limits, migrations with " },
     { text: "zero downtime", volt: true },
-    { text: ". Then I run the " },
-    { text: "agent", volt: true },
-    { text: " loops that sit on top of them until they " },
-    { text: "break", volt: true },
+    { text: ". Now I work where " },
+    { text: "agents", volt: true },
+    { text: " meet real users: I build what they can't finish, and I'm the one who answers when it " },
+    { text: "breaks", volt: true },
     { text: " — because that's where the engineering actually is." },
   ],
   signature: "ishan@prod:~$",
@@ -66,9 +81,20 @@ export const whoami = {
 // (The two ON/OFF PROD "doors" were replaced by the homepage Journey section —
 // components/journey — so experience + work + interests show without a click.)
 
+// Experience timeline — the ONLY place employer names appear (hard rule 2).
+// Deliberately mark-free: a logo inline with a timeline row reads as clutter
+// (owner, 2026-08-14). The Emergent mark lives on the role *card* below instead,
+// as a side rail — the placement the certs and skills windows already use.
+// Owner-confirmed 2026-08-15: "L3" is Emergent's internal level and "AI Agent
+// Reliability" is the team. The industry label for this shape of role is
+// deliberately absent — owner-directed, it appears nowhere in this repo.
 export const experience = [
   {
-    period: "sept 2025 – present",
+    period: "aug 2026 – present",
+    role: "L3 Engineer · AI Agent Reliability · Emergent · Bengaluru",
+  },
+  {
+    period: "sept 2025 – jul 2026",
     role: "SWE-1 · Rayvector Technologies · Bengaluru",
   },
   { period: "may 2025 – aug 2025", role: "SWE Intern · Rayvector Technologies" },

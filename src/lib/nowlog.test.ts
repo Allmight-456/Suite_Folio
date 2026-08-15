@@ -39,4 +39,21 @@ describe("parseNowLog", () => {
   it("throws on unrecognizable input (caller falls back to snapshot)", () => {
     expect(() => parseNowLog("# empty readme")).toThrow();
   });
+
+  // Regression: the live README switched the summary separator from "—" to "->",
+  // which parsed every title to "" and folded the whole line into `tag` — the hero
+  // chip then silently fell back to its hardcoded string. Separator is now tolerant.
+  it.each(["—", "–", "->", "→"])("splits the summary on %s", (sep) => {
+    const md = `\`\`\`bash
+$ tail -f ./now.log
+\`\`\`
+<details>
+<summary><b>🤖  Building ${sep} Rasputin_Loop: a Slack-native agent</b></summary>
+One Strands loop, no router.
+</details>`;
+    const [entry] = parseNowLog(md);
+    expect(entry.emoji).toBe("🤖");
+    expect(entry.tag).toBe("Building");
+    expect(entry.title).toBe("Rasputin_Loop: a Slack-native agent");
+  });
 });

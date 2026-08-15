@@ -1,20 +1,38 @@
 // Hall of Fame cards — copy from handoff/docs/CONTENT.md §5, repos from the
-// GitHub README. SkillForge repo link intentionally points at the profile until
-// repo visibility is confirmed (PROJECT-DEEP-DIVES verification TODO #2).
+// GitHub README. The SkillForge link now points at the real repo (it went public
+// 2026-05; the placeholder profile link is retired).
 import type { SchematicKind } from "@/components/ui/Schematic";
 import { ProjectSchema, type Project } from "./schema";
 
 export const projects: Project[] = [
   {
-    slug: "skillforge",
-    name: "SkillForge",
+    slug: "rasputin-loop",
+    name: "Rasputin_Loop",
     year: 2026,
-    stat: "~3000 → ~80 tokens (~50×)",
+    stat: "one agent loop, no router",
     oneLiner:
-      "Procedural memory for AI coding agents — distills LLM bug-fixes into reusable Claude Skill files via AST-based retrieval and human-gated approval.",
+      "Slack-native agent on a single Strands loop — no intent parser, no command router. Provenance-stamped episodic memory, hybrid RAG, runtime MCP tools and Jira auto-triage; several Slack apps from one process.",
+    wip: false,
+    repo: "https://github.com/Allmight-456/Rasputin_Loop",
+    context: "Built for the Slack Agent Builder Challenge · submitted jul 2026",
+    brand: "slack",
+    stack: ["Python", "Strands", "libSQL/Turso", "MCP", "Slack"],
+  },
+  {
+    slug: "amadeus",
+    name: "Amadeus",
+    year: 2026,
+    stat: "nothing activates itself",
+    // Leads on GOVERNANCE, not "procedural memory" — SkillForge already owns that
+    // phrase, and two cards opening the same way read as one project listed twice.
+    // Amadeus's distinct half is the control plane: consent, review, promotion.
+    oneLiner:
+      "An evaluation control plane for agent skills. Captures a Codex run a human consented to, compiles it into a reviewed candidate, and refuses to activate anything a named human hasn't promoted — retrieval abstains rather than guess.",
     wip: true,
-    repo: "https://github.com/Allmight-456",
-    stack: ["Python", "AST", "Claude Skills", "MCP", "Multi-agent"],
+    repo: "https://github.com/Allmight-456/Amadeus_Skill",
+    context: "Built for OpenAI Build Week · submitted jul 2026",
+    brand: "openai",
+    stack: ["TypeScript", "Node", "Codex CLI", "MCP", "SQLite/FTS5"],
   },
   {
     slug: "autodocxpdf",
@@ -37,6 +55,17 @@ export const projects: Project[] = [
     wip: false,
     repo: "https://github.com/Allmight-456/Go_Ticket_booking_app",
     stack: ["Go", "PostgreSQL", "Redis", "JWT", "Docker"],
+  },
+  {
+    slug: "skillforge",
+    name: "SkillForge",
+    year: 2026,
+    stat: "~3000 → ~80 tokens (~50×)",
+    oneLiner:
+      "Procedural memory for AI coding agents — distills LLM bug-fixes into reusable Claude Skill files via AST-based retrieval and human-gated approval.",
+    wip: true,
+    repo: "https://github.com/Allmight-456/SkillForge",
+    stack: ["Python", "AST", "Claude Skills", "MCP", "Multi-agent"],
   },
   {
     slug: "market-research",
@@ -111,6 +140,8 @@ export const olderProjects = projects.filter((p) => p.tier === "older");
 // Diversified schematic per project (no two share a glyph). Single source of truth
 // for the /work/[slug] hero icon (the work tree that also used this was removed).
 export const kindForProject: Record<string, SchematicKind> = {
+  "rasputin-loop": "loop",
+  amadeus: "harness",
   skillforge: "ast",
   autodocxpdf: "pipeline",
   ticketflow: "lock",

@@ -46,9 +46,23 @@ export const skills: SkillGroup[] = [
       { name: "Azure", detail: "VM · Blob Storage · Flexible Server" },
       "Docker",
       { name: "multi-stage builds", niche: true },
+      { name: "Kubernetes", detail: "workloads · deploys · rollouts", niche: true },
       "Nginx",
       "CI/CD",
       "Linux",
+    ],
+  },
+  // Owner-supplied 2026-08-14 — the observability/analytics surface picked up on
+  // the Emergent platform work. Kept as its own group rather than padding
+  // "cloud & devops": reading production is a different job from shipping to it.
+  {
+    label: "observability & analytics",
+    items: [
+      { name: "Grafana", detail: "dashboards · service metrics" },
+      { name: "Redash", detail: "SQL dashboards over product data" },
+      { name: "PostHog", detail: "product analytics · funnels · session review" },
+      { name: "per-step tracing", detail: "agent loops · tool calls", niche: true },
+      "telemetry",
     ],
   },
   {
@@ -68,6 +82,8 @@ export const skills: SkillGroup[] = [
     items: [
       { name: "RAG pipelines", niche: true },
       "LangChain",
+      { name: "Strands", detail: "single-loop agents · runtime tools", niche: true },
+      { name: "hybrid retrieval", detail: "FTS5 + vectors, RRF-fused", niche: true },
       { name: "multi-agent orchestration", niche: true },
       { name: "AST-based retrieval", niche: true },
       { name: "procedural & episodic memory", detail: "SkillForge · mem0", niche: true },
@@ -101,6 +117,7 @@ export const skills: SkillGroup[] = [
       "Selenium",
       { name: "mermaid-cli", niche: true },
       { name: "Claude Code", niche: true },
+      { name: "Codex", detail: "CLI adapter · captured runs", niche: true },
       "Cursor",
     ],
   },

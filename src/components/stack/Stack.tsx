@@ -7,6 +7,7 @@ import { EASE_SITE } from "@/lib/choreo";
 import { TerminalCursor, TerminalSpinner } from "@/components/ui/Terminal";
 import { useTerminalBoot } from "@/components/ui/useTerminalBoot";
 import { ThemeSwatches } from "./ThemeSwatches";
+import { WindowChrome } from "@/components/ui/WindowChrome";
 
 const PROMPT = "ishan@prod:~$";
 const COMMAND = "skill --all";
@@ -83,14 +84,7 @@ export function Stack() {
         transition={{ duration: 0.4, ease: EASE_SITE }}
         className="mx-auto max-w-4xl overflow-hidden rounded-lg border border-volt-dim bg-ink-raise shadow-2xl"
       >
-        <div className="flex items-center gap-2 border-b border-volt-dim px-4 py-3">
-          <span className="h-3 w-3 rounded-full bg-volt-dim" />
-          <span className="h-3 w-3 rounded-full bg-volt-dim" />
-          <span className="h-3 w-3 rounded-full bg-volt-dim" />
-          <span className="ml-3 truncate font-mono text-xs text-bone-dim">
-            {PROMPT} {typedText}
-          </span>
-        </div>
+        <WindowChrome label={`${PROMPT} ${typedText}`} className="" />
 
         <div className="grid gap-6 p-6 md:grid-cols-[auto_1fr] md:gap-10 md:p-8">
           <div className="hidden self-center md:block">

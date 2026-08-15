@@ -9,11 +9,14 @@ import { experience } from "@/content/site";
 import { labBlocks } from "@/content/lab";
 import {
   journeyPanels,
-  roleBullets,
+  roleHighlights,
+  careerMark,
   headlineProjects,
   type JourneyPanel,
 } from "@/content/journey";
 import { useJourneyChoreo } from "./useJourneyChoreo";
+import { WindowChrome } from "@/components/ui/WindowChrome";
+import { PixelLogo } from "@/components/ui/PixelLogo";
 
 const PROMPT = "ishan@prod:~$";
 const commands = journeyPanels.map((p) => p.cmd);
@@ -34,13 +37,14 @@ export function Journey() {
     return (
       <section
         ref={sectionRef}
+        id="career"
         aria-label="Experience, work and interests"
-        className="border-y border-volt-dim"
+        className="rule-top rule-bottom scroll-mt-20"
       >
         {journeyPanels.map((panel, i) => (
           <div
             key={panel.id}
-            className={`px-6 py-16 md:px-16 ${i > 0 ? "border-t border-volt-dim" : ""}`}
+            className={`px-6 py-16 md:px-16 ${i > 0 ? "border-t border-volt-dim/40" : ""}`}
           >
             <div className="mx-auto max-w-4xl">
               <p className="font-mono text-sm text-bone">
@@ -63,24 +67,22 @@ export function Journey() {
   return (
     <section
       ref={sectionRef}
+      id="career"
       aria-label="Experience, work and interests"
       style={{ height: `${journeyPanels.length * 100}vh` }}
-      className="relative border-y border-volt-dim"
+      className="rule-top rule-bottom relative"
     >
-      <div className="sticky top-0 flex h-screen items-center px-6 md:px-16">
-        <div className="mx-auto w-full max-w-4xl">
-          <div className="overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
-            <div className="flex items-center gap-2 border-b border-volt-dim bg-ink-raise px-4 py-3">
-              <span className="h-3 w-3 rounded-full bg-volt-dim" />
-              <span className="h-3 w-3 rounded-full bg-volt-dim" />
-              <span className="h-3 w-3 rounded-full bg-volt-dim" />
-              <span className="ml-3 truncate font-mono text-xs text-bone-dim">
-                {PROMPT} {shown}
-              </span>
-            </div>
+      {/* svh (not vh) so mobile browser chrome doesn't push the window off-screen.
+          The window is capped to the viewport and its BODY scrolls: previously a
+          fixed min-h-[460px] + padding overflowed the pane on short laptops and
+          landscape tablets, hiding the status bar (owner, 2026-08-14). */}
+      <div className="sticky top-0 flex h-svh items-center px-4 py-6 sm:px-6 md:px-16">
+        <div className="mx-auto flex max-h-full w-full max-w-4xl flex-col overflow-hidden rounded-lg border border-volt-dim shadow-2xl">
+          <WindowChrome label={`${PROMPT} ${shown}`} />
 
-            <div className="min-h-[460px] bg-ink-raise p-6 md:p-10">
-              <p className="font-mono text-sm text-bone">
+          <div className="min-h-0 flex-1 overflow-y-auto bg-ink-raise p-5 sm:p-6 md:p-8 lg:p-10">
+            <div className="min-h-[min(24rem,42svh)]">
+              <p className="font-mono text-xs text-bone sm:text-sm">
                 <span className="text-volt-bright">{PROMPT}</span> {shown}
                 {cursor && <TerminalCursor />}
               </p>
@@ -93,22 +95,22 @@ export function Journey() {
                     : { opacity: 0, y: 10, filter: "blur(3px)" }
                 }
                 transition={{ duration: 0.42, ease: EASE_SITE }}
-                className="mt-6"
+                className="mt-5 md:mt-6"
               >
                 <Caption panel={panel} />
-                <div className="mt-5">
+                <div className="mt-4 md:mt-5">
                   <PanelBody id={panel.id} />
                 </div>
               </motion.div>
             </div>
-
-            <StatusBar
-              tags={journeyPanels.map((p) => p.tag)}
-              active={activeDot}
-              total={journeyPanels.length}
-              busy={busy}
-            />
           </div>
+
+          <StatusBar
+            tags={journeyPanels.map((p) => p.tag)}
+            active={activeDot}
+            total={journeyPanels.length}
+            busy={busy}
+          />
         </div>
       </div>
     </section>
@@ -131,24 +133,64 @@ function PanelBody({ id }: { id: JourneyPanel["id"] }) {
   return <GoDeeperBody />;
 }
 
+/**
+ * Career panel. Two beats: the role cards (a one-line hook each, then scannable
+ * fragments) and then the full timeline underneath. Cards first because nobody
+ * reads seven sentences of bullets — the summary is what has to land.
+ *
+ * The Emergent mark is a rail down the LEFT of both cards, vertically centred
+ * against the pair (owner, 2026-08-15) rather than aligned to its own card — it
+ * anchors the block the way the pixel robot anchors the skills window.
+ */
 function ExperienceBody() {
   return (
-    <div className="space-y-6">
-      <ol className="space-y-2.5 font-mono text-sm">
+    <div className="space-y-7">
+      <div className="grid gap-x-5 sm:grid-cols-[3.75rem_1fr]">
+        <div className="hidden items-center justify-center sm:flex">
+          <PixelLogo
+            kind={careerMark.kind}
+            size={0.375}
+            label={`${careerMark.label} logo`}
+          />
+        </div>
+
+        <div className="space-y-4">
+          {roleHighlights.map((group) => (
+            <div key={group.at}>
+              <p className="flex flex-wrap items-baseline gap-x-3 font-mono text-xs">
+                <span className="uppercase tracking-wider text-volt-bright">
+                  {group.at}
+                </span>
+                <span className="text-bone-dim">{group.period}</span>
+              </p>
+              <p className="mt-1.5 max-w-2xl text-balance text-base leading-snug text-bone md:text-lg">
+                {group.summary}
+              </p>
+              <ul className="mt-2 flex flex-wrap gap-x-2 gap-y-1 font-mono text-[11px] text-bone-dim md:text-xs">
+                {group.bullets.map((b, i) => (
+                  <li key={b} className="flex items-center gap-2">
+                    {i > 0 && (
+                      <span aria-hidden="true" className="text-volt-dim">
+                        ·
+                      </span>
+                    )}
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <ol className="space-y-1.5 border-t border-volt-dim/40 pt-5 font-mono text-xs md:text-sm">
         {experience.map((e) => (
-          <li key={e.role} className="flex flex-col gap-1 md:flex-row md:gap-6">
-            <span className="shrink-0 text-bone-dim md:w-48">{e.period}</span>
+          <li key={e.role} className="flex flex-col gap-0.5 md:flex-row md:gap-6">
+            <span className="shrink-0 text-bone-dim md:w-44">{e.period}</span>
             <span className="text-bone">{e.role}</span>
           </li>
         ))}
       </ol>
-      <ul className="max-w-2xl space-y-2 text-sm leading-relaxed text-bone-dim">
-        {roleBullets.map((b, i) => (
-          <li key={i} className="border-l-2 border-volt-dim pl-4">
-            {b}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
@@ -177,6 +219,14 @@ function ShippedBody() {
               <span className="mt-1 block max-w-xl text-sm leading-relaxed text-bone-dim">
                 {p.oneLiner}
               </span>
+              {p.context && (
+                <span className="mt-1.5 flex items-center gap-2 font-mono text-xs text-bone-dim/70">
+                  {/* 0.19 is the floor: below ~3px per cell the OpenAI knot
+                      loses its lobes and reads as a smudge. */}
+                  {p.brand && <PixelLogo kind={p.brand} size={0.19} />}
+                  {p.context}
+                </span>
+              )}
             </Link>
           </li>
         ))}
@@ -260,31 +310,33 @@ function StatusBar({
   busy: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-t border-volt-dim bg-ink px-4 py-2.5 font-mono text-[11px]">
-      <span className="flex min-w-[7rem] items-center gap-2">
+    <div className="flex shrink-0 items-center justify-between gap-3 border-t border-volt-dim bg-ink px-3 py-2 font-mono text-[10px] sm:px-4 sm:py-2.5 sm:text-[11px]">
+      <span className="flex min-w-0 shrink items-center gap-2 sm:min-w-[7rem]">
         {busy ? (
           <TerminalSpinner />
         ) : (
           <>
             <span className="text-volt-bright">▸</span>
-            <span className="text-bone-dim">ready</span>
+            <span className="truncate text-bone-dim">ready</span>
           </>
         )}
       </span>
-      <span aria-hidden="true" className="flex items-center gap-2.5">
+      <span aria-hidden="true" className="flex shrink-0 items-center gap-2.5">
+        {/* Breadcrumbs are the first thing to go on a narrow pane — the counter
+            already carries the position, so the row never wraps or clips. */}
         {tags.map((t, i) => (
           <span
             key={t}
-            className={
+            className={`hidden lg:inline ${
               i === active
                 ? "text-volt-bright"
                 : "text-bone-dim/40 transition-colors"
-            }
+            }`}
           >
             {t}
           </span>
         ))}
-        <span className="ml-1 rounded bg-volt-dim/40 px-1.5 py-0.5 text-bone-dim">
+        <span className="rounded bg-volt-dim/40 px-1.5 py-0.5 text-bone-dim">
           {active + 1}/{total}
         </span>
       </span>
