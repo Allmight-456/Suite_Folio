@@ -366,3 +366,27 @@ role cards, vertically centred against them (owner). It is therefore no longer a
 way the pixel robot anchors the skills window, and calling it a per-role logo would
 have been a lie about what it now is. Each card keeps its own text label, so
 nothing implies the mark covers Rayvector.
+
+## 2026-08-15 (later) — OpenAI mark, revived
+
+**D-2026-08-15d — The OpenAI knot is back, rasterised rather than drawn.** It was
+dropped on 2026-08-14 (D-2026-08-14b) because a hand-drawn 11px attempt read as a
+target, not the mark. Owner asked for it again, and two things had since changed
+that made it worth retrying: PixelLogo now renders dense (gapless, unrounded)
+below ~6px/cell, and the failure was partly the gaps shattering a one-cell stroke.
+
+Fetching the real asset was blocked (openai.com returns 403 to non-browser agents;
+the old cdn path 404s), so the grid is **rasterised from the geometry the mark is
+built on** — three congruent elongated rings at 0°/60°/120°. Ring thickness turned
+out to be the whole game: fat rings (semi-minor 3.6) merge into a lumpy doughnut
+that stays unreadable even at 90px, while thin ones (3.0) keep the six lobes and
+the hexagonal core and survive down to 3px per cell. 17 columns are needed to
+resolve them.
+
+**D-2026-08-15e — Footprint is normalised by ink, not width.** Equal width is not
+equal presence. Slack's arms are two cells thick and read solid; OpenAI's knot is
+a one-cell line, so at the same box it collapses into a grey smudge. `FOOTPRINT`
+gives the knot 1.45 reference-box widths, which balances the two by how much ink
+each puts on screen — which is what the eye actually compares. `size` now means
+"the edge an 11-column mark would use", so callers stay unaware of grid width.
+The Journey shipped-list mark moved 0.13 → 0.19, its legibility floor.

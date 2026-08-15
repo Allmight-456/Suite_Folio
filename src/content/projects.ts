@@ -31,6 +31,7 @@ export const projects: Project[] = [
     wip: true,
     repo: "https://github.com/Allmight-456/Amadeus_Skill",
     context: "Built for OpenAI Build Week · submitted jul 2026",
+    brand: "openai",
     stack: ["TypeScript", "Node", "Codex CLI", "MCP", "SQLite/FTS5"],
   },
   {

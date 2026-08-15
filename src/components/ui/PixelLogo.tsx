@@ -15,7 +15,8 @@ export type PixelLogoKind =
   | "google-gemini"
   | "databricks"
   | "emergent"
-  | "slack";
+  | "slack"
+  | "openai";
 
 // Chars → brand tokens. Google: b/r/y/g · Databricks: R/o · monochrome: e
 // Slack: B(blue) G(green) Y(yellow) P(pink/red).
@@ -73,6 +74,29 @@ const GRIDS: Record<PixelLogoKind, string[]> = {
     "..ee...ee..",
     "...eeeee...",
   ],
+  // OpenAI's six-fold knot. Hand-drawing this failed (at 11px it read as a
+  // target, which is why the mark was dropped on the first pass); it is instead
+  // rasterised from the geometry the real mark is built on — three congruent
+  // elongated rings at 0°/60°/120°. Ring thickness is the whole game: fat rings
+  // merge into a lumpy doughnut, thin ones keep the six lobes and the hexagonal
+  // core. Needs 17 columns to resolve them, hence FOOTPRINT below.
+  openai: [
+    "....eee...eee....",
+    "....e.ee.ee.e....",
+    "...ee..eee..ee...",
+    "...ee..eee..ee...",
+    "....eeeeeeeee....",
+    "..eeeee...eeeee..",
+    ".ee.ee.....ee.ee.",
+    "ee..ee.....ee..ee",
+    ".ee.ee.....ee.ee.",
+    "..eeeee...eeeee..",
+    "....eeeeeeeee....",
+    "...ee..eee..ee...",
+    "...ee..eee..ee...",
+    "....e.ee.ee.e....",
+    "....eee...eee....",
+  ],
   // Slack's four-arm pinwheel, rotationally symmetric around an empty centre.
   slack: [
     "....BB.....",
@@ -102,9 +126,23 @@ const CELL: Record<string, string> = {
   P: "bg-brand-slack-red",
 };
 
+/** Marks are normalised to this many columns so they occupy a matching box. */
+const REF_COLS = 11;
+
 /**
- * `size` is the pixel edge in rem — 0.45 for the certification windows (the
- * original scale), ~0.16 for the inline marks beside a timeline row.
+ * Optical-weight correction, in reference-box widths. Equal *width* is not equal
+ * *presence*: Slack's arms are two cells thick and read solid, while OpenAI's
+ * knot is a one-cell line — normalised to the same box it collapses into a grey
+ * smudge (it needs ≥3px per cell to hold its lobes). Giving it a wider footprint
+ * balances the two by ink, which is what the eye actually compares.
+ */
+const FOOTPRINT: Partial<Record<PixelLogoKind, number>> = { openai: 1.45 };
+
+/**
+ * `size` is the rem edge a REF_COLS-wide mark would use — 0.45 for the
+ * certification windows (the original scale), ~0.2 for inline marks. Grids that
+ * need more columns (OpenAI's knot needs 15) shrink their cell to keep the
+ * overall footprint equal, so marks sitting side by side stay the same size.
  */
 export function PixelLogo({
   kind,
@@ -117,12 +155,13 @@ export function PixelLogo({
 }) {
   const grid = GRIDS[kind];
   const cols = grid[0].length;
+  const cell = (size * REF_COLS * (FOOTPRINT[kind] ?? 1)) / cols;
   // Below ~6px per cell the grid goes SOLID: gaps and corner rounding are a
   // constant device-pixel cost, so on a 1-cell-wide monoline mark (Emergent's
-  // ring, Slack's arms) they eat the stroke and it reads as scattered dots.
-  // Large marks keep the visible pixel grid — that's the whole cert vernacular.
-  const dense = size < 0.4;
-  const gap = dense ? 0 : size / 8;
+  // ring, Slack's arms, OpenAI's knot) they eat the stroke and it reads as
+  // scattered dots. Large marks keep the visible pixel grid — the cert vernacular.
+  const dense = cell < 0.4;
+  const gap = dense ? 0 : cell / 8;
   return (
     <div
       role={label ? "img" : undefined}
@@ -130,11 +169,11 @@ export function PixelLogo({
       aria-hidden={label ? undefined : "true"}
       className="grid shrink-0"
       style={{
-        gridTemplateColumns: `repeat(${cols}, ${size}rem)`,
+        gridTemplateColumns: `repeat(${cols}, ${cell}rem)`,
         // Rows pinned explicitly (not `auto`) and leading zeroed: left to content
         // sizing, sub-pixel rounding opened seams between rows, so a dense mark
         // merged horizontally but stayed striped vertically.
-        gridAutoRows: `${size}rem`,
+        gridAutoRows: `${cell}rem`,
         lineHeight: 0,
         gap: `${gap}rem`,
       }}
@@ -143,7 +182,7 @@ export function PixelLogo({
         row.split("").map((ch, x) => (
           <span
             key={`${y}-${x}`}
-            style={{ height: `${size}rem`, width: `${size}rem` }}
+            style={{ height: `${cell}rem`, width: `${cell}rem` }}
             className={`${dense ? "" : "rounded-[1px]"} ${CELL[ch] ?? ""}`}
           />
         )),

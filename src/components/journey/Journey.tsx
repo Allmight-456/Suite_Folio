@@ -219,7 +219,9 @@ function ShippedBody() {
               </span>
               {p.context && (
                 <span className="mt-1.5 flex items-center gap-2 font-mono text-xs text-bone-dim/70">
-                  {p.brand && <PixelLogo kind={p.brand} size={0.13} />}
+                  {/* 0.19 is the floor: below ~3px per cell the OpenAI knot
+                      loses its lobes and reads as a smudge. */}
+                  {p.brand && <PixelLogo kind={p.brand} size={0.19} />}
                   {p.context}
                 </span>
               )}

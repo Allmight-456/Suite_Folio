@@ -18,7 +18,7 @@ export const ProjectSchema = z.object({
   // are never written here without owner confirmation (facts registry, CONTENT §10).
   context: z.string().optional(),
   // Optional brand pixel-mark for that provenance (ui/PixelLogo registry).
-  brand: z.enum(["slack", "emergent"]).optional(),
+  brand: z.enum(["slack", "emergent", "openai"]).optional(),
 });
 export type Project = z.infer<typeof ProjectSchema>;
 
